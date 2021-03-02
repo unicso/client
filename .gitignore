@@ -1,0 +1,5 @@
+/.nuxt/
+/.idea/
+/node_modules/
+/core
+/package-lock.json
