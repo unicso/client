@@ -1,6 +1,6 @@
 {
-  "name": "StartUp",
-  "version": "1.0.0",
+  "name": "unicso",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",

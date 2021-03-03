@@ -38,7 +38,7 @@ export default {
 
   axios: {
     //origin:'https://startup-clan.ru',
-    baseURL: 'https://example.com/api/',
+    baseURL: 'https://unicso.devcomp.ru/v1/',
     proxyHeaders: false,
     credentials: true,
     debug:false,
