@@ -1,0 +1,82 @@
+html{
+    font-size: 14px;
+}
+a:link{
+   text-decoration: none;
+    color: black;
+}
+a:visited{
+    color: black;
+}
+.main_menu_desktop .logo {
+    font-size: 1.2rem;
+}
+
+@font-face {
+    font-family: "Unicso1";
+    src: url("/files/client/fonts/unicso1.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso2";
+    src: url("/files/client/fonts/unicso2.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso3";
+    src: url("/files/client/fonts/unicso3.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso4";
+    src: url("/files/client/fonts/unicso4.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso5";
+    src: url("/files/client/fonts/unicso5.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso6";
+    src: url("/files/client/fonts/unicso6.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso7";
+    src: url("/files/client/fonts/unicso7.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso8";
+    src: url("/files/client/fonts/unicso8.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso9";
+    src: url("/files/client/fonts/unicso9.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso10";
+    src: url("/files/client/fonts/unicso10.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso11";
+    src: url("/files/client/fonts/unicso11.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso12";
+    src: url("/files/client/fonts/unicso12.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso13";
+    src: url("/files/client/fonts/unicso13.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso14";
+    src: url("/files/client/fonts/unicso14.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso15";
+    src: url("/files/client/fonts/unicso15.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso16";
+    src: url("/files/client/fonts/unicso16.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Unicso17";
+    src: url("/files/client/fonts/unicso17.woff2") format("woff2");
+}

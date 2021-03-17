@@ -1,0 +1,86 @@
+input[type=text], .price_counter, select {
+    width: 100%;
+    padding: 5px 13px;
+    box-sizing: border-box;
+    border: 2px solid grey;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.05);
+}
+
+input[type=text]:focus,.price_counter:focus, select:focus {
+    border-radius: 5px;
+    border: 2px solid rgb(255,73,0);
+    background-color: white;
+}
+
+.btn-blick{
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 2px solid grey;
+    padding: 8px 13px;
+    transition: 0.5s;
+    font-weight: bold;
+}
+.btn-blick:hover{
+    border: 2px solid rgb(255,73,0);
+    /*background: linear-gradient(45deg, rgb(255,73,0), rgba(255,73,0, 0.2));*/
+    background-color: rgb(255,73,0);
+    background-image: linear-gradient(
+            45deg, rgb(255,73,0) 30%, rgba(255,255,255,.8), rgba(255,255,255,.0) 70%),
+    radial-gradient(190% 100% at 50% 0%, rgba(255,255,255,.7) 0%, rgba(255,255,255,.5) 50%, rgba(0,0,0,0) 50%);
+    background-repeat: no-repeat;
+    background-size: 200% 100%, auto;
+    background-position: 200% 0, 0 0;
+    color:white;
+
+}
+.btn-std{
+    border-radius: 10px;
+    border: 2px solid rgb(255,73,0);
+    padding: 8px 13px;
+    transition: 0.5s;
+}
+.btn-std:hover{
+    border: 2px solid rgb(255,73,0);
+    cursor: pointer;
+}
+
+.price_counter{
+    display: inline-flex;
+    padding: 0;
+    height: 30px;
+    overflow: hidden;
+    width: 150px;
+
+}
+.price_counter button, .price_counter input{
+    background-color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+
+}
+.price_counter button{
+    background-color: rgba(100,100,100, 0.1);
+    cursor: pointer;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: none;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    outline: none;
+    transition: 0.5s;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 1.2rem;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+}

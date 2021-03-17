@@ -3,15 +3,70 @@ html, body {
   padding: 0px;
 
 }
+body{
+ /* background-color: rgb(248, 248, 248);*/
+}
+/*
+color="#ff4900"
+ff4900
+255, 73, 0
+ */
 .wrapper{
   min-height: 90vh;
-  border: 1px solid rgba(0,0,0,0.2);
   margin-left: auto;
   margin-right: auto;
+  padding: 0px 8px 8px 8px;
+  max-width: 1200px;
+
 }
 h1{
   text-align: center;
 }
 .active-link{
   font-weight: bold;
+}
+.base_shadow_hover{
+
+}
+.base_shadow_hover:hover{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.base_shadow{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.content_block{
+  padding: 10px 10px 10px 10px;
+  border-radius: 7px;
+  background-color: white;
+  box-shadow: 0 0 5px 2px rgba(0,0,0,0.2);
+
+
+}
+ul{
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+
+}
+.std_link{
+  transition: 0.7s;
+
+}
+.std_link:hover{
+  color: rgb(255,73,0);
+  cursor: pointer;
+}
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+* {
+  z-index: 100;
+}
+.empty_block{
+  z-index: 99;
+}
+.foreground{
+  z-index: 101;
 }
