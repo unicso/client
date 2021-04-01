@@ -132,9 +132,15 @@ computed:{
 
       this.$store.dispatch('order/addItemToBasket', item)
 
+    },
+
+    viewItem(item)
+    {
+
+      this.$router.push('/catalog/'+this.page+'/'+item.guid)
+
+
     }
-
-
 
 
   }
