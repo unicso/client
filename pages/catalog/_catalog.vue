@@ -132,24 +132,9 @@ computed:{
 
       this.$store.dispatch('order/addItemToBasket', item)
 
-    },
-    addToBasket(item, count){
-      var add = {
-        item: item,
-        count: count
-      }
-
-
-      this.$store.commit('shop/addItemToBasket', add)
-
-    },
-    viewItem(item)
-    {
-
-      this.$router.push('/catalog/'+this.page+'/'+item.guid)
-
-
     }
+
+
 
 
   }
