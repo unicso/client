@@ -1,0 +1,34 @@
+html{
+    font-size: 14px;
+    font-family: Verdana;
+    font-family: MicrosoftSansSerif;
+}
+a:link{
+   text-decoration: none;
+    color: black;
+}
+a:visited{
+    color: black;
+}
+.main_menu_desktop .logo {
+    font-size: 1.2rem;
+}
+.product_title h1{
+    font-size: 1.3rem;
+}
+.article{
+    font-size: 0.9rem;
+}
+
+.item_price .price{
+    font-size: 1.2rem;
+
+}
+
+@font-face {
+    font-family: "MicrosoftSansSerif";
+    src: url("/files/client/fonts/MicrosoftSansSerif.woff2") format("woff2");
+}
+body{
+    font-size: 1.04rem;
+}
