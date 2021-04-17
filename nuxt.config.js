@@ -10,6 +10,7 @@ export default {
     title: 'Сайт',
     htmlAttrs: {
       lang: 'ru',
+      translate:'no'
     },
     meta: [
       { charset: 'utf-8' },

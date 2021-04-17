@@ -6,7 +6,12 @@
     <div class="empty_block"></div>
     <div class="catalog on_top">
       <h1 v-if="not_found">{{not_found}}</h1>
-      <h1>{{ category }}</h1>
+
+
+
+      <breadcrumb-component  :cef_name="page"/>
+
+
       <article class="catalog_items  content_block base_shadow_hover" v-for="item in catalog_items">
         <div class="item_image" @click="viewItem(item)">
 
@@ -15,7 +20,7 @@
         </div>
         <div class="item_description" @click="viewItem(item)">
 
-            <h4>{{item.name}}</h4>
+            <h3>{{item.name}}</h3>
             <div class="article">Код товара: {{item.article}}</div>
 
 
@@ -38,9 +43,10 @@
 
 <script>
 import ProductCategory from "../../components/main/ProductCategory";
+import BreadcrumbComponent from "../../components/catalog/BreadcrumbComponent";
 export default {
   name: "MainCatalog",
-  components: {ProductCategory},
+  components: {BreadcrumbComponent, ProductCategory},
 
   data(){
     return{
@@ -50,21 +56,22 @@ export default {
       count_items: [],
       count_items2: [],
       not_found:false,
-      show_item:false
+      show_item:false,
+
+      page:''
     }
   },
 computed:{
   countItem: {
    get(){
-     console.log(222);
+
      return this.count_items;
    },
     set(value){
-      console.log(value);
+
       return this.count_items;
     }
   }
-
 },
   mounted(){
     this.page = this.$route.params.catalog;
@@ -107,8 +114,9 @@ computed:{
         for(var key in this.catalog_items){
           var guid = this.catalog_items[key]['guid']
           this.count_items[guid] = 1
+
         }
-        console.log(result.body)
+
       }
       else
 
@@ -118,19 +126,12 @@ computed:{
       }
 
     },
-    addItemToBasket(item)
+    async  addItemToBasket(item)
     {
-      var item ={
-        guid: item.guid,
-        name: item.name,
-        code: item.article,
-        price: item.price,
-        count: 1,
-        summ: item.price*this.item_count,
-        image: item.image
-      }
-
-      this.$store.dispatch('order/addItemToBasket', item)
+      item['count'] = 1
+      var uri = 'basket/'+item.guid + '/' + item.count
+      var result = await this.$store.dispatch('api/post', {endpoint:uri})
+      this.$store.state.order.basket_load_item = true;
 
     },
 
@@ -156,15 +157,15 @@ computed:{
 }
 article{
   display: grid;
-  grid-template-columns: minmax(200px, 270px) minmax(400px, 2fr) minmax(200px, 250px);
+  grid-template-columns: minmax(200px, 250px) minmax(400px, 2fr) minmax(200px, 250px);
   margin-bottom: 15px;
 
 }
 
 .item_image{
-  width: 260px;
-  max-width: 260px;
-  max-height: 260px;
+  width: 210px;
+  max-width: 210px;
+  max-height: 210px;
   cursor: pointer;
 }
 .item_image img{
@@ -217,5 +218,9 @@ article{
   text-align: left;
 
   /*font-size: 0.7rem;*/
+}
+.item_description h4{
+  font-size: 1.1rem;
+
 }
 </style>

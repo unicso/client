@@ -36,6 +36,7 @@ footer{
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 10px;
   text-align: center;
+  width: 100%;
 }
 header{
   font-size: 17px;

@@ -3,9 +3,12 @@
   <product-category/>
   <div class="catalog_item" v-if="show">
     <div class="empty_block"></div>
+<article class="  on_top">
+       <breadcrumb-component :cef_name="cef_name" :last_cef_link="$route.fullPath" :last_name="name"/>
+      <div class="product content_block">
 
-      <div class="product  content_block on_top">
         <div class="product_title">
+
           <h1>{{name}}</h1>
           <div class="article"> Код товара: {{article}}</div>
           <div class="article" v-if="manufacturer!= 'NoName'"> Производитель: {{manufacturer}}</div>
@@ -47,7 +50,7 @@
 
         </div>
       </div>
-
+</article>
   </div>
 
 
@@ -59,9 +62,10 @@
 
 <script>
 import ProductCategory from "../../../components/main/ProductCategory";
+import BreadcrumbComponent from "../../../components/catalog/BreadcrumbComponent";
 export default {
   name: "catalog_item",
-  components: {ProductCategory},
+  components: {BreadcrumbComponent, ProductCategory},
   data(){
     return{
       item:{},
@@ -76,6 +80,8 @@ export default {
       article:'',
       item_count:1,
       price_summ:0,
+      cef_name:'',
+
       show:false,
       showImageImg:false
     }
@@ -108,7 +114,7 @@ export default {
       if(result.error == false)
       {
         this.show= true
-        var item = result.body
+        var item = result.body.products
 
         this.item = item
         this.guid = item.guid
@@ -118,7 +124,7 @@ export default {
         this.article = item.article
         this.price = item.price
         this.price_unit = item.price_view
-
+        this.cef_name = item.cef_name
         if(typeof item.images !='undefined')
       {
         this.image = item.images[0];
@@ -135,28 +141,19 @@ export default {
     changeImage(image)
     {
       this.image = image
-      console.log(image)
+
     },
     showImage()
     {
       this.showImageImg = !this.showImageImg;
-      console.log(444)
+
     },
 
-    addItemToBasket()
+    async addItemToBasket()
     {
-      var item ={
-        guid: this.guid,
-        name: this.name,
-        code: this.article,
-        price: this.price,
-        count: this.item_count,
-        summ: this.price*this.item_count,
-        image: this.image
-      }
-
-      this.$store.dispatch('order/addItemToBasket', item)
-
+        var uri = 'basket/'+this.guid + '/' + this.item_count
+        var result = await this.$store.dispatch('api/post', {endpoint:uri})
+        this.$store.state.order.basket_load_item = true;
     }
   }
 }

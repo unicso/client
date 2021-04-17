@@ -1,4 +1,4 @@
-input[type=text], .price_counter, select {
+input[type=text],input[type=number], input[type=email] .price_counter, select {
     width: 100%;
     padding: 5px 13px;
     box-sizing: border-box;
@@ -8,7 +8,17 @@ input[type=text], .price_counter, select {
     border-radius: 5px;
     background-color: rgba(0,0,0,0.05);
 }
+textarea{
+    width: 100%;
+    padding: 5px 13px;
+    box-sizing: border-box;
+    border: 2px solid grey;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.05);
 
+}
 input[type=text]:focus,.price_counter:focus, select:focus {
     border-radius: 5px;
     border: 2px solid rgb(255,73,0);

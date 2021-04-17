@@ -20,37 +20,43 @@ export const mutations = {
         this.$cookies.set('basket', state.basket)
         state.basket_count_items = Object.keys(state.basket).length;
         state.basket_summary = 0
+
         for(var key in state.basket){
             state.basket_summary = state.basket_summary + state.basket[key].count*state.basket[key].price
         }
 
+
+    },
+    deleteItemFromBasket(state,guid) {
+       delete  state.basket[guid]
+        this.$cookies.set('basket', state.basket)
+        state.basket_count_items = Object.keys(state.basket).length;
+        state.basket_summary = 0
+        console.log(guid)
+        for(var key in state.basket){
+
+            state.basket_summary = state.basket_summary + state.basket[key].count*state.basket[key].price
+        }
     }
+
 
 
 }
 
 export const actions = {
 
-    addItemToBasket({context, commit},item)
+
+    async getBasket()
     {
-
-        commit('addItemToBasket', item)
-
+        return await this.dispatch('api/get', {endpoint:'basket'})
     },
-     loadBasketFromCookies({commit})
+    async deleteItemFromBasket({context, commit},guid)
     {
-        var cookies = this.$cookies.get('basket')
+        var uri = 'basket/'+guid
+        return await this.dispatch('api/delete', {endpoint:uri})
+    },
 
 
-        if(cookies!='undefined')
-            for (var key  in cookies)
-            {
-                commit('addItemToBasket', cookies[key])
-            }
-
-
-
-    }
 
 
 }

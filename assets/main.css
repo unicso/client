@@ -56,6 +56,15 @@ ul{
   color: rgb(255,73,0);
   cursor: pointer;
 }
+.std_link:hover{
+  color: rgb(255,73,0);
+  cursor: pointer;
+}
+.std_link a:hover{
+  color: rgb(255,73,0);
+  cursor: pointer;
+}
+
 ul{
   list-style: none;
   margin: 0;
@@ -104,3 +113,16 @@ ul{
 .product_categorys, .on_top{
   z-index: 100;
 }
+
+
+/**
+Запрет переводчика
+ */
+#google_translate_element{width:300px;float:right;text-align:right;display:block}
+.goog-te-banner-frame.skiptranslate { display: none !important;}
+body { top: 0px !important; }
+#goog-gt-tt{display: none !important; top: 0px !important; }
+.goog-tooltip skiptranslate{display: none !important; top: 0px !important; }
+.activity-root { display: none !important;}
+.status-message { display: none !important;}
+.started-activity-container { display: none !important;}
