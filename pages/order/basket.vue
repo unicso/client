@@ -40,7 +40,7 @@
       </div>
 
   </div>
-  <div class="order_client content_block base_shadow_hover" :class="[error?'error':'']">
+  <form class="order_client content_block base_shadow_hover" :class="[error?'error':'']">
     <h1>Информация о Вас</h1>
      <div class="customer_info">
        <div class="input_filed"  :class="[error?'error':'']">
@@ -76,7 +76,7 @@
 
      </div>
     <br>
-    <button v-if="basket.count>0" class="btn-std base_shadow_hover base_shadow" @click="addOrder" :disabled="!policy_accept">Оформить заказ</button>
+    <button form="out_form" v-if="basket.count>0" class="btn-std base_shadow_hover base_shadow" @click="addOrder" :disabled="!policy_accept">Оформить заказ</button>
     <div class="error_message" v-if="error" v-html="error"></div>
     <div  class="policy">
       <input type="checkbox" name="policy_accept" id="policy_accept" v-model="policy_accept">
@@ -85,7 +85,7 @@
       </label>
 
     </div>
-  </div>
+  </form>
 
 
 </div>
@@ -175,6 +175,7 @@ name: "basket",
         this.order_status = true;
 
         this.load_basket()
+      if(typeof request.body.order_token != 'undefined')
         this.$router.push('/order/search/'+request.body.order_token)
       }
 

@@ -4,7 +4,7 @@
 <div class="view_order" v-if="order!=false">
 
   <div class="code" v-if="order.code">Код: {{order.code}}</div>
-  <div class="status" v-if="order.status">Статус: {{order.status}}</div>
+  <div class="status" v-if="order.status" :class="[order.status=='Отменен'?'color_red':'']">Статус: {{order.status}}</div>
   <div class="contragent" v-if="order.contragent">Наименование: {{order.contragent}}</div>
   <div class="inn" v-if="order.inn">ИНН: {{order.inn}}</div>
   <div class="kpp" v-if="order.kpp">КПП: {{order.kpp}}</div>
@@ -30,12 +30,17 @@
     <td>{{item.count}}</td>
     <td>{{item.price}}</td>
     <td>{{item.summ}}</td>
-
   </tr>
 
   </tbody>
 
   </table>
+<div class="btn-std delete_order" @click="deleteOrder" v-if="order.status !='Отменен' && confirm==false">Отменить заказ</div>
+<div class="confirm_delete" v-if="confirm">
+  <h3>Подтверждаете отмену заказа?</h3>
+  <button class="btn-std" @click="deleteOrderConfirm">Подтверждаю {{confirm}}</button>
+
+</div>
 
 </div>
   <div v-else>
@@ -49,7 +54,10 @@ export default {
 name: "token",
   data(){
   return{
-    order:false
+    order:false,
+    token:'',
+    confirm:false,
+
   }},
   mounted() {
 
@@ -65,21 +73,36 @@ name: "token",
     },
   async getOrder()
   {
+    this.token = this.$route.params.token
     var request = {
-      endpoint:'order/'+this.$route.params.token
+      endpoint:'order/'+ this.token
     }
 
     const response = await this.$store.dispatch('api/get', request)
-console.log(response.body)
+    console.log(response)
     if(response.error != true)
     {
       this.order = response.body
     }
 
 
+  },
+    async deleteOrder(){
+      var response = await this.$store.dispatch('api/delete',
+          {endpoint:'order/'+this.token})
+      this.confirm = response.body.result
+    },
+    async deleteOrderConfirm(){
+      var response = await this.$store.dispatch('api/delete',
+          {endpoint:'order/'+this.token + '/' + confirm})
 
-
-  }
+      if(response.body.action == 'confirm' && response.body.result == 'true')
+      {
+        this.confirm = false
+        this.getOrder()
+      }
+      console.log(response)
+    },
 
   }
 
@@ -87,5 +110,17 @@ console.log(response.body)
 </script>
 
 <style scoped>
+.delete_order{
+  width: 200px;
 
+}
+.confirm_delete{
+  width: 400px;
+  height: 400px;
+  border-color: red;
+  color: red;
+}
+.color_red{
+  color:red;
+}
 </style>
