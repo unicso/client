@@ -1,13 +1,13 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
-  domain:'https://unicso.devcomp.ru',
+
   loading: '~/components/loader.vue',
 
   router: {
     middleware: 'preload'
   },
   head: {
-    title: 'Сайт',
+    title: 'ООО Юниксо',
     htmlAttrs: {
       lang: 'ru',
       translate:'no'
@@ -17,11 +17,11 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
 
-      { property:"og:url", content:this.domain},
+      { property:"og:url", content: "https://unicso.ru"},
       { property:"og:type", content:"website"},
-      { property:"og:title", content:"Сайт"},
-      { property:"og:description", content:"Сайт"},
-      { property:"og:image", content:this.domain},
+      { property:"og:title", content:"ООО Юниксо"},
+      { property:"og:description", content:"ООО Юниксо"},
+      { property:"og:image", content: "https://unicso.ru"},
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/files/client/images/favicon.ico' },
