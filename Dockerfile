@@ -3,7 +3,8 @@ RUN mkdir /home/client
 ADD . /home/client
 
 WORKDIR /home/client
-RUN npm ci
-RUN npm run build
+RUN npm update \
+&& npm ci \
+&& npm run build
 
 CMD ["npm", "run", "start"]
