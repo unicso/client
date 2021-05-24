@@ -1,10 +1,8 @@
 <template>
 <div>
-  <product-category/>
-
 
 <div class="main_page_content">
-  <div class="empty_block"></div>
+
   <div class="orders_basket on_top">
     <h1>Оформление заказа</h1>
     <div v-if="2==3">
@@ -22,7 +20,7 @@
                 <img :src="item.image">
               </div>
               <div class="name std_link">
-                <nuxt-link  :to="'/catalog/item/'+item.guid">{{item.name}}</nuxt-link>
+                <nuxt-link  :to="'/catalog/item/'+item.code">{{item.name}}</nuxt-link>
               </div>
               <div class="unit_price">
                 <input type="number"  class="item_count" name="item_count"
@@ -326,7 +324,7 @@ sup {
   border-color: grey;
 }
 .main_page_content{
-  display: grid;
+ /* display: grid;*/
 }
 .delete_item{
   font-size: 2rem;
@@ -341,5 +339,8 @@ sup {
   width:50px;
   font-size: 1rem;
   height: auto;
+}
+.update_basket:disabled{
+  cursor: no-drop;
 }
 </style>

@@ -226,5 +226,7 @@
     .catalog_items{
         width: 100%;
     }
-
+    .nuxt__content {
+        display: block;
+    }
 }

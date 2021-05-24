@@ -5,6 +5,7 @@
     <header>Информация</header>
     <main>
       <nuxt-link to="/info/contacts">Контакты</nuxt-link>
+      <nuxt-link to="/info/about">О компании</nuxt-link>
       <nuxt-link to="/info/politika-konfidentsialnosti">Политика конфиденциальности</nuxt-link>
 
 

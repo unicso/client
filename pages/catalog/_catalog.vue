@@ -1,11 +1,11 @@
 
 <template>
   <div>
-  <product-category/>
-  <div class="catalog_all">
+  <product-category v-if="2==3"/>
+  <div class="catalog_all" v-if="catalog_items!=false">
     <div class="empty_block"></div>
     <div class="catalog on_top">
-      <h1 v-if="not_found">{{not_found}}</h1>
+      <div class="not__found" v-if="not_found">{{not_found}}</div>
 
 
 
@@ -21,7 +21,7 @@
         <div class="item_description" @click="viewItem(item)">
 
             <h3>{{item.name}}</h3>
-            <div class="article">Код товара: {{item.article}}</div>
+            <div class="article">Код товара: {{item.code}}</div>
 
 
           <div class="truncate-text">{{item.description}}</div>
@@ -38,29 +38,31 @@
 
     </div>
   </div>
+    <loader v-else :important="true"/>
   </div>
 </template>
 
 <script>
 import ProductCategory from "../../components/main/ProductCategory";
 import BreadcrumbComponent from "../../components/catalog/BreadcrumbComponent";
+import Loader from "../../components/loader";
 export default {
   name: "MainCatalog",
-  components: {BreadcrumbComponent, ProductCategory},
+  components: {Loader, BreadcrumbComponent, ProductCategory},
 
   data(){
     return{
-      catalog_items:[],
+      catalog_items:false,
       category:'',
       show:false,
       count_items: [],
       count_items2: [],
       not_found:false,
       show_item:false,
-
       page:''
     }
   },
+
 computed:{
   countItem: {
    get(){
@@ -100,7 +102,9 @@ computed:{
 
       return count*price
     },
+
     async load_catalog(){
+
       if(this.$route.params.catalog =='search')
        var result = await this.$store.dispatch('api/get', {endpoint:'shop/search', params:{search:this.$route.query.search}})
     else if(this.$route.params.catalog =='profit')
@@ -117,7 +121,6 @@ computed:{
         for(var key in this.catalog_items){
           var guid = this.catalog_items[key]['guid']
           this.count_items[guid] = 1
-
         }
 
       }
@@ -125,7 +128,7 @@ computed:{
 
       {
         this.catalog_items = [];
-        this.not_found = 'Извините, ничего не найдено.'
+        this.not_found = result.body
       }
 
     },
@@ -141,7 +144,7 @@ computed:{
     viewItem(item)
     {
 
-      this.$router.push('/catalog/'+this.page+'/'+item.guid)
+      this.$router.push('/catalog/'+this.page+'/'+item.code)
 
 
     }
@@ -214,5 +217,9 @@ computed:{
 .item_description h4{
   font-size: 1.1rem;
 
+}
+.not__found{
+  font-size: 1.3rem;
+  text-align: center;
 }
 </style>

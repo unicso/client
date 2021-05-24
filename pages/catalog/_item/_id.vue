@@ -1,6 +1,6 @@
 <template>
 <div>
-  <product-category/>
+  <product-category  v-if="2==3"/>
   <div class="catalog_item" v-if="show">
     <div class="empty_block"></div>
 <article class="on_top">
@@ -10,7 +10,7 @@
         <div class="product_title">
 
           <h1>{{name}}</h1>
-          <div class="article"> Код товара: {{article}}</div>
+          <div class="article"> Код товара: {{code}}</div>
           <div class="article" v-if="manufacturer!= 'NoName'"> Производитель: {{manufacturer}}</div>
 
 
@@ -80,6 +80,8 @@ export default {
       price:0,
       price_unit:'',
       article:'',
+      code:'',
+
       item_count:1,
       price_summ:0,
       cef_name:'',
@@ -124,6 +126,8 @@ export default {
         this.manufacturer = item.manufacturer
         this.name = item.name
         this.article = item.article
+        this.code = item.code
+
         this.price = item.price
         this.price_unit = item.price_view
         this.cef_name = item.cef_name

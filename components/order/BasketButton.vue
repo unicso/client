@@ -29,7 +29,7 @@
     <ul>
       <li  class="view_item" v-for="item in basket.items" :key="item.guid">
       <div class="name " @click="show_fast_view = false">
-        <nuxt-link  :to="'/catalog/item/'+item.guid">{{item.name}}</nuxt-link>
+        <nuxt-link  :to="'/catalog/item/'+item.code">{{item.name}}</nuxt-link>
       </div>
       <div class="unit_price">
               {{item.count}} х {{priceSet(item.price)}} = {{priceSet(item.count*item.price)}}

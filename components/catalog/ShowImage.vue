@@ -70,7 +70,7 @@ export default {
 .current_image{
   background-size: contain;
   height: 93vh;
-  width: 100vw;
+ /* width: 100vw;*/
   background-position: center;
   background-repeat: no-repeat;
 }

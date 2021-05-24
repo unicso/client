@@ -9,7 +9,11 @@
     </header>
 
     <main>
-      <Nuxt/>
+      <product-category/>
+      <section  class="nuxt__content">
+        <div class="empty_block"></div>
+        <Nuxt class="on_top"/>
+      </section>
     </main>
 
   </div>
@@ -28,11 +32,13 @@
 import MainMenuDesktop from "../components/main/MainMenuDesktop";
 import FooterComponent from "../components/main/FooterComponent";
 import MainMenuMobile from "../components/main/MainMenuMobile";
+import ProductCategory from "../components/main/ProductCategory";
 
 
 export default {
   name: "default.vue",
   components:{
+    ProductCategory,
     MainMenuMobile,
     FooterComponent,
     MainMenuDesktop
@@ -120,4 +126,6 @@ export default {
 footer {
   height: 80px;
 }
+
+
 </style>

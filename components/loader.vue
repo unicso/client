@@ -1,7 +1,7 @@
 <template>
 
 
-  <div  v-if="loading"  class='cssload-loader'>
+  <div  v-if="loading || important"  class='cssload-loader'>
     <div class='cssload-inner cssload-one'></div>
     <div class='cssload-inner cssload-two'></div>
     <div class='cssload-inner cssload-three'></div>
@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  props:[
+   'important'
+  ],
   data: () => ({
     loading: false,
     delay:20,

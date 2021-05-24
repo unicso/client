@@ -10,7 +10,7 @@
       </p>
     </li>
   </ul>
-  <div class="sub_menu content_block" v-show="show_subcategory" >
+  <div class="sub_menu content_block" v-show="show_subcategory" :class="[show_subcategory?'on_top':'on_down']" @click="show_subcategory=false">
     <div class="sub_category" v-for="item in sub_category" :key="item.name">
       <h4>
         <nuxt-link class="std_link" :to="'/catalog/'+item.cef_name">
@@ -18,7 +18,7 @@
         </nuxt-link>
       </h4>
       <ul>
-        <li   v-for="child in item.child" :key="child.name">
+        <li   v-for="child in item.child" :key="child.name" >
          <nuxt-link class="std_link" :to="'/catalog/'+child.cef_name"> {{child.name}}</nuxt-link>
         </li>
       </ul>

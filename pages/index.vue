@@ -1,7 +1,7 @@
 <template>
 <div class="main_page">
 
-<product-category class="product_category_component"/>
+<product-category class="product_category_component"   v-if="2==3"/>
 <main-page-content/>
 
 </div>

@@ -111,8 +111,11 @@ ul{
   padding-bottom: 3px;
   margin-bottom: 10px;
 }
-.product_categorys, .on_top{
+ .on_top{
   z-index: 100;
+}
+.on_down{
+  z-index: 0;
 }
 .invisible{
   display: none;

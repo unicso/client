@@ -1,15 +1,15 @@
 <template>
 <div class="content_block">
-  <h1>Контакты</h1>
-  <!--
-<a href="tel://+74951980882">+7 (495) 198-08-82</a>
+  <h1>Контактная информация</h1>
 
-  <p>Время работы пн-пт с 8:00 до 20:00.</p>
-  email для поставщиков devzak@unicso.ru
-  email для клиентов order@unicso.ru
-  email по общим вопросам contact@unicso.ru
+  <a class="phone" href="tel://+74951980882">Телефон для связи: <b>+7 (495) 198-08-82</b></a><br><br>
+  <a class="email" href="mailto:devzak@unicso.ru?subject=Вопросы по поставке товаров" >Обращения поставщиков: <b>devzak@unicso.ru</b></a><br><br>
+  <a class="email" href="mailto:order@unicso.ru?subject=Вопросы по заказам" >Поддержка клиентов: <b>order@unicso.ru</b></a><br><br>
+  <a class="email" href="mailto:contact@unicso.ru?subject=Общие вопросы" >Общие вопросы: <b>contact@unicso.ru</b></a><br><br>
+  <a class="email" href="mailto:dev@unicso.ru?subject=Работа интернет-магазина" >Вопросы по работе интернет-магазина: <b>dev@unicso.ru</b></a><br><br>
 
--->
+  <p>Время работы Пн.-Пт. с 8:00 до 20:00.</p>
+
 
 </div>
 </template>
@@ -21,5 +21,14 @@ name: "Contacts"
 </script>
 
 <style scoped>
+a{
+  font-size: 1.2rem;
+}
+.phone:before{
+  content: "\260E  ";
+}
+.email:before{
+  content: "\1F582  ";
+}
 
 </style>
