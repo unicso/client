@@ -42,3 +42,6 @@ body{
 .default__link:visited{
     color: blue;
 }
+.default__link:hover{
+    color: rgb(255,73,0);
+}
