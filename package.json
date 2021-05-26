@@ -10,8 +10,8 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "vue": "^2.6.12",
-    "vue-server-renderer": "^2.6.12",
+    "vue": "^2.6.11",
+    "vue-server-renderer": "^2.6.11",
     "nuxt": "^2.15.6",
     "@nuxtjs/axios": ">=5.12.2",
     "@nuxtjs/device": "^1.2.7",
