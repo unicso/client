@@ -46,7 +46,9 @@
             <input type="range" min="0" max="1000" step="10" v-model="item_count">
             <br>
             <h3 class="summ" v-if="item_count>0">{{'Сумма: ' + priceSet(price*item_count)}}</h3>
-            <button class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">В корзину</button>
+          <button v-if="$store.state.order.basket.items[guid]" class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">Изменить</button>
+          <button v-else class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">В корзину</button>
+
 
         </div>
       </div>
@@ -160,6 +162,7 @@ export default {
         var uri = 'basket/'+this.guid + '/' + this.item_count
         var result = await this.$store.dispatch('api/post', {endpoint:uri})
         this.$store.state.order.basket_load_item = true;
+
     }
   }
 }

@@ -35,3 +35,10 @@ a:visited{
 body{
     font-size: 1.04rem;
 }
+.default__link:link{
+    text-decoration: underline;
+    color: blue;
+}
+.default__link:visited{
+    color: blue;
+}

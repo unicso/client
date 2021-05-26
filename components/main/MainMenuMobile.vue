@@ -14,16 +14,20 @@
       </div>
       <div class="mobile_menu" >
         <button class="menu_button" @click="$router.push('/'); show_menu=false">
-          <i class="svg_icon" v-html="$store.state.icons.house"></i>
+          <i class="svg_mobile_menu_icon" v-html="$store.state.icons.house"></i>
+          <br><small>Главная</small>
         </button>
-        <button class="menu_button" @click="show_menu=false">
-          <basket-button :asIcon="true"/>
+        <button class="menu_button" @click="$router.push('/order/basket'); show_menu=false">
+          <i class="svg_mobile_menu_icon" v-html="$store.state.icons.shoping_cart"></i>
+          <br><small>Корзина({{$store.state.order.basket_count_items}})</small>
         </button>
         <button class="menu_button" @click="show_search_string=!show_search_string">
-          <i class="svg_icon" v-html="$store.state.icons.search"></i>
+          <i class="svg_mobile_menu_icon" v-html="$store.state.icons.search"></i>
+          <br><small>Поиск</small>
         </button>
         <button class="menu_button" @click="show_menu=!show_menu">
-          <i class="svg_icon" v-html="$store.state.icons.menu"></i>
+          <i class="svg_mobile_menu_icon" v-html="$store.state.icons.menu"></i>
+          <br><small>Каталог</small>
         </button>
       </div>
       <div class="mobile_fullscreen_menu" v-if="show_menu">
@@ -130,4 +134,5 @@ export default {
 .search input{
   height: 3rem;
 }
+
 </style>

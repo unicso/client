@@ -12,13 +12,15 @@
       <breadcrumb-component  :cef_name="page"/>
 
 
-      <article class="catalog_items  content_block base_shadow_hover" v-for="item in catalog_items">
-        <div class="item_image" @click="viewItem(item)">
+      <article class=" catalog_items content_block base_shadow_hover" v-for="item in catalog_items">
+
+        <div class="item_image" >
 
           <img v-if="typeof item.image != 'undefined' &&  item.image" :src="item.image" >
           <i v-else v-html="$store.state.icons.empty_image"></i>
         </div>
-        <div class="item_description" @click="viewItem(item)">
+        <nuxt-link class="" :to="'/catalog/'+page+'/'+item.code">
+          <div class="item_description">
 
             <h3>{{item.name}}</h3>
             <div class="article">Код товара: {{item.code}}</div>
@@ -26,13 +28,18 @@
 
           <div class="truncate-text">{{item.description}}</div>
         </div>
-        <div class="item_price">
+        </nuxt-link>
+          <div class="item_price">
           <div class="unit">Цена {{item.price_view}}</div>
           <div class="price">{{priceSet(item.price)}}</div>
 
 
-          <button class="btn-std base_shadow_hover add_to_cart"  @click="addItemToBasket(item)"  style="font-size: inherit">В корзину</button>
+          <button v-if="$store.state.order.basket.items[item.guid]" class="btn-std base_shadow_hover add_to_cart"   @click="viewItem(item)"  style="font-size: inherit">Изменить</button>
+          <button v-else class="btn-std base_shadow_hover add_to_cart"  @click="addItemToBasket(item)"  style="font-size: inherit">В корзину</button>
+
+
         </div>
+
       </article>
 
 
@@ -222,4 +229,11 @@ computed:{
   font-size: 1.3rem;
   text-align: center;
 }
+ a:link{
+  color: #0d0d0d;
+}
+ a:link:hover{
+  color: #0d0d0d;
+}
+
 </style>

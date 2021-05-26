@@ -3,7 +3,7 @@
   <div class="empty_block"></div>
   <div class="top_content">
     <slider class="content_block"/>
-    <main-page-promotions v-if="2==3" class="content_block"/>
+    <main-page-promotions v-if="2==2" class="content_block"/>
     <promotions-block class="promotions_block"/>
 
     

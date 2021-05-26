@@ -106,7 +106,7 @@ watch:{
     setTimeout(()=>this.$store.state.order.basket_load_item=false, 100)
     this.basket = result.body
     this.$store.state.order.basket_count_items = this.basket.count
-
+    this.$store.state.order.basket = result.body
   }
 
   }

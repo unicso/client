@@ -229,4 +229,7 @@
     .nuxt__content {
         display: block;
     }
+    .main_page_slider{
+        justify-self: left;
+    }
 }

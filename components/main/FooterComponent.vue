@@ -6,6 +6,9 @@
     <main>
       <nuxt-link to="/info/contacts">Контакты</nuxt-link>
       <nuxt-link to="/info/about">О компании</nuxt-link>
+      <nuxt-link to="/info/delivery">Доставка</nuxt-link>
+      <nuxt-link to="/info/payment">Оплата</nuxt-link>
+
       <nuxt-link to="/info/politika-konfidentsialnosti">Политика конфиденциальности</nuxt-link>
 
 
@@ -13,11 +16,10 @@
   </section>
 
   <section>
-
-  </section>
-
-  <section>
-
+  <header>Полезное</header>
+    <main>
+      <nuxt-link to="/sitemap">Карта сайта</nuxt-link>
+    </main>
   </section>
 
 
@@ -34,7 +36,7 @@ export default {
 
 footer{
 
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 10px;
   text-align: center;
   width: 100%;
@@ -50,5 +52,8 @@ main{
   border-right: 1px solid rgba(171, 171, 171, 0.3);
   font-size: 12px;
   height: 80%;
+}
+section:last-child main{
+  border-right: none;
 }
 </style>

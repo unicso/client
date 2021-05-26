@@ -1,5 +1,5 @@
 <template>
-<div class="main_page_promotions">
+<div class="main_page_promotions" v-if="2==3">
 
 </div>
 </template>

@@ -126,7 +126,7 @@ ul{
 .promotion_item img{
   max-width: 200px;
   max-height: 200px;
-  min-height: 200px;
+  /*min-height: 200px;*/
 
 }
 .promotion_items header a:link{
@@ -169,3 +169,6 @@ body { top: 0px !important; }
 .activity-root { display: none !important;}
 .status-message { display: none !important;}
 .started-activity-container { display: none !important;}
+.main_page_slider{
+  justify-self: center;
+}

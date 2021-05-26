@@ -12,7 +12,7 @@
 
 
         <li class="promotion_item" v-for="(item, index) in items.products" :key="index">
-          <nuxt-link :to="'/catalog/item/'+item.guid">
+          <nuxt-link :to="'/catalog/item/'+item.code">
             <div class="image">
               <img :src="item.image" >
             </div>
@@ -123,8 +123,15 @@ header{
 .promotion_item:nth-child(n+5){
 display: none;
 }
-@media screen and (max-width: 480px){
+
+.image{
+  min-height: 200px;
 
 }
+@media screen and (max-width: 480px){
+  .image{
+    min-height: 70px;
 
+  }
+}
 </style>

@@ -52,6 +52,7 @@ name: "ProductCategory",
 <style scoped>
 .parent_category {
 padding-top: 15px;
+  align-self: baseline;
   /*font-size: 1.2rem;*/
 
 }
