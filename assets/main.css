@@ -58,7 +58,7 @@ ul{
   cursor: pointer;
 }
 .std_link:hover{
-  color: rgb(255,73,0);
+  color: rgb(255,70,0);
   cursor: pointer;
 }
 .std_link a:hover{
@@ -156,7 +156,7 @@ ul{
 
 }
 .main_menu_desktop .basket_main_menu{
-  margin-top: 15px;
+ /* margin-top: 15px;*/
 }
 /**
 Запрет переводчика
@@ -172,3 +172,8 @@ body { top: 0px !important; }
 .main_page_slider{
   justify-self: center;
 }
+footer.content_block{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.full__width{width: 100%}

@@ -1,26 +1,30 @@
 <template>
 <footer class="content_block">
 
-  <section>
-    <header>Информация</header>
-    <main>
-      <nuxt-link to="/info/contacts">Контакты</nuxt-link>
-      <nuxt-link to="/info/about">О компании</nuxt-link>
-      <nuxt-link to="/info/delivery">Доставка</nuxt-link>
-      <nuxt-link to="/info/payment">Оплата</nuxt-link>
+  <main>
+  <section class="logotype">
+    <nuxt-link to="/" v-html="$store.state.icons.logotype_vertical"></nuxt-link>
+    <div class="copiryght"> © ООО ЮНИКСО, 2021</div>
+  </section>
+  <section class="links">
 
-      <nuxt-link to="/info/politika-konfidentsialnosti">Политика конфиденциальности</nuxt-link>
+      <nuxt-link to="/info/contacts" class="std_link">Контакты</nuxt-link><br>
+      <nuxt-link to="/info/about" class="std_link">О компании</nuxt-link><br>
+      <nuxt-link to="/info/delivery" class="std_link">Доставка</nuxt-link><br>
+      <nuxt-link to="/info/payment" class="std_link">Оплата</nuxt-link><br>
+      <nuxt-link to="/info/support" class="std_link">Служба поддержки клиентов</nuxt-link><br>
 
+      <nuxt-link to="/info/politika-konfidentsialnosti" class="std_link">Политика конфиденциальности</nuxt-link><br>
+      <nuxt-link to="/sitemap" class="std_link">Карта сайта</nuxt-link>
 
-    </main>
   </section>
 
-  <section>
-  <header>Полезное</header>
-    <main>
-      <nuxt-link to="/sitemap">Карта сайта</nuxt-link>
-    </main>
+  <section class="contacts">
+    <a class="phone" href="tel://+74951980882">+7 (495) 198-08-82</a><br>
+    <nuxt-link to="/info/support" class="std_link">contact@unicso.ru</nuxt-link>
+    <div>Пн.-Пт. с 8:00 до 20:00</div>
   </section>
+  </main>
 
 
 </footer>
@@ -33,27 +37,52 @@ export default {
 </script>
 
 <style scoped>
-
 footer{
-
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 10px;
-  text-align: center;
+  position: absolute;
+  left: 0px;
+  margin-left: 0px;
   width: 100%;
+  padding-bottom: 40px;
 }
-header{
-  font-size: 17px;
+footer main{
+
+  text-align: center;
+  display: inline-flex;
+  padding-top: 20px;
+
 }
-main{
-  display: grid;
-  grid-template-columns: 1fr 1fr ;
-  grid-column-gap: 10px;
-  text-align: left;
-  border-right: 1px solid rgba(171, 171, 171, 0.3);
-  font-size: 12px;
-  height: 80%;
+
+
+
+footer main .copiryght{
+  margin-top: -40px;
+  font-size: 0.8rem;
 }
-section:last-child main{
-  border-right: none;
+footer main .logotype{
+  width: 30%;
+  margin-top: -20px;
+  zoom: 1.2;
+}
+footer main .links{
+  width: 40%;
+ /* column-count: 2;*/
+  display: inline-flex;
+  flex-flow: wrap;
+  padding-left: 10%;
+
+}
+footer main .links a{
+  display: inline-flex;
+  width: 50%;
+  line-height: 1.8rem;
+}
+footer main  .contacts {
+  width: 30%;
+}
+
+footer main .contacts a{
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: 2rem;
 }
 </style>

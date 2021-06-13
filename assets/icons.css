@@ -6,3 +6,121 @@
     width: 32px;
     height: 20px;
 }
+
+/**
+СПРАЙТ
+ */
+.icons {
+    background-image: url("https://dev.unicso.ru/files/client/images/icons/sprite.png");
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    background-position: 0px 32px;
+    min-width: 32px;
+    min-height: 32px;
+}
+
+.avatar.icons {background-position: 0px 0px}
+.avatar_black.icons {background-position: 0px -32px}
+.avatar_hovered{background-position: 0px -32px}
+.avatar_hovered:hover{background-position: 0px 0px}
+
+.paper_1.icons {
+    background-position: 0px -64px;
+}
+.paper_1_black.icons {
+    background-position: 0px -96px;
+}
+.office_folder.icons {
+    background-position: 0px -128px;
+}
+.office_folder_black.icons {
+    background-position: 0px -160px;
+}
+.favorites.icons {
+    background-position: 0px -192px;
+}
+.favorites_black.icons {
+    background-position: 0px -224px;
+}
+.cleaning.icons {
+    background-position: 0px -256px;
+}
+.cleaning_black.icons {
+    background-position: 0px -288px;
+}
+.medicine.icons {
+    background-position: 0px -320px;
+}
+.medicine_black.icons {
+    background-position: 0px -352px;
+}
+.specodejda.icons {
+    background-position: 0px -384px;
+}
+.specodejda_black.icons {
+    background-position: 0px -416px;
+}
+.paper.icons {
+    background-position: 0px -448px;
+}
+.paper_black.icons {
+    background-position: 0px -480px;
+}
+.printer.icons {
+    background-position: 0px -512px;
+}
+.printer_black.icons {
+    background-position: 0px -544px;
+}
+.printer_1.icons {
+    background-position: 0px -576px;
+}
+.printer_1_black.icons {
+    background-position: 0px -608px;
+}
+.basket.icons {
+    background-position: 0px -640px;
+}
+.basket_black.icons {
+    background-position: 0px -672px;
+}
+.view_list.icons {
+    background-position: 0px -704px;
+}
+.view_list_black.icons {
+    background-position: 0px -736px;
+}
+.view_tile.icons {
+    background-position: 0px -768px;
+}
+.view_tile_black.icons {
+    background-position: 0px -800px;
+}
+
+
+
+.icons16.icons{
+    zoom: 0.7;
+}
+
+/**
+СПЕЦСИМВОЛЫ
+ */
+.icon_base{
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
+    font-size: 2rem;
+    margin-top: -5px;
+    text-align: center;
+}
+.icon_close:before{
+    content: "\2716";
+}
+.icon_view_list:before{
+    content: "LIST";
+}
+.icon_view_table:before{
+     content: "TABLE";
+ }

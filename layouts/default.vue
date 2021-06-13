@@ -2,14 +2,17 @@
   <div class="wrapper">
   <div class="content">
     <header class="main_menu_desktop" ref="main_menu_desktop">
-      <main-menu-desktop :class="[scroll_to_top_show?'main_menu_fixed':'main_menu']"/>
+      <main-menu-desktop/>
     </header>
     <header class="main_menu_mobile">
       <main-menu-mobile />
     </header>
 
     <main>
-      <product-category/>
+      <div>
+        <product-category/>
+        <left-banners/>
+      </div>
       <section  class="nuxt__content">
         <div class="empty_block"></div>
         <Nuxt class="on_top"/>
@@ -33,11 +36,13 @@ import MainMenuDesktop from "../components/main/MainMenuDesktop";
 import FooterComponent from "../components/main/FooterComponent";
 import MainMenuMobile from "../components/main/MainMenuMobile";
 import ProductCategory from "../components/main/ProductCategory";
+import LeftBanners from "../components/main/LeftBanners";
 
 
 export default {
   name: "default.vue",
   components:{
+    LeftBanners,
     ProductCategory,
     MainMenuMobile,
     FooterComponent,
@@ -57,7 +62,7 @@ export default {
     this.$store.dispatch('shop/fetchShopData')
 
     this.scroll()
-
+    this.$store.dispatch('config/getConfig')
   },
 
   methods: {
@@ -81,7 +86,7 @@ export default {
         'password': '123'
       };
       const response = await this.$store.dispatch('api/put', {'endpoint': 'user/auth', 'params': params});
-      console.log(response)
+
       if (response.is_guest == false) {
         this.$store.commit('user/login', response.body)
       }
@@ -121,11 +126,13 @@ export default {
   z-index: 2000;
 }
 .content {
-  min-height: calc(100vh - 90px);
+  min-height: calc(100vh - 70px);
 }
 footer {
-  height: 80px;
+ /* height: 30px;*/
 }
-
+.nuxt__content{
+  margin-left: 10px;
+}
 
 </style>

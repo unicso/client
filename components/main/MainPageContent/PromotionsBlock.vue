@@ -73,7 +73,9 @@ export default {
   grid-column-end: 4;
 }
 
-
+.content_block{
+  margin-left: 0px;
+}
 .main-block-first{
   margin-top: 20px;
   grid-column-start: 1;

@@ -6,6 +6,8 @@
   <about-us  v-if="$route.params.cef_name=='about'"/>
   <delivery-page  v-if="$route.params.cef_name=='delivery'"/>
   <payment-page   v-if="$route.params.cef_name=='payment'"/>
+  <client-support v-if="$route.params.cef_name=='support'"/>
+
 </div>
 
 </template>
@@ -18,11 +20,12 @@ import AboutUs from "../../components/info/AboutUs";
 import Delivery from "../../components/info/DeliveryPage";
 import DeliveryPage from "../../components/info/DeliveryPage";
 import PaymentPage from "../../components/info/PaymentPage";
+import ClientSupport from "../../components/info/ClientSupport";
 export default {
 
 
-name: "_cef_name",
-  components: {PaymentPage, DeliveryPage, AboutUs, Contacts, PolitikaKonfidentsialnosti}
+name: "cef_name",
+  components: {ClientSupport, PaymentPage, DeliveryPage, AboutUs, Contacts, PolitikaKonfidentsialnosti}
 }
 </script>
 

@@ -1,0 +1,9 @@
+
+.dropdown_forward{
+    animation: 1s dropdown forwards;
+    overflow: hidden;
+}
+@keyframes dropdown {
+    0%{height: 1px}
+    100%{height: 100%}
+}

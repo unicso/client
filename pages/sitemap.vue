@@ -1,5 +1,6 @@
 <template>
 <section class="content_block">
+
 <h1>Карта сайта</h1>
   <ul>
     <li v-for="(item, name) in sitemap">
@@ -51,8 +52,8 @@ export default {
   methods:{
     async load_sitemap()
     {
-        const result = await this.$axios.$get('https://dev.unicso.ru/v1/config/sitemap')
-        this.sitemap = result.body
+      let result = await this.$store.dispatch('api/get',{endpoint:'config/sitemap'})
+      this.sitemap = result.body
 
     }
 
@@ -65,4 +66,28 @@ export default {
 ul{
   margin-left: 20px;
 }
+details summary::-webkit-details-marker {
+  display: none
+}
+/* Убираем стандартный маркер Firefox */
+details > summary {
+  list-style: none;
+}
+
+/* Добавляем собственный маркер для закрытого состояния */
+details summary:before {
+  content: '+ ';
+  font-size: 1.5rem;
+  margin-right: 7px;
+  cursor: pointer;
+}
+
+/* Добавляем собственный маркер для открытого состояния */
+details[open] summary:before {
+  content: '- ';
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
 </style>

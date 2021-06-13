@@ -10,7 +10,7 @@
     </div>
     <div class="inline">
       <div class="order_items content_block base_shadow">
-        <div class="empty_basket" v-if="basket.count == 0">
+        <div class="empty_basket" v-if="basket == false">
           Корзина пуста
         </div>
         <div class="basket_items">
@@ -27,7 +27,7 @@
                        v-model="basket.items[index].count">
 
                  х {{priceSet(item.price)}} = {{priceSet(item.count*item.price)}}
-                <i class="delete_item" @click="deleteItemFromBasket(item.guid)">
+                <i class="delete_item" @click="deleteItemFromBasket(item.code)">
                   &#215;
                 </i>
               </div>
@@ -128,7 +128,7 @@ name: "basket",
     address:'',
     result:{},
     error:false,
-    basket:{},
+    basket:false,
     order_status:false,
     policy_accept:false
   }
@@ -169,15 +169,18 @@ name: "basket",
     {
 
       const result = await this.$store.dispatch('order/getBasket');
-      this.basket = result.body
+      if(result.body != undefined)
+      {
+        this.basket = result.body
+      }
 
       console.log(this.basket)
 
     },
-    async deleteItemFromBasket(guid)
+    async deleteItemFromBasket(code)
     {
       this.$store.state.order.basket_load_item=true
-      await this.$store.dispatch('order/deleteItemFromBasket', guid)
+      await this.$store.dispatch('order/deleteItemFromBasket', code)
       this.load_basket()
     },
     async addItemToBasket(guid, count)

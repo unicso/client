@@ -39,10 +39,12 @@ export default {
     '~assets/fonts.css',
     '~assets/form_fields.css',
     '~assets/icons.css',
+    '~assets/animations.css',
 
     '~assets/min980.css',
     '~assets/max980.css',
     '~assets/max480.css',
+
     '~assets/ie.css'
 
 

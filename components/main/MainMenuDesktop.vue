@@ -1,68 +1,115 @@
 <template>
- <div class="main_menu"
+
     <div class="main_menu_desktop ">
-      <ul>
-        <li class="logo">
-          <nuxt-link to="/">
-                <div v-html="logotype2">
 
-                </div>
+      <div class="graph__menu2">
+        <div class="logo">
+          <nuxt-link to="/"> <div v-html="$store.state.icons.logotype_vertical"></div></nuxt-link>
+        </div>
 
-          </nuxt-link>
-        </li>
+        <div class="menu__items">
+          <div class="string__menu" :class="[fix_menu?'fixed_menu_string':'']">
+            <ul class=" " >
+              <li><nuxt-link to="/" class="std_link">Главная</nuxt-link></li>
+              <li><nuxt-link to="/info/about" class="std_link">О компании</nuxt-link></li>
 
-        <li class="search"  >
-          <p>
-            <input class="base_shadow_hover" type="text" name="search" placeholder="Поиск" v-model="search_string" v-on:keyup.enter="$router.push({path:'/catalog/search', query:{search:search_string}})">
-            <i class="search_svg_icon" v-html="$store.state.icons.search" @click="$router.push({path:'/catalog/search', query:{search:search_string}})"></i>
-          </p>
-        </li>
-        <li>
+              <li><nuxt-link to="/info/delivery" class="std_link">Доставка</nuxt-link></li>
+              <li><nuxt-link to="/info/payment" class="std_link">Оплата</nuxt-link></li>
+              <li><nuxt-link to="/info/contacts" class="std_link">Контакты</nuxt-link></li>
+              <li><nuxt-link to="/info/contacts" class="std_link">Карьера</nuxt-link></li>
+              <li><nuxt-link to="/info/support" class="std_link">Служба поддержки</nuxt-link></li>
+              <li v-if="fix_menu"><nuxt-link  to="/order/basket">Корзина ({{$store.state.order.basket_count_items}})</nuxt-link></li>
+            </ul>
 
-            <select-fonts v-if="true==false"/>
+          </div>
+          <hr class="string_menu_decorate">
+          <div class="second__line">
+            <div class="search">
+              <p>
+                <input class="base_shadow_hover" type="text" name="search" placeholder="Поиск" v-model="search_string" v-on:keyup.enter="$router.push({path:'/catalog/search', query:{search:search_string}})">
+                <span v-if="search_string!=''" class="clear__search_string" @click="search_string=''">&#10006;</span>
+                <i  class="search_svg_icon" v-html="$store.state.icons.search" @click="$router.push({path:'/catalog/search', query:{search:search_string}})"></i>
+              </p>
+            </div>
+            <div>
+              <select-fonts v-if="true==false"/>
+            </div>
+            <div>
+              <sign-in-button/>
+            </div>
+            <nuxt-link to="/catalog/favorits" class="favorites__button" >
+              <div>
+                <div class="icons " :class="[$route.fullPath =='/catalog/favorits'?'favorites':'favorites_black']"> </div>
+                <sub class="favorites_count">{{$store.state.order.favorite_count}}</sub>
+              </div>
+              <div class="name menu__icon__text">Избранное</div>
+            </nuxt-link>
+            <div v-if="!$store.state.user.isAuth">
+              <basket-button/>
+            </div>
 
-        </li>
-
-        <li>
-
-        </li>
-
-
-        <li v-if="!$store.state.user.isAuth">
-
-         <basket-button/>
-
-        </li>
+          </div>
+        </div>
 
 
 
-      </ul>
+      </div>
 
 
     </div>
+
 </template>
 
 <script>
 import SelectFonts from "../dev/SelectFonts";
 import BasketButton from "../order/BasketButton";
+import SignInButton from "../user/SignInButton";
 export default {
 name: "MainMenuDesktop",
   components:{
+    SignInButton,
     BasketButton,
   SelectFonts
   },
   data(){
     return{
     search_string:'',
-      logotype: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px" height="80px" viewBox="0 0 237.165625 161.8" style="enable-background:new 0 0 197.165625 141.8;" xml:space="preserve"><style type=\'text/css\'>.title{fill:#373e46;}.slogan{fill:#5f6a69;}</style><g transform="scale(2.1487450217653) translate(26.420509765625,0)"><g><polygon opacity="0.7" fill-rule="evenodd" clip-rule="evenodd" fill="#f24c21" points="16.373,0 10.023,3.72 29.269,14.668 29.269,30.128 19.619,35.557 16.577,33.847 16.419,22.387 9.878,18.604 9.878,37.707 19.674,43.188 35.939,34.021 35.939,11.124 "/><polygon fill-rule="evenodd" clip-rule="evenodd" fill="#f24c21" points="6.981,5.356 0,9.212 0,32.192 6.67,35.917 6.67,12.871 19.879,20.397 19.752,31.936 26.422,28.211 26.422,16.715 \t"/></g></g><g transform="scale(0.0435) translate(73.563218390805, 3029.8850574713)"><path transform="translate(0,0) rotate(180) scale(-1, 1)" d="M47 553h146v-198h72c33 132 153 211 295 211c168 0 303 -109 303 -290s-135 -290 -303 -290c-151 0 -277 89 -301 238h-66v-224h-146v553zM403 276c0 -105 54 -165 157 -165s157 60 157 165s-54 165 -157 165s-157 -60 -157 -165z" class=\'title\'/><path transform="translate(897,0) rotate(180) scale(-1, 1)" d="M47 553h147v-202h271v202h148v-553h-148v219h-271v-219h-147v553z" class=\'title\'/><path transform="translate(1556,0) rotate(180) scale(-1, 1)" d="M47 553h146v-351l291 351h140v-553h-146v349l-290 -349h-141v553z" class=\'title\'/><path transform="translate(2227,0) rotate(180) scale(-1, 1)" d="M47 553h146v-195h130l133 195h170l-178 -256l190 -297h-175l-136 223h-134v-223h-146v553z" class=\'title\'/><path transform="translate(2888,0) rotate(180) scale(-1, 1)" d="M637 409l-114 -65c-41 60 -89 92 -174 92c-98 0 -163 -62 -163 -160c0 -97 67 -160 163 -160c84 0 135 32 173 91l114 -64c-56 -105 -153 -157 -285 -157c-178 0 -311 111 -311 290c0 178 136 290 311 290c134 0 229 -53 286 -157z" class=\'title\'/><path transform="translate(3563,0) rotate(180) scale(-1, 1)" d="M190 276c0 -101 72 -165 164 -165c91 0 163 64 163 165s-72 165 -163 165c-92 0 -164 -64 -164 -165zM665 276c0 -173 -146 -290 -311 -290s-311 117 -311 290s146 290 311 290s311 -117 311 -290z" class=\'title\'/></g></svg>',
-      logotype2: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="220px" height="90px"width="1700px" height="747.93230059862px" viewBox="0 0 317.165625 121.24533236874"\t\t style="enable-background:new 0 0 277.165625 101.24533236874;" xml:space="preserve"><style type=\'text/css\'>.title{fill:#373e46;}.slogan{fill:#5f6a69;}</style><g transform="scale(2.0479145218287) translate(0, 0)"><g>\t<polygon opacity="0.7" fill-rule="evenodd" clip-rule="evenodd" fill="#f24c21" points="16.373,0 10.023,3.72 29.269,14.668 29.269,30.128 19.619,35.557 16.577,33.847 16.419,22.387 9.878,18.604 9.878,37.707 19.674,43.188 35.939,34.021 35.939,11.124 "/>\t<polygon fill-rule="evenodd" clip-rule="evenodd" fill="#f24c21" points="6.981,5.356 0,9.212 0,32.192 6.67,35.917 6.67,12.871 \t19.879,20.397 19.752,31.936 26.422,28.211 26.422,16.715 \t"/></g></g><g transform="scale(0.0435) translate(1986.2068965517, 1382.1302571119)"><path transform="translate(0,0) rotate(180) scale(-1, 1)" d="M47 553h146v-198h72c33 132 153 211 295 211c168 0 303 -109 303 -290s-135 -290 -303 -290c-151 0 -277 89 -301 238h-66v-224h-146v553zM403 276c0 -105 54 -165 157 -165s157 60 157 165s-54 165 -157 165s-157 -60 -157 -165z" class=\'title\'/><path transform="translate(897,0) rotate(180) scale(-1, 1)" d="M47 553h147v-202h271v202h148v-553h-148v219h-271v-219h-147v553z" class=\'title\'/><path transform="translate(1556,0) rotate(180) scale(-1, 1)" d="M47 553h146v-351l291 351h140v-553h-146v349l-290 -349h-141v553z" class=\'title\'/><path transform="translate(2227,0) rotate(180) scale(-1, 1)" d="M47 553h146v-195h130l133 195h170l-178 -256l190 -297h-175l-136 223h-134v-223h-146v553z" class=\'title\'/><path transform="translate(2888,0) rotate(180) scale(-1, 1)" d="M637 409l-114 -65c-41 60 -89 92 -174 92c-98 0 -163 -62 -163 -160c0 -97 67 -160 163 -160c84 0 135 32 173 91l114 -64c-56 -105 -153 -157 -285 -157c-178 0 -311 111 -311 290c0 178 136 290 311 290c134 0 229 -53 286 -157z" class=\'title\'/><path transform="translate(3563,0) rotate(180) scale(-1, 1)" d="M190 276c0 -101 72 -165 164 -165c91 0 163 64 163 165s-72 165 -163 165c-92 0 -164 -64 -164 -165zM665 276c0 -173 -146 -290 -311 -290s-311 117 -311 290s146 290 311 290s311 -117 311 -290z" class=\'title\'/></g></svg>'
 
+      fix_menu:false
+    }
+  },
+  created() {
+
+  },
+  mounted() {
+    window.addEventListener('scroll', this.scroll);
+    if(typeof this.$cookies.get('favorites') != 'undefined')
+    {
+      var items =  this.$cookies.get('favorites')
+      for (var code  of items) {
+        this.$store.commit('order/addToFavorite', code)
+      }
     }
   },
   methods:{
 
 
+    scroll() {
+      window.onscroll = () => {
 
+      console.log(window.pageYOffset)
+        if(window.pageYOffset>20)
+        {
+          this.fix_menu = true
+        }
+        else
+        {
+          this.fix_menu = false
+        }
+      };
+
+
+    }
 
   }
 
@@ -76,7 +123,7 @@ name: "MainMenuDesktop",
 .main_menu_desktop{
 
 }
-ul{
+.graph__menu ul{
   list-style: none;
   margin: 0px;
   padding: 0px;
@@ -85,10 +132,11 @@ ul{
   margin-right: auto;
 
 }
-ul{
+.graph__menu{
   display: grid;
-  grid-template-columns: 1.5fr 2fr 1fr  1fr 1fr;
+  grid-template-columns: 320px 2fr 1fr  1fr 1fr;
   width: 100%;
+  padding-top: 50px;
 }
 .logo a{
   width: 150px;
@@ -115,20 +163,21 @@ ul{
   float: left;
 }
 
-li p{
+.graph__menu li p{
   display: flex;
   justify-content: center;
 
 }
 .search_svg_icon{
   cursor: pointer;
+  margin-left: 10px;
 }
 .main_menu_fixed{
   display: flex;
   position: fixed;
   left: 0px;
   width: 100%;
-  z-index: 102;
+  z-index: 100000;
   top:0px;
   animation: 1s forwards ease-in;
   background-color: white;
@@ -140,5 +189,114 @@ li p{
 
   width: 100%;
  /* box-shadow: 0 1px 10px rgba(0,0,0,0.5);*/
+}
+.string__menu{
+  background-color: transparent;
+  font-weight: bold;
+  white-space: nowrap;
+}
+.string__menu ul{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+  margin-left: -25px;
+  background-color: inherit;
+  max-height: 50px;
+
+}
+.string__menu ul li{
+  width: 100%;
+  text-align: center;
+}
+.string__menu ul {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  max-width: 1200px;
+  margin-left: -40px;
+  margin-right: auto;
+}
+.fixed_menu_string{
+  position: fixed;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  z-index: 40005;
+  width: 100%;
+  left: 0px;
+  top:0px;
+  overflow: hidden;
+  background-color: white;
+  animation: 1s show_fixed forwards;
+}
+.fixed_menu_string  ul{
+  margin-left: auto;
+}
+@keyframes show_fixed {
+  0%{height: 0px;}
+  100%{height: 40px;}
+}
+.menu__items, .second__line, .first__line{
+
+  justify-content: space-between;
+  width: 100%;
+}
+.second__line{
+  display: flex;
+}
+.search{
+  width: 500px;
+}
+.graph__menu2{
+  display: inline-flex;
+  padding-left: 20px;
+  width: 100%;
+}
+.graph__menu2 .logo{
+  width: 420px;
+}
+.clear__search_string{
+  margin-left: -30px;
+  font-size: 25px;
+  cursor: pointer;
+  text-align: left;
+}
+.clear__search_string:hover{
+  color: rgb(255,73,0);
+}
+.basket_button_string{
+
+}
+
+hr {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  border: 0;
+  height: 1px;
+  background: #000;
+  background-image: -webkit-linear-gradient(left, #fff, #000, #fff);
+  background-image: -moz-linear-gradient(left, #fff, #000, #fff);
+  background-image: -ms-linear-gradient(left, #fff, #000, #fff);
+  background-image: -o-linear-gradient(left, #fff, #000, #fff);
+}
+.favorites__button div:first-child{
+  display: inline-flex;
+}
+.favorites__button div:first-child sub{
+  margin-top: 19px;
+  margin-left: -5px;
+  font-size: 0.65rem;
+
+}
+.favorites__button .name{
+
+  margin-left: -10px;
+}
+.favorites_black:hover {
+  background-position: 0px -192px;
+}
+.favorites__button:hover{
+  color: rgb(255,73,0);
+}
+.header__background{
+  background-image: url(/files/client/images/header.jpg);
 }
 </style>

@@ -29,7 +29,17 @@
           </div>
           <i v-else v-html="$store.state.icons.empty_image"></i>
         </div>
+<!--
+        <div class="description">
+          <div class="select_show_type" style="display: inline-flex; color:rgb(255,73,0); cursor: pointer">
+            <div  @click="show_description = true" style="margin-right: 20px; ">Описание</div>
+            <div @click="show_description = false">Характеристики</div>
+          </div><br><br>
+          <div v-if="show_description"> {{description}}</div>
+          <div v-else> Спиcок разных характеристик</div>
 
+        </div>
+    -->
         <div class="description">
           {{description}}
         </div>
@@ -73,6 +83,7 @@ export default {
   data(){
     return{
       item:{},
+      show_description:true,
       name:'',
       guid:'',
       manufacturer:'',
@@ -231,4 +242,5 @@ input[type=range],  .price_counter{
 .image_gallery img{
   justify-self: center;
 }
+
 </style>

@@ -1,23 +1,32 @@
 <template>
-<div class="product_category" :class="show_subcategory?'foreground':''" @mouseleave="show_subcategory = false">
+<section>
+  <div class="btn-std show_catalog" @click="show_catalog = !show_catalog">Каталог</div>
 
-  <ul class="parent_category content_block on_top">
+
+
+
+    <div  v-if="show_catalog" class="product_category show_catalog_in" :class="show_subcategory?'foreground':''" @mouseleave="show_subcategory = false">
+  <ul class="parent_category content_block on_top dropdown_forward">
     <li  class="std_link" v-for="(main, index) in $store.state.shop.category"
          :key="main.id"
         @mouseover="selectCategory(main)">
-      <p>
-        {{main.name}}
-      </p>
+      <div class="item_name">
+        <div class="icons icons16" :class="main.icon"></div>
+        <div>{{main.name}}</div>
+      </div>
     </li>
   </ul>
   <div class="sub_menu content_block" v-show="show_subcategory" :class="[show_subcategory?'on_top':'on_down']" @click="show_subcategory=false">
     <div class="sub_category" v-for="item in sub_category" :key="item.name">
-      <h4>
-        <nuxt-link class="std_link" :to="'/catalog/'+item.cef_name">
-          {{ item.name}}
-        </nuxt-link>
-      </h4>
+
       <ul>
+        <li>
+          <h4>
+            <nuxt-link class="std_link" :to="'/catalog/'+item.cef_name">
+              {{ item.name}}
+            </nuxt-link>
+          </h4>
+        </li>
         <li   v-for="child in item.child" :key="child.name" >
          <nuxt-link class="std_link" :to="'/catalog/'+child.cef_name"> {{child.name}}</nuxt-link>
         </li>
@@ -27,6 +36,10 @@
   </div>
 
 </div>
+
+
+
+</section>
 </template>
 
 <script>
@@ -36,7 +49,8 @@ name: "ProductCategory",
     return{
 
       show_subcategory:false,
-      sub_category:{}
+      sub_category:{},
+      show_catalog:false
     }
   },
   methods:{
@@ -50,6 +64,19 @@ name: "ProductCategory",
 </script>
 
 <style scoped>
+.show_catalog{
+  position: absolute;
+  width: 250px;
+  z-index: 40000;
+  margin-left: 8px;
+
+}
+.sub_menu, .show_catalog{
+
+}
+.product_category{
+  margin-top: 40px;
+}
 .parent_category {
 padding-top: 15px;
   align-self: baseline;
@@ -63,7 +90,7 @@ li p{
 ul{
   list-style: none;
   padding:0px;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 li{
   padding:5px 5px 5px 10px
@@ -78,10 +105,11 @@ li:hover{
 }
 .sub_menu{
   position: relative;
-  display: grid;
+/*  display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
-
+*/
+  column-count: 2;
 }
 .sub_menu{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 15px rgba(0,0,0,0.22);
@@ -89,9 +117,41 @@ li:hover{
 .foreground{
   z-index: 200;
 }
-@media screen and (max-width: 480px){
+.icons{
 
 }
 
 
+@media screen and (max-width: 480px){
+
+}
+.item_name{
+  display: inline-flex;
+}
+.item_name div:first-child{
+
+
+}
+.item_name div:last-child{
+  margin-left: 10px;
+  padding-top: 3px;
+}
+.sub_category{
+  word-spacing: normal;
+  display: inline-flex;
+  max-width: 390px;
+  min-width: 200px;
+}
+.sub_category ul li:not(:first-child){
+  margin-left: 10px;
+}
+.sub_category ul li:first-child{
+  margin-left: -10px;
+}
+.sub_category ul li h4{
+  margin-bottom: 5px;
+}
+.parent_category.on_top{
+  z-index: 200;
+}
 </style>

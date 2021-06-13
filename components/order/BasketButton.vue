@@ -1,20 +1,26 @@
 <template>
 <div class="basket_main_menu"  @mouseleave="show_fast_view = false">
-  <div class="basket_button btn-std base_shadow_hover"
+  <div classs="basket_button btn-std base_shadow_hover"
        :class="[$store.state.order.basket_load_item?'basket_process':'']"
        @mouseover="show_fast_view = true"
       @click="$router.push('/order/basket'); show_fast_view = false"
     v-if="asIcon!=true"
   >
-    Корзина
-    <i v-if="basket.count>0">({{basket.count}})</i>
+    <div class="menu__icon__fields">
+      <div class="menu__icon">
+        <div class="icons " :class="[(show_fast_view||$route.fullPath=='/order/basket')?'basket':'basket_black']"></div>
+        <i v-if="basket.count>0" class="basket_count">{{basket.count}}</i>
+      </div>
+      <div class="menu__icon__text ">Корзина</div>
+    </div>
+
   </div>
   <div v-if="asIcon" class="shoping_cart" @click="$router.push('/order/basket')">
     <i v-html="$store.state.icons.shoping_cart"></i>
     <div>{{basket.count}}</div>
   </div>
   <div class="basket_fast_view base_shadow on_top" v-if="show_fast_view && asIcon!=true">
-    <div class="empty_basket" v-if="basket.count == 0">
+    <div class="empty_basket" v-if="basket == false">
       Корзина пуста
     </div>
     <div v-else class="basket_items">
@@ -34,7 +40,7 @@
       <div class="unit_price">
               {{item.count}} х {{priceSet(item.price)}} = {{priceSet(item.count*item.price)}}
       </div>
-        <div class="delete_item" @click="deleteItemFromBasket(item.guid)">
+        <div class="delete_item" @click="deleteItemFromBasket(item.code)">
           &#215;
         </div>
       </li>
@@ -67,7 +73,8 @@ name: "BasketButton",
   return{
     basket_item_counts:0,
     show_fast_view:false,
-    basket:{}
+    basket:{},
+
 
   }
   },
@@ -88,10 +95,10 @@ watch:{
   methods:{
 
 
-  deleteItemFromBasket(guid)
+  deleteItemFromBasket(code)
   {
     this.$store.state.order.basket_load_item=true
-    this.$store.dispatch('order/deleteItemFromBasket', guid)
+    this.$store.dispatch('order/deleteItemFromBasket', code)
   },
   priceSet(data){
       var price       = Number.prototype.toFixed.call(parseFloat(data) || 0, 2),
@@ -103,10 +110,15 @@ watch:{
  async  load_basket()
   {
     const result = await this.$store.dispatch('api/get', {endpoint:'basket'})
-    setTimeout(()=>this.$store.state.order.basket_load_item=false, 100)
-    this.basket = result.body
-    this.$store.state.order.basket_count_items = this.basket.count
-    this.$store.state.order.basket = result.body
+    if(result.body != undefined)
+    {
+      console.log(1231313213)
+      setTimeout(()=>this.$store.state.order.basket_load_item=false, 100)
+      this.basket = result.body
+      this.$store.state.order.basket_count_items = this.basket.count
+      this.$store.state.order.basket = result.body
+    }
+
   }
 
   }
@@ -119,9 +131,16 @@ watch:{
 .wrapper{
   margin-bottom: 50px;
 }
-
+.search p {
+  margin: 5px;
+}
 </style>
 <style scoped>
+.basket_main_menu{
+  text-align: center;
+  margin-right: 30px;
+ /* width: 200px;*/
+}
 i{
   font-style: normal;
 }
@@ -131,7 +150,7 @@ i{
 
   border-radius: 15px;
   padding: 25px;
-  margin-left: -300px;
+  margin-left: -400px;
   z-index: 105;
 
   background-color: white;
@@ -216,5 +235,19 @@ i{
 }
 .shoping_cart{
   display: inline-flex;
+}
+.menu__icon{
+  display: inline-flex;
+  cursor: pointer;
+}
+.basket_count{
+  margin-left: -5px;
+  margin-top: 15px;
+  font-size: 0.7rem;
+}
+.menu__icon__text{
+
+  margin-top: -5px;
+  margin-left: -5px;
 }
 </style>

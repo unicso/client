@@ -1,7 +1,7 @@
 <template>
 <div class="main_menu_mobile">
       <div class="header">
-        <div class="logo"  v-if="$route.fullPath=='/'">
+        <div class="logo"  v-if="$route.fullPath=='/'" >
           <nuxt-link to="/">
             <div v-html="logotype"></div>
           </nuxt-link>
@@ -49,9 +49,26 @@
             </ul>
           </li>
         </ul>
+        <hr>
+        <ul>
+          <li class="footer" @click="show_menu=false"><p><nuxt-link to="/info/contacts">Контакты</nuxt-link></p></li>
+          <li class="footer" @click="show_menu=false"><p><nuxt-link to="/info/about">О компании</nuxt-link></p></li>
+          <li class="footer" @click="show_menu=false"><p><nuxt-link to="/info/delivery">Доставка</nuxt-link></p></li>
+          <li class="footer" @click="show_menu=false"><p><nuxt-link to="/info/payment">Оплата</nuxt-link></p></li>
+          <li class="footer" @click="show_menu=false"><p><nuxt-link to="/info/support">Служба поддержки клиентов</nuxt-link></p></li>
 
+          <li class="footer"><p><nuxt-link to="/info/politika-konfidentsialnosti">Политика конфиденциальности</nuxt-link></p></li>
+        </ul>
+        <br><br><br><br>
       </div>
+      <small v-if="show_menu">
+        <style>
+          .nuxt__content{
+            display: none!important;
+          }
 
+        </style>
+      </small>
 </div>
 </template>
 
@@ -104,7 +121,7 @@ export default {
   width: 100%;
   background-color: white;
   bottom: 0px !important;
-  z-index: 10000;
+  z-index: 10002;
   box-shadow: 0px -5px 8px 0px rgba(34, 60, 80, 0.2);
   justify-content: space-between;
 
@@ -118,21 +135,28 @@ export default {
   background-color: white;
 }
 .mobile_fullscreen_menu{
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   left: 0px;
   top: 0px;
   background-color: white;
-  z-index: 9999;
+  z-index: 10000;
   text-align: center;
+  margin-bottom: 100px;
 
 }
+
 .mobile_fullscreen_menu .parent_category .std_link{
   font-size: 1.5rem;
 }
 .search input{
   height: 3rem;
 }
-
+.footer{
+  font-size: 1.3rem;
+}
+.logo{
+  zoom: 0.7;
+}
 </style>

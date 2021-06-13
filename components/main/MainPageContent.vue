@@ -2,7 +2,8 @@
 <div class="main_page_content">
   <div class="empty_block"></div>
   <div class="top_content">
-    <slider class="content_block"/>
+    <slider-clean/>
+    <button-after-slider v-if="2==3"/>
     <main-page-promotions v-if="2==2" class="content_block"/>
     <promotions-block class="promotions_block"/>
 
@@ -17,9 +18,13 @@ import MainPagePromotions from "./MainPageContent/MainPagePromotions";
 import MainBlockSecond from "./MainPageContent/MainBlockSecond";
 import ProfitBlock from "./MainPageContent/ProfitBlock";
 import PromotionsBlock from "./MainPageContent/PromotionsBlock";
+import SliderClean from "./MainPageContent/SliderClean";
+import ButtonAfterSlider from "./MainPageContent/ButtonAfterSlider";
 
 export default {
   components:{
+    ButtonAfterSlider,
+    SliderClean,
     PromotionsBlock,
     ProfitBlock,
     MainBlockSecond,
