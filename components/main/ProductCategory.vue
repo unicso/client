@@ -1,11 +1,11 @@
 <template>
 <section>
-  <div class="btn-std show_catalog on_top_1" @click="show_catalog = !show_catalog">Каталог</div>
+  <div class="btn-std show_catalog on_top_1 hide__on__mobile" @click="show_catalog = !show_catalog">Каталог</div>
 
 
 
 
-    <div  v-if="show_catalog" class="product_category show_catalog_in" :class="show_subcategory?'':''" @mouseleave="show_subcategory = false">
+    <div  v-if="show_catalog" class="product_category show_catalog_in hide__on__mobile" :class="show_subcategory?'':''" @mouseleave="show_subcategory = false">
   <ul class="parent_category content_block dropdown_forward on_top_1">
     <li  class="std_link" v-for="(main, index) in $store.state.shop.category"
          :key="main.id"

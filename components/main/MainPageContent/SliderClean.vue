@@ -1,6 +1,5 @@
 <template>
 <section>
-  <h1>{{checkedNames}}</h1>
   <div class="slider_clean">
     <input class="current__slide" v-for="(slide,index) in slides"
            type="radio" name="point"

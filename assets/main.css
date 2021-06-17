@@ -173,6 +173,15 @@ footer.content_block{
 }
 .full__width{width: 100%}
 
+.link__with__text{
+
+}
+.link__with__text >div:first-child{
+
+}
+.link__with__text >div:last-child{
+font-size: 0.9rem;
+}
 
 .on_top_1{z-index: 1}
 .on_top_2{z-index: 2}

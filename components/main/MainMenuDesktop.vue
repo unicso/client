@@ -8,7 +8,7 @@
         </div>
 
         <div class="menu__items">
-          <div class="string__menu" :class="[fix_menu?'fixed_menu_string':'']">
+          <div class="string__menu" :class="[fix_menu?'fixed_menu_string on_top_100':'']">
             <ul class=" " >
               <li><nuxt-link to="/" class="std_link">Главная</nuxt-link></li>
               <li><nuxt-link to="/info/about" class="std_link">О компании</nuxt-link></li>
@@ -16,7 +16,7 @@
               <li><nuxt-link to="/info/delivery" class="std_link">Доставка</nuxt-link></li>
               <li><nuxt-link to="/info/payment" class="std_link">Оплата</nuxt-link></li>
               <li><nuxt-link to="/info/contacts" class="std_link">Контакты</nuxt-link></li>
-              <li><nuxt-link to="/info/contacts" class="std_link">Карьера</nuxt-link></li>
+              <li v-if="2==3"><nuxt-link  to="/info/contacts" class="std_link">Карьера</nuxt-link></li>
               <li><nuxt-link to="/info/support" class="std_link">Служба поддержки</nuxt-link></li>
               <li v-if="fix_menu"><nuxt-link  to="/order/basket">Корзина ({{$store.state.order.basket_count_items}})</nuxt-link></li>
             </ul>
@@ -35,15 +35,16 @@
               <select-fonts v-if="true==false"/>
             </div>
             <div>
-              <sign-in-button/>
+              <sign-in-button  v-if="2==3"/>
             </div>
             <nuxt-link to="/catalog/favorits" class="favorites__button" >
               <div>
                 <div class="icons " :class="[$route.fullPath =='/catalog/favorits'?'favorites':'favorites_black']"> </div>
-                <sub class="favorites_count">{{$store.state.order.favorite_count}}</sub>
+                <sub class="favorites_count" v-if="$store.state.order.favorite_count>0">{{$store.state.order.favorite_count}}</sub>
               </div>
               <div class="name menu__icon__text">Избранное</div>
             </nuxt-link>
+
             <div v-if="!$store.state.user.isAuth">
               <basket-button/>
             </div>
@@ -97,7 +98,7 @@ name: "MainMenuDesktop",
     scroll() {
       window.onscroll = () => {
 
-      console.log(window.pageYOffset)
+
         if(window.pageYOffset>20)
         {
           this.fix_menu = true

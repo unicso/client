@@ -11,7 +11,7 @@
 СПРАЙТ
  */
 .icons {
-    background-image: url("https://dev.unicso.ru/files/client/images/icons/sprite.png");
+    background-image: url("/files/client/images/icons/sprite.png");
     width: 32px;
     height: 32px;
     display: inline-flex;

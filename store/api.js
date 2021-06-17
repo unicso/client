@@ -37,8 +37,6 @@ export const actions = {
 
     const result = await this.$axios.$delete(data.endpoint, formData)
 
-    console.log(result);
-
     return result;
   }
 

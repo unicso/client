@@ -1,7 +1,7 @@
 <template>
 <div class="order_view">
   <h1>Данные заказа</h1>
-<div class="view_order" v-if="order!=false">
+  <div class="view_order" v-if="order!=false">
 
   <div class="code" v-if="order.code">Код: {{order.code}}</div>
   <div class="status" v-if="order.status" :class="[order.status=='Отменен'?'color_red':'']">Статус: {{order.status}}</div>
@@ -38,20 +38,25 @@
 <div class="btn-std delete_order" @click="deleteOrder" v-if="order.status !='Отменен' && confirm==false">Отменить заказ</div>
 <div class="confirm_delete" v-if="confirm">
   <h3>Подтверждаете отмену заказа?</h3>
-  <button class="btn-std" @click="deleteOrderConfirm">Подтверждаю {{confirm}}</button>
+  <button class="btn-std" @click="deleteOrderConfirm">Подтверждаю</button>
 
 </div>
 
 </div>
-  <div v-else>
+  <div v-if="order =='empty' ">
     <h2>Заказ не найден</h2>
   </div>
+  <loader v-if="order==false" :important="true"/>
+
 </div>
 </template>
 
 <script>
+
+import Loader from "../../../components/loader";
 export default {
 name: "token",
+  components: {Loader},
   data(){
   return{
     order:false,
@@ -79,7 +84,7 @@ name: "token",
     }
 
     const response = await this.$store.dispatch('api/get', request)
-    console.log(response)
+
     if(response.error != true)
     {
       this.order = response.body
@@ -88,20 +93,17 @@ name: "token",
 
   },
     async deleteOrder(){
-      var response = await this.$store.dispatch('api/delete',
-          {endpoint:'order/'+this.token})
-      this.confirm = response.body.result
+      this.confirm = true
     },
     async deleteOrderConfirm(){
       var response = await this.$store.dispatch('api/delete',
           {endpoint:'order/'+this.token + '/' + this.confirm})
-      console.log(response)
-      if(response.body.action == 'delete' && response.body.result == 'true')
+
+
+      if(response.error!= undefined && response.error == false)
       {
         this.confirm = false
-
       }
-      this.confirm = false
       this.getOrder()
     },
 

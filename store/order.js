@@ -34,7 +34,6 @@ export const mutations = {
         this.$cookies.set('basket', state.basket)
         state.basket_count_items = Object.keys(state.basket).length;
         state.basket_summary = 0
-        console.log(code)
         for(var key in state.basket){
 
             state.basket_summary = state.basket_summary + state.basket[key].count*state.basket[key].price
@@ -50,7 +49,7 @@ export const mutations = {
     },
     deleteFromFavorite(state,code){
 
-            console.log(code)
+
         if (state.favorite_items.indexOf(code)>=0)
         {
            var favorits  = []

@@ -45,7 +45,7 @@ export default {
         'password':this.password
       };
       const response = await this.$store.dispatch('api/put',{'endpoint':'user/auth', 'params':params});
-      console.log(response)
+
       if(response.error == false)
       {
         this.$store.commit('user/login', response.body)

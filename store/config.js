@@ -18,7 +18,7 @@ export const mutations = {
         state.view_type_catalog = value
 
        // this.$cookies.set('config', cookie)
-        console.log(state.view_type_catalog)
+
 
     },
 

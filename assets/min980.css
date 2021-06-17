@@ -1,4 +1,4 @@
-@media screen and (min-width: 980px) {
+@media screen and (min-width: 720px) {
     html, body, .wrapper {
         max-width: 1200px;
         margin-left: auto;

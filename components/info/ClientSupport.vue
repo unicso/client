@@ -2,37 +2,41 @@
 <section >
   <h1>Служба поддержки клиентов</h1>
 
-  <div class="client_support content_block">
+  <div class="client_support content_block" v-if="email_sended==false">
     <header>Отправить сообщение</header>
     <main>
       <div class="field__block">
         <label>Название вашей компании</label>
-        <input type="text">
+        <input type="text" v-model="company">
       </div>
       <div class="field__block">
         <label>Ваши ФИО, должность</label>
-        <input type="text">
+        <input type="text" v-model="name">
       </div>
       <div class="field__block">
         <label>Email</label>
-        <input type="text">
+        <input type="text" v-model="email">
       </div>
       <div class="field__block">
         <label>Ваш номер телефона</label>
-        <input type="text">
+        <input type="text"  v-model="phone">
       </div>
       <div class="field__block">
         <label>Сообщение</label>
-        <textarea rows="9">
+        <textarea rows="9"  v-model="message">
       </textarea>
       </div>
       <div class="field__block">
         <label></label>
-        <input type="button" value="Отправить" class="btn-std base_shadow_hover">
+        <input type="button" value="Отправить" class="btn-std base_shadow_hover" @click="sendMessage">
       </div>
 
     </main>
 
+
+  </div>
+  <div v-else>
+    <h3>Сообщение отправлено</h3>
 
   </div>
 </section>
@@ -40,7 +44,46 @@
 
 <script>
 export default {
-  name: "ClientSupport"
+  name: "ClientSupport",
+  data(){
+    return{
+      company:'',
+      name:'',
+      email:'',
+      phone:'',
+      message:'',
+      to:'order@unicso.ru',
+      subject:'Поддержка клиентов',
+      email_sended:false
+
+    }
+  },
+
+  methods:{
+
+    async sendMessage(){
+
+      let params = {
+        company:this.company,
+        name:this.name,
+        email:this.email,
+        phone:this.phone,
+        message:this.message,
+        to:this.to,
+        subject:this.subject,
+
+
+      }
+      const result = await this.$store.dispatch('api/post', {endpoint:'support/email', params:params})
+
+      if(result.error == false)
+        this.email_sended = true
+
+    }
+
+  }
+
+
 }
 </script>
 

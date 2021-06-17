@@ -10,7 +10,7 @@
 
       <breadcrumb-component  :cef_name="page"/>
       <div class="view_box">
-        <div class="sort_by">
+        <div class="sort_by"  v-if="2==3">
           <select>
             <option selected>По популярности</option>
             <option>По возрастанию цены</option>
@@ -56,7 +56,7 @@
 
       </div>
       <div class="catalog_items_list_view" v-else>
-        <article  class=" catalog_items content_block base_shadow_hover on_top_2" v-for="item in catalog_items"  @click="$router.push('/catalog/'+page+'/'+item.code)">
+        <article  class=" catalog_items content_block base_shadow_hover on_top_2" v-for="item in catalog_items" >
 
           <div class="item_image"  @click="$router.push('/catalog/'+page+'/'+item.code)">
 
@@ -200,7 +200,7 @@ export default {
         var result = await this.$store.dispatch('api/get', {endpoint: 'shop/category/' + this.page})
       }
 
-      console.log(result)
+
 
         if (result.error == false && result.body.products != false) {
           this.not_found = false;
@@ -382,5 +382,19 @@ width: 100%;
 .item_image, .item_description{
   position: relative;
 }
+.btn-std{
 
+}
+.catalog_items_tile_view .price{
+  margin-bottom: 10px;
+}
+.catalog_items_tile_view .btn-std{
+  width: 150px;
+}
+.catalog_items_tile_view .item_price{
+text-align: center;
+}
+.btn-std{
+
+}
 </style>

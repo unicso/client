@@ -1,11 +1,11 @@
 <template>
   <div  v-if="as_icon" class="add__to__favorite">
     <button v-if="$store.state.order.favorite_items.indexOf(code)==-1" class="btn-std" @click="addToFavorite(code)">В избранное</button>
-    <button v-else class="btn-std small" @click="deleteFromFavorits(code)">Убрать из избранного</button>
+    <button v-else class="btn-std small" @click="deleteFromFavorits(code)">Из избранного</button>
   </div>
   <div v-else class="add__to__favorite" >
     <button v-if="$store.state.order.favorite_items.indexOf(code)==-1" class="btn-std" @click="addToFavorite(code)">В избранное</button>
-    <button v-else class="btn-std small" @click="deleteFromFavorits(code)">Убрать из избранного</button>
+    <button v-else class="btn-std small" @click="deleteFromFavorits(code)">Из избранного</button>
   </div>
 
 
@@ -37,7 +37,7 @@ export default {
 </script>
 
 <style scoped>
-.btn-std.small{
-  font-size: 0.7rem;
+.btn-std{
+width: 150px;
 }
 </style>

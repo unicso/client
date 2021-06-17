@@ -1,14 +1,6 @@
 <template>
-<section class="left__banners">
-  <select v-model="coof" style="width: 100px;  position: fixed; left: 0px; top:1px">
-    <option value="100" selected>100%</option>
-    <option value="90" >90%</option>
-    <option value="80" >80%</option>
-    <option value="70" >70%</option>
-    <option value="60" >60%</option>
-    <option value="50" >50%</option>
+<section class="left__banners hide__on__mobile">
 
-  </select>
 
   <div class="banner" v-for="banner in banners" :style="'width:'+coof+'%;height:'+coof+'%;'">
     <nuxt-link v-if="banner.link" :to="banner.link">

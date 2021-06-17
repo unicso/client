@@ -19,7 +19,7 @@
     <i v-html="$store.state.icons.shoping_cart"></i>
     <div>{{basket.count}}</div>
   </div>
-  <div class="basket_fast_view base_shadow" v-if="show_fast_view && asIcon!=true">
+  <div class="basket_fast_view base_shadow on_top_100" v-if="show_fast_view && asIcon!=true">
     <div class="empty_basket" v-if="basket == false">
       Корзина пуста
     </div>
@@ -112,7 +112,7 @@ watch:{
     const result = await this.$store.dispatch('api/get', {endpoint:'basket'})
     if(result.body != undefined)
     {
-      console.log(1231313213)
+
       setTimeout(()=>this.$store.state.order.basket_load_item=false, 100)
       this.basket = result.body
       this.$store.state.order.basket_count_items = this.basket.count
@@ -245,7 +245,8 @@ i{
 }
 .menu__icon__text{
 
-  margin-top: -5px;
+
   margin-left: -5px;
 }
+
 </style>

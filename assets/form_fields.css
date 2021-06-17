@@ -84,7 +84,7 @@ input[type="number"] {
     appearance: none;
     height: 100%;
     width: 100%;
-    text-align: center;
+    text-align: left;
     outline: none;
     transition: 0.5s;
     box-sizing: border-box;

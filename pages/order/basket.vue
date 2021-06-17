@@ -174,7 +174,7 @@ name: "basket",
         this.basket = result.body
       }
 
-      console.log(this.basket)
+
 
     },
     async deleteItemFromBasket(code)
@@ -225,7 +225,7 @@ name: "basket",
     }
       const request = await this.$store.dispatch('api/post', params)
       this.result = request
-      console.log(request)
+
       if(request.error === true)
       {
         this.error = request.body
@@ -344,5 +344,8 @@ sup {
 }
 .update_basket:disabled{
   cursor: no-drop;
+}
+input:focus{
+  border: 1px solid rgb(255,73,0)`;
 }
 </style>

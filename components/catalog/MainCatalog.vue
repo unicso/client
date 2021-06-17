@@ -82,7 +82,7 @@ export default {
 
         this.catalog_items = result.body.catalog
         this.category = result.body.category
-        console.log(result.body)
+
       }
 
     },
