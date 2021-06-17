@@ -177,7 +177,6 @@ name: "MainMenuDesktop",
   position: fixed;
   left: 0px;
   width: 100%;
-  z-index: 100000;
   top:0px;
   animation: 1s forwards ease-in;
   background-color: white;
@@ -219,7 +218,6 @@ name: "MainMenuDesktop",
 .fixed_menu_string{
   position: fixed;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  z-index: 40005;
   width: 100%;
   left: 0px;
   top:0px;

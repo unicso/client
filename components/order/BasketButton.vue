@@ -19,7 +19,7 @@
     <i v-html="$store.state.icons.shoping_cart"></i>
     <div>{{basket.count}}</div>
   </div>
-  <div class="basket_fast_view base_shadow on_top" v-if="show_fast_view && asIcon!=true">
+  <div class="basket_fast_view base_shadow" v-if="show_fast_view && asIcon!=true">
     <div class="empty_basket" v-if="basket == false">
       Корзина пуста
     </div>
@@ -151,8 +151,6 @@ i{
   border-radius: 15px;
   padding: 25px;
   margin-left: -400px;
-  z-index: 105;
-
   background-color: white;
 }
 .image img{

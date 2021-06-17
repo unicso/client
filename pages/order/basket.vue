@@ -3,7 +3,7 @@
 
 <div class="main_page_content">
 
-  <div class="orders_basket on_top">
+  <div class="orders_basket ">
     <h1>Оформление заказа</h1>
     <div v-if="2==3">
       <pre><div v-html="result"></div></pre>
@@ -284,7 +284,6 @@ i{
 
 .order_items, .order_client{
   border-radius: 15px;
-  z-index: 105;
   background-color: white;
 
 }

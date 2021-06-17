@@ -121,7 +121,6 @@ export default {
   width: 100%;
   background-color: white;
   bottom: 0px !important;
-  z-index: 10002;
   box-shadow: 0px -5px 8px 0px rgba(34, 60, 80, 0.2);
   justify-content: space-between;
 
@@ -130,7 +129,6 @@ export default {
   position: fixed !important;
   bottom: 43px !important;
   width: 100%;
-  z-index: 10000;
   left: 0px;
   background-color: white;
 }
@@ -141,7 +139,6 @@ export default {
   left: 0px;
   top: 0px;
   background-color: white;
-  z-index: 10000;
   text-align: center;
   margin-bottom: 100px;
 

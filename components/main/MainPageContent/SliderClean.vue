@@ -100,7 +100,6 @@ export default {
   opacity: 0;
   position: absolute;
   width: inherit;
-  z-index: 0;
   -webkit-transform: scale(1.5);
   -moz-transform: scale(1.5);
   -o-transform: scale(1.5);
@@ -134,7 +133,6 @@ export default {
 
 {
   opacity: 1;
-  z-index: 1;
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -o-transform: scale(1);
@@ -150,7 +148,6 @@ export default {
   margin-left: -98px;
   position: absolute;
   margin-top: -50px;
-  z-index: 100;
 }
 
 .slider_clean label {

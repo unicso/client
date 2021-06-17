@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal on_top_200">
     <client-only>
       <modal
           :name="modal_name"

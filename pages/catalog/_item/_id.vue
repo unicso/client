@@ -3,7 +3,7 @@
   <product-category  v-if="2==3"/>
   <div class="catalog_item" v-if="show">
     <div class="empty_block"></div>
-<article class="on_top">
+<article class="">
        <breadcrumb-component :cef_name="cef_name" :last_cef_link="$route.fullPath" :last_name="name"/>
       <div class="base_shadow  product content_block">
 
@@ -15,7 +15,7 @@
 
 
         </div>
-        <div class="images">
+        <div class="images" style="position: relative">
 
           <div class="images_block"  v-if="images!= false">
             <img :src="image"  @click="$modal.show('show_image')"/>
@@ -29,17 +29,7 @@
           </div>
           <i v-else v-html="$store.state.icons.empty_image"></i>
         </div>
-<!--
-        <div class="description">
-          <div class="select_show_type" style="display: inline-flex; color:rgb(255,73,0); cursor: pointer">
-            <div  @click="show_description = true" style="margin-right: 20px; ">Описание</div>
-            <div @click="show_description = false">Характеристики</div>
-          </div><br><br>
-          <div v-if="show_description"> {{description}}</div>
-          <div v-else> Спиcок разных характеристик</div>
 
-        </div>
-    -->
         <div class="description">
           {{description}}
         </div>
@@ -56,7 +46,9 @@
             <input type="range" min="0" max="1000" step="10" v-model="item_count">
             <br>
             <h3 class="summ" v-if="item_count>0">{{'Сумма: ' + priceSet(price*item_count)}}</h3>
-          <button v-if="$store.state.order.basket.items[guid]" class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">Изменить</button>
+          <button v-if="$store.state.order.basket.items!= undefined && $store.state.order.basket.items[guid] != undefined "
+
+                  class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">Изменить</button>
           <button v-else class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">В корзину</button>
 
 
@@ -232,13 +224,16 @@ export default {
 .images_block{
   cursor: pointer;
 }
+.item_price{
+  min-width: 160px;
+  position: relative;
+  padding-bottom: 15px;
+}
 input[type=range],  .price_counter{
-  width: 150px
+  width: 140px
 
 }
-.image_gallery{
-  z-index: 3000;
-}
+
 .image_gallery img{
   justify-self: center;
 }

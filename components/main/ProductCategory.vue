@@ -1,12 +1,12 @@
 <template>
 <section>
-  <div class="btn-std show_catalog" @click="show_catalog = !show_catalog">Каталог</div>
+  <div class="btn-std show_catalog on_top_1" @click="show_catalog = !show_catalog">Каталог</div>
 
 
 
 
-    <div  v-if="show_catalog" class="product_category show_catalog_in" :class="show_subcategory?'foreground':''" @mouseleave="show_subcategory = false">
-  <ul class="parent_category content_block on_top dropdown_forward">
+    <div  v-if="show_catalog" class="product_category show_catalog_in" :class="show_subcategory?'':''" @mouseleave="show_subcategory = false">
+  <ul class="parent_category content_block dropdown_forward on_top_1">
     <li  class="std_link" v-for="(main, index) in $store.state.shop.category"
          :key="main.id"
         @mouseover="selectCategory(main)">
@@ -16,7 +16,7 @@
       </div>
     </li>
   </ul>
-  <div class="sub_menu content_block" v-show="show_subcategory" :class="[show_subcategory?'on_top':'on_down']" @click="show_subcategory=false">
+  <div class="sub_menu content_block " v-show="show_subcategory" :class="[show_subcategory?'on_top_1':'']" @click="show_subcategory=false">
     <div class="sub_category" v-for="item in sub_category" :key="item.name">
 
       <ul>
@@ -67,7 +67,6 @@ name: "ProductCategory",
 .show_catalog{
   position: absolute;
   width: 250px;
-  z-index: 40000;
   margin-left: 8px;
 
 }
@@ -114,9 +113,7 @@ li:hover{
 .sub_menu{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 15px rgba(0,0,0,0.22);
 }
-.foreground{
-  z-index: 200;
-}
+
 .icons{
 
 }
@@ -150,8 +147,5 @@ li:hover{
 }
 .sub_category ul li h4{
   margin-bottom: 5px;
-}
-.parent_category.on_top{
-  z-index: 200;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-<section class="left__banners  on_top">
-  <select v-model="coof" style="width: 100px; z-index: 300020; position: fixed; left: 0px; top:1px">
+<section class="left__banners">
+  <select v-model="coof" style="width: 100px;  position: fixed; left: 0px; top:1px">
     <option value="100" selected>100%</option>
     <option value="90" >90%</option>
     <option value="80" >80%</option>

@@ -15,7 +15,7 @@
       </div>
       <section  class="nuxt__content">
         <div class="empty_block"></div>
-        <Nuxt class="on_top"/>
+        <Nuxt class=""/>
       </section>
     </main>
 
@@ -123,7 +123,6 @@ export default {
   right: 10px;
   bottom: 0px;
   opacity: 0.2;
-  z-index: 2000;
 }
 .content {
   min-height: calc(100vh - 70px);

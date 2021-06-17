@@ -49,7 +49,6 @@ ul{
 
   width: 200px;
   height: 100px;
-  z-index: 200;
   margin-left: -50px;
 }
 .submenu.content_block{

@@ -95,6 +95,7 @@ ul {
 }
 li{
   padding: 5px 5px 5px 5px;
+  border:1px solid transparent;
 }
 .promotion_item .name {
 

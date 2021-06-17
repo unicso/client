@@ -5,7 +5,7 @@
     <div class="not__found" v-if="not_found">{{not_found}}</div>
   <div class="catalog_all" v-if="catalog_items!=false">
     <div class="empty_block"></div>
-    <div class="catalog on_top">
+    <div class="catalog ">
       <div class="not__found" v-if="not_found">{{not_found}}</div>
 
       <breadcrumb-component  :cef_name="page"/>
@@ -28,21 +28,18 @@
 
 
       <div class="catalog_items_tile_view" v-if="$store.state.config.view_type_catalog=='tile'">
-        <article  class=" content_block" v-for="item in catalog_items">
+        <article  class="content_block on_top_2" v-for="item in catalog_items">
 
-          <div class="item_image" @click="$router.push('/catalog/'+page+'/'+item.code)">
+          <div class="item_image"   @click="$router.push('/catalog/'+page+'/'+item.code)">
 
             <img v-if="typeof item.image != 'undefined' &&  item.image" :src="item.image+'/tmb'" >
             <i v-else v-html="$store.state.icons.empty_image"></i>
           </div>
-
-          <nuxt-link class="" :to="'/catalog/'+page+'/'+item.code">
-            <div class="item_description">
+            <div class="item_description"   @click="$router.push('/catalog/'+page+'/'+item.code)">
               <div class="article">Код товара: {{item.code}}</div>
               <h3>{{item.name}}</h3>
 
             </div>
-          </nuxt-link>
           <div class="item_price">
             <div class="unit">{{item.price_view}}</div>
             <div class="price">{{priceSet(item.price)}}</div>
@@ -59,15 +56,15 @@
 
       </div>
       <div class="catalog_items_list_view" v-else>
-        <article  class=" catalog_items content_block base_shadow_hover" v-for="item in catalog_items">
+        <article  class=" catalog_items content_block base_shadow_hover on_top_2" v-for="item in catalog_items"  @click="$router.push('/catalog/'+page+'/'+item.code)">
 
           <div class="item_image"  @click="$router.push('/catalog/'+page+'/'+item.code)">
 
             <img v-if="typeof item.image != 'undefined' &&  item.image" :src="item.image+'/tmb'" >
             <i v-else v-html="$store.state.icons.empty_image"></i>
           </div>
-          <nuxt-link class="" :to="'/catalog/'+page+'/'+item.code">
-            <div class="item_description">
+
+            <div class="item_description"   @click="$router.push('/catalog/'+page+'/'+item.code)">
 
               <h3>{{item.name}}</h3>
               <div class="article">Код товара: {{item.code}}</div>
@@ -75,7 +72,7 @@
 
               <div class="truncate-text">{{item.description}}</div>
             </div>
-          </nuxt-link>
+
           <div class="item_price">
             <div class="unit">Цена {{item.price_view}}</div>
             <div class="price">{{priceSet(item.price)}}</div>
@@ -378,4 +375,12 @@ width: 100%;
   padding: 2px;
 
 }
+.catalog_items_tile_view article{
+  cursor: pointer;
+}
+
+.item_image, .item_description{
+  position: relative;
+}
+
 </style>
