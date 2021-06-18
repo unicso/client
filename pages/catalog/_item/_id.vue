@@ -162,7 +162,7 @@ export default {
 
     async addItemToBasket()
     {
-        var uri = 'basket/'+this.guid + '/' + this.item_count
+        var uri = 'basket/'+this.code + '/' + this.item_count
         var result = await this.$store.dispatch('api/post', {endpoint:uri})
         this.$store.state.order.basket_load_item = true;
 
