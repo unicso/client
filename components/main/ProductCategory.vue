@@ -22,12 +22,12 @@
       <ul>
         <li>
           <h4>
-            <nuxt-link class="std_link" :to="'/catalog/'+item.cef_name">
+            <nuxt-link class="std_link" :to="'/catalog/'+item.cef_name" @click="show_catalog = false">
               {{ item.name}}
             </nuxt-link>
           </h4>
         </li>
-        <li   v-for="child in item.child" :key="child.name" >
+        <li   v-for="child in item.child" :key="child.name"  @click="show_catalog = false">
          <nuxt-link class="std_link" :to="'/catalog/'+child.cef_name"> {{child.name}}</nuxt-link>
         </li>
       </ul>

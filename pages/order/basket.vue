@@ -348,4 +348,7 @@ sup {
 input:focus{
   border: 1px solid rgb(255,73,0)`;
 }
+.update_basket{
+  margin-top: 15px;
+}
 </style>
