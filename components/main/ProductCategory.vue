@@ -53,6 +53,11 @@ name: "ProductCategory",
       show_catalog:false
     }
   },
+  watch:{
+  '$route.fullPath'(newVal, oldVal){
+    this.show_catalog = false
+  }
+  },
   methods:{
     selectCategory(parent)
     {
