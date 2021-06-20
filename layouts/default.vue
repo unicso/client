@@ -126,6 +126,7 @@ export default {
 }
 .content {
   min-height: calc(100vh - 70px);
+  min-height: 1000px;
 }
 footer {
  /* height: 30px;*/
