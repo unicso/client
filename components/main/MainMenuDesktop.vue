@@ -35,7 +35,7 @@
               <select-fonts v-if="true==false"/>
             </div>
             <div>
-              <sign-in-button  v-if="2==3"/>
+              <sign-in-button  v-if="3==2"/>
             </div>
             <nuxt-link to="/catalog/favorits" class="favorites__button" >
               <div>

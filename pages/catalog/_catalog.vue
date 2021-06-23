@@ -30,10 +30,11 @@
       <div class="catalog_items_tile_view" v-if="$store.state.config.view_type_catalog=='tile'">
         <article  class="content_block on_top_2" v-for="item in catalog_items">
 
-          <div class="item_image"   @click="$router.push('/catalog/'+page+'/'+item.code)">
-
-            <img v-if="typeof item.image != 'undefined' &&  item.image" :src="item.image+'/tmb'" >
-            <i v-else v-html="$store.state.icons.empty_image"></i>
+          <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
+          :style="'background-image: url('+ item.image + '/tmb)'">
+          </div>
+          <div v-else class="item_image"    @click="$router.push('/catalog/'+page+'/'+item.code)"
+               :style="'background-image: url('+ $store.state.icons.empty_image + '/tmb)'">
           </div>
             <div class="item_description"   @click="$router.push('/catalog/'+page+'/'+item.code)">
               <div class="article">Код товара: {{item.code}}</div>
@@ -58,10 +59,11 @@
       <div class="catalog_items_list_view" v-else>
         <article  class=" catalog_items content_block base_shadow_hover on_top_2" v-for="item in catalog_items" >
 
-          <div class="item_image"  @click="$router.push('/catalog/'+page+'/'+item.code)">
-
-            <img v-if="typeof item.image != 'undefined' &&  item.image" :src="item.image+'/tmb'" >
-            <i v-else v-html="$store.state.icons.empty_image"></i>
+          <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
+               :style="'background-image: url('+ item.image + '/tmb)'">
+          </div>
+          <div v-else class="item_image"    @click="$router.push('/catalog/'+page+'/'+item.code)"
+               :style="'background-image: url('+ $store.state.icons.empty_image + '/tmb)'">
           </div>
 
             <div class="item_description"   @click="$router.push('/catalog/'+page+'/'+item.code)">
@@ -257,7 +259,11 @@ VIEW LIST START
   object-fit: contain;
 
 }
-
+.item_image{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
 .item_description:hover{
   cursor: pointer;
 

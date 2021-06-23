@@ -70,11 +70,11 @@
             <input type="number"  v-model="inn"  required >
           </div>
           <div class="input_filed" :class="[error?'error':'']">
-            <label>КПП организации<sup class="required">*</sup>:</label>
+            <label>КПП организации (при наличии):</label>
             <input type="number" v-model="kpp" required >
           </div>
-          <div class="input_filed" :class="[error?'error':'']">
-            <label>Адрес доставки<sup class="required" >*</sup>:</label>
+          <div class="input_filed">
+            <label>Адрес доставки:</label>
             <input type="text" v-model="customer_address"  required >
           </div>
           <div class="input_filed">

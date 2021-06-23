@@ -2,11 +2,11 @@
 <div class="authorization_fields">
   <div class="input_fields">
     <label>Логин</label>
-    <input type="text" name="username" v-model="username">
+    <input type="text" name="email" v-model="email" placeholder="email">
   </div>
   <div class="input_fields">
     <label>Пароль</label>
-    <input type="text" name="password" v-model="password">
+    <input type="text" name="password" v-model="password" placeholder="Пароль">
   </div>
   <div class="input_fields">
 
@@ -23,7 +23,8 @@ export default {
   data(){
     return{
       username:'test',
-      password:'241185',
+      email:'',
+      password:'',
       error: false
     }
   },
@@ -41,7 +42,7 @@ export default {
 
     async login(){
       var params ={
-        'username':this.username,
+        'email':this.email,
         'password':this.password
       };
       const response = await this.$store.dispatch('api/put',{'endpoint':'user/auth', 'params':params});

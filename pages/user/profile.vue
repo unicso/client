@@ -2,7 +2,7 @@
 <div class="user_profile">
   <h1>Личный кабинет</h1>
 <br>
-  <button @click="logout">Выйти</button>
+  <button @click="logout" class="">Выйти</button>
 </div>
 </template>
 

@@ -1,5 +1,8 @@
 <template>
   <div class="wrapper">
+    <div class="show__alert">
+      Ваш браузер устарел и не соответствует требованиям безопасности, а так же не позволяет полноценно использовать сайт.
+    </div>
   <div class="content">
     <header class="main_menu_desktop" ref="main_menu_desktop">
       <main-menu-desktop/>

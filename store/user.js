@@ -2,7 +2,9 @@ export const strict = false
 export const state = () =>({
     loaded:false,
     isAuth:false,
-    username:false
+    username:false,
+    app_token:'',
+    auth_token:''
 
 
 })

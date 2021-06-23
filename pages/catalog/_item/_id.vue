@@ -18,11 +18,13 @@
         <div class="images" style="position: relative">
 
           <div class="images_block"  v-if="images!= false">
-            <img :src="image"  @click="$modal.show('show_image')"/>
 
+            <div class="main__image" :style="'background-image: url('+ image + ')'"   @click="$modal.show('show_image')">
+
+            </div>
               <ul  class="product_images">
-                <li v-for="img in images" :key="img" @click="changeImage(img)">
-                  <img :src="img" width="25px" height="25px"/>
+                <li v-for="img in images" :key="img" @click="changeImage(img)"
+                    :style="'background-image: url(' + img + ')'">
                 </li>
               </ul>
 
@@ -213,6 +215,7 @@ export default {
   border-top: 1px solid rgba(0,0,0,0.2);
   border-bottom: 1px solid rgba(0,0,0,0.2);
 
+
 }
 
 
@@ -237,5 +240,19 @@ input[type=range],  .price_counter{
 .image_gallery img{
   justify-self: center;
 }
-
+.main__image{
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.product_images li{
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  border: 1px solid rgba(0,0,0,0.2);
+}
 </style>
