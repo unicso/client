@@ -1,9 +1,9 @@
 <template>
-<section>
+<section v-if="show_component">
   <sa-menu/>
 
   <sa-users v-if="$route.params.sa_components == 'users'"/>
-  {{$route.params}}
+  {{$store.state.user}}
 </section>
 </template>
 
@@ -12,7 +12,18 @@ import SaMenu from "../../../../components/lk/sa/SaMenu";
 import SaUsers from "../../../../components/lk/sa/SaUsers";
 export default {
   name: "sa_components",
-  components: {SaUsers, SaMenu}
+  components: {SaUsers, SaMenu},
+  data(){
+    return{
+      show_component:false
+    }
+  },
+  mounted() {
+    if(this.$store.state.user.type != 100)
+      this.$router.push('/user/auth')
+    else
+      this.show_component = true
+  }
 }
 </script>
 

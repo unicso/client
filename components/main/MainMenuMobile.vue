@@ -7,12 +7,12 @@
           </nuxt-link>
         </div>
 
-        <div class="search" v-if="show_search_string">
+        <div class="search on_top_105" v-if="show_search_string">
           <input class="base_shadow_hover" autocomplete="off" type="text" name="search" placeholder="Поиск" v-model="search_string" v-on:keyup.enter="$router.push({path:'/catalog/search', query:{search:search_string}});  show_search_string=false">
           <i class="search_svg_icon" v-html="$store.state.icons.search" @click="$router.push({path:'/catalog/search', query:{search:search_string}}); show_search_string=false"></i>
         </div>
       </div>
-      <div class="mobile_menu" >
+      <div class="mobile_menu on_top_105" >
         <button class="menu_button" @click="$router.push('/'); show_menu=false">
           <i class="svg_mobile_menu_icon" v-html="$store.state.icons.house"></i>
           <br><small>Главная</small>
@@ -86,6 +86,10 @@ export default {
       show_submenu:false,
       show_search_string:false
     }
+  },
+  watch:{
+    '$route.fullPath'(newVal){this.show_menu = false}
+
   }
 }
 </script>
@@ -105,6 +109,7 @@ export default {
 .menu_button{
   background-color: white;
   border: none;
+  zoom:1.1;
 }
 .bar1, .bar2, .bar3 {
   width: 10px;
@@ -117,7 +122,7 @@ export default {
 .mobile_menu{
   display: inline-flex;
   position: fixed !important;
-  height: 40px;
+  height: 50px;
   width: 100%;
   background-color: white;
   bottom: 0px !important;
@@ -127,7 +132,7 @@ export default {
 }
 .search{
   position: fixed !important;
-  bottom: 43px !important;
+  bottom: 55px !important;
   width: 100%;
   left: 0px;
   background-color: white;

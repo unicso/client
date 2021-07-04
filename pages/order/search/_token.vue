@@ -1,6 +1,8 @@
 <template>
 <div class="order_view">
+  <button class="btn-std backward__button" @click="$router.go(-1)">Назад</button>
   <h1>Данные заказа</h1>
+
   <div class="view_order" v-if="order!=false">
 
   <div class="code" v-if="order.code">Код: {{order.code}}</div>
@@ -14,8 +16,7 @@
 
   <div class="created_at" v-if="order.created_at">Создан: {{order.created_at}}</div>
   <div class="updated_at" v-if="order.updated_at">Обновлён: {{order.updated_at}}</div>
-  <div class="summ_basket" v-if="order.summ_basket">Сумма: {{priceSet(order.summ_basket)}}</div>
-  <div class="summ" v-if="order.summ">Сумма со скидкой: {{priceSet(order.summ)}}</div>
+  <div class="summ" v-if="order.summ">Сумма: {{priceSet(order.summ)}}</div>
   <table>
     <caption><h3>Список товаров</h3></caption>
   <tr>
@@ -39,6 +40,7 @@
 <div class="confirm_delete" v-if="confirm">
   <h3>Подтверждаете отмену заказа?</h3>
   <button class="btn-std" @click="deleteOrderConfirm">Подтверждаю</button>
+  <button class="btn-std" @click="confirm=false">Нет</button>
 
 </div>
 
@@ -62,8 +64,10 @@ name: "token",
     order:false,
     token:'',
     confirm:false,
-
+    previos_page:''
   }},
+
+
   mounted() {
 
     this.getOrder()
@@ -125,5 +129,11 @@ name: "token",
 }
 .color_red{
   color:red;
+}
+.backward__button{
+  width: 80px;
+  height: 25px;
+  padding-top: 5px;
+  padding-top: 3px;
 }
 </style>

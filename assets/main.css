@@ -232,4 +232,8 @@ font-size: 0.9rem;
 }
 .table tbody tr:hover{
   background-color: #dddddd;
+  cursor: pointer;
+}
+.default__link{
+  cursor: pointer;
 }

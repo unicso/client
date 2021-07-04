@@ -35,7 +35,7 @@
               <select-fonts v-if="true==false"/>
             </div>
             <div>
-              <sign-in-button  v-if="3==2"/>
+              <sign-in-button  v-if="2==2"/>
             </div>
             <nuxt-link to="/catalog/favorits" class="favorites__button" >
               <div>
@@ -45,8 +45,8 @@
               <div class="name menu__icon__text">Избранное</div>
             </nuxt-link>
 
-            <div v-if="!$store.state.user.isAuth">
-              <basket-button/>
+            <div >
+              <basket-button :asicon="false"/>
             </div>
 
           </div>

@@ -105,4 +105,8 @@
         grid-template-columns: minmax(300px, 1fr) minmax(500px, 4fr);
         grid-column-gap: 20px;
     }
+
+
+
+
 }

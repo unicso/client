@@ -3,8 +3,12 @@
   <h1>Пользователи сайта</h1>
 
  <div class="registration__block">
-   <div class="btn-std" @click="show_registration_form=!show_registration_form">Зарегистрировать нового</div>
-   <registration-form v-if="show_registration_form"/>
+   <button class="btn-std" @click="show_registration_manager=!show_registration_manager; show_registration_client=false"  :disabled="show_registration_manager">Зарегистрировать менеджера</button>
+   <button class="btn-std" @click="show_registration_client=!show_registration_client; show_registration_manager=false" :disabled="show_registration_client">Зарегистрировать клиента</button>
+
+   <registration-form class="reg_form" v-if="show_registration_manager" :type="'manager'"/>
+    <registration-form class="reg_form" v-if="show_registration_client" :type="'client'"/>
+
  </div> <br><br>
 
 
@@ -46,7 +50,10 @@ export default {
   data(){
     return{
       users:false,
-      show_registration_form:false
+      show_registration_form:false,
+      show_registration_manager:false,
+      show_registration_client:false,
+
     }
   },
   created(){
@@ -63,20 +70,7 @@ export default {
 
     },
 
-    async registrationUser(){
-      let params ={
-        endpoint:'lk/admin/users',
-        params:
-            {
-              email:this.email,
-              password:this.password
-            }
-      }
 
-      const result = await this.$store.dispatch('api/post', params);
-      console.log(result)
-
-    }
   }
 
 }
@@ -88,9 +82,11 @@ export default {
   transform: rotate(120deg);
   cursor: pointer;
 }
-.registration__block{
-  width: 250px;
+.registration__block .reg_form{
+  width: 300px;
 }
-
+.registration__block div{
+  display: inline-flex;
+}
 
 </style>

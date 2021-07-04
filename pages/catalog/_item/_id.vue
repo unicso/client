@@ -48,9 +48,9 @@
             <input type="range" min="0" max="1000" step="10" v-model="item_count">
             <br>
             <h3 class="summ" v-if="item_count>0">{{'Сумма: ' + priceSet(price*item_count)}}</h3>
-          <button v-if="$store.state.order.basket.items!= undefined && $store.state.order.basket.items[guid] != undefined "
+          <button v-if="$store.state.order.basket.items!= undefined && itemInBasket()"
 
-                  class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">Изменить</button>
+                  class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket" disabled>В корзине</button>
           <button v-else class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">В корзину</button>
 
 
@@ -117,7 +117,24 @@ export default {
           price_sep   = price_sep.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
       return price_sep + ' ₽';
     },
+    itemInBasket(){
 
+
+
+
+        if(typeof this.$store.state.order.basket.items[this.code] != "undefined")
+        {
+          return true
+        }
+        else
+        {
+          return false
+        }
+
+
+
+
+    },
     async getItem()
     {
       var item_id = this.$route.params['id'];

@@ -20,21 +20,21 @@
           </select>
         </div>
 
-        <div class="view__method">Вид:
+        <div class="view__method" v-if="!$device.isMobile">Вид:
           <div class="icons" @click="selectViewType('list')" :class="[$store.state.config.view_type_catalog=='list'?'view_list':'view_list_black']"></div>
           <div class="icons" @click="selectViewType('tile')" :class="[$store.state.config.view_type_catalog=='tile'?'view_tile':'view_tile_black']"></div>
         </div>
       </div>
 
 
-      <div class="catalog_items_tile_view" v-if="$store.state.config.view_type_catalog=='tile'">
+      <div class="catalog_items_tile_view" v-if="$store.state.config.view_type_catalog=='tile' && !$device.isMobile">
         <article  class="content_block on_top_2" v-for="item in catalog_items">
 
           <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
           :style="'background-image: url('+ item.image + '/tmb)'">
           </div>
-          <div v-else class="item_image"    @click="$router.push('/catalog/'+page+'/'+item.code)"
-               :style="'background-image: url('+ $store.state.icons.empty_image + '/tmb)'">
+          <div v-else class="item_image"    @click="$router.push('/catalog/'+page+'/'+item.code)">
+            <div v-html="$store.state.icons.empty_image"></div>
           </div>
             <div class="item_description"   @click="$router.push('/catalog/'+page+'/'+item.code)">
               <div class="article">Код товара: {{item.code}}</div>
@@ -62,8 +62,8 @@
           <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
                :style="'background-image: url('+ item.image + '/tmb)'">
           </div>
-          <div v-else class="item_image"    @click="$router.push('/catalog/'+page+'/'+item.code)"
-               :style="'background-image: url('+ $store.state.icons.empty_image + '/tmb)'">
+          <div v-else class="item_image"    @click="$router.push('/catalog/'+page+'/'+item.code)">
+            <div v-html="$store.state.icons.empty_image"></div>
           </div>
 
             <div class="item_description"   @click="$router.push('/catalog/'+page+'/'+item.code)">
@@ -80,7 +80,7 @@
             <div class="price">{{priceSet(item.price)}}</div>
 
 
-            <button v-if="itemInBasket(item)" class="btn-std base_shadow_hover add_to_cart"   @click="viewItem(item)"  style="font-size: inherit">Изменить</button>
+            <button v-if="itemInBasket(item)" class="btn-std base_shadow_hover add_to_cart"   @click="viewItem(item)"  style="font-size: inherit" disabled>В корзине</button>
             <button v-else class="btn-std base_shadow_hover add_to_cart"  @click="addItemToBasket(item)"  style="font-size: inherit">В корзину</button>
             <br><br>
             <add-to-favorite :code="item.code"/>
@@ -402,5 +402,11 @@ text-align: center;
 }
 .btn-std{
 
+}
+.item_image >div{
+  width: 200px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

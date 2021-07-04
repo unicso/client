@@ -143,6 +143,7 @@
 
     .catalog_items .item_image{
         width: 150px;
+        height: 150px;
         max-width: 150px;
         max-height: 150px;
         cursor: pointer;
@@ -232,4 +233,9 @@
     .main_page_slider{
         justify-self: left;
     }
+
+
+
+
+
 }

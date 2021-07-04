@@ -136,8 +136,18 @@ export default {
   -moz-transform: scale(1);
   -o-transform: scale(1);
   transform: scale(1);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+@media all and (max-width: 480px) {
 
+  .slider_clean {
+    height: 110px;
+    position: relative;
+    width: 100%;
+
+  }
+}
 .slider_clean > input {
   display: none;
 }

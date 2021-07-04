@@ -2,18 +2,22 @@
 <section>
   <ul>
     <li>
-      <nuxt-link to="/user/lk/client/profile">Профиль</nuxt-link>
+      <nuxt-link to="/user/lk/manager/users">Пользователи</nuxt-link>
     </li>
+
     <li>
-      <nuxt-link to="/user/lk/client/orders">Заказы</nuxt-link>
+      <nuxt-link to="/user/lk/manager/clients">Клиенты</nuxt-link>
     </li>
+
   </ul>
+
+<hr>
 </section>
 </template>
 
 <script>
 export default {
-  name: "ClientMenu"
+  name: "ManagerMenu"
 }
 </script>
 

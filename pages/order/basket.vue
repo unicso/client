@@ -152,10 +152,12 @@ name: "basket",
     customer_inn(newVal) {this.error = false},
     customer_kpp(newVal) {this.error = false},
     customer_address(newVal) {this.error = false},
-
+    '$store.state.user.isAuth'(newVal){if(newVal==true) this.getInfo()},
   },
   mounted() {
   this.load_basket()
+    if(this.$store.state.user.isAuth)
+      this.getInfo()
   },
   methods:{
 
@@ -165,8 +167,7 @@ name: "basket",
           price_sep   = price_sep.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
       return price_sep + ' ₽';
     },
-    async  load_basket()
-    {
+    async  load_basket(){
 
       const result = await this.$store.dispatch('order/getBasket');
       if(result.body != undefined)
@@ -177,21 +178,18 @@ name: "basket",
 
 
     },
-    async deleteItemFromBasket(code)
-    {
+    async deleteItemFromBasket(code){
       this.$store.state.order.basket_load_item=true
       await this.$store.dispatch('order/deleteItemFromBasket', code)
       this.load_basket()
     },
-    async addItemToBasket(guid, count)
-    {
+    async addItemToBasket(guid, count){
       var uri = 'basket/'+guid + '/' + count
       var result = await this.$store.dispatch('api/post', {endpoint:uri})
       this.$store.state.order.basket_load_item = true;
 
     },
-    async updateBasket()
-    {
+    async updateBasket(){
       this.basket_update = true
       for (var guid in this.basket.items)
       {
@@ -203,8 +201,7 @@ name: "basket",
       setTimeout(()=>{this.basket_update = false}, 1000)
 
     },
-    async addOrder()
-    {
+    async addOrder(){
 
 
       var order ={
@@ -239,7 +236,22 @@ name: "basket",
         this.$router.push('/order/search/'+request.body.order_token)
       }
 
-    }
+    },
+    async getInfo()
+    {
+      const result = await this.$store.dispatch('api/get', {endpoint:'lk/client/info'})
+      if(result.error == false)
+        {
+          this.customer_email = result.body.email
+          this.customer_name = result.body.name
+          this.customer_phone = result.body.phone
+          this.inn = result.body.contragent_inn
+          this.kpp = result.body.contragent_kpp
+
+
+        }
+    },
+
   }
 }
 </script>

@@ -1,6 +1,6 @@
 
 .dropdown_forward{
-    animation: 1s dropdown forwards;
+    animation: 0.5s dropdown forwards;
     overflow: hidden;
 }
 @keyframes dropdown {

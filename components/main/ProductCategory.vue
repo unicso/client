@@ -56,6 +56,10 @@ name: "ProductCategory",
   watch:{
   '$route.fullPath'(newVal, oldVal){
     this.show_catalog = false
+  },
+  '$store.state.user.isAuth'(newVal){
+    this.$store.dispatch('config/getConfig')
+    this.$store.dispatch('shop/fetchShopData')
   }
   },
   methods:{
@@ -84,6 +88,7 @@ name: "ProductCategory",
 .parent_category {
 padding-top: 15px;
   align-self: baseline;
+  min-width: 300px;
   /*font-size: 1.2rem;*/
 
 }

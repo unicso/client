@@ -93,7 +93,6 @@ section{
 }
 .client_support{
   width: 700px;
-
   padding: 0;
   margin-left: auto;
   margin-right: auto;
@@ -136,5 +135,26 @@ h1{
 }
 input[type=button]{
   width: 150px;
+}
+
+@media screen and (max-width: 720px){
+  .client_support main{
+    padding: 2px;
+  }
+  .client_support .field__block{
+    display: block;
+    margin-bottom: 10px;
+  }
+  .client_support{
+    width: 100%;
+  }
+  .client_support .field__block label, .client_support .field__block input[type=text],  .client_support .field__block textarea{
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+    min-width: 100%;
+    display: block;
+  }
+
 }
 </style>
