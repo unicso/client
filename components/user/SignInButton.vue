@@ -20,7 +20,7 @@
           <div class="default__link" @click="logout">Выйти</div>
         </li>
         <li class="new__client" v-else>
-          <nuxt-link to="/" class="default__link">Новый клиент?<br>Зарегистрироваться</nuxt-link>
+          <nuxt-link to="/user/registration" class="default__link">Новый клиент?<br>Зарегистрироваться</nuxt-link>
         </li>
       </ul>
     </div>

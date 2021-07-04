@@ -30,7 +30,9 @@
         <label></label>
         <input type="button" value="Отправить" class="btn-std base_shadow_hover" @click="sendMessage">
       </div>
-
+      <div class="input__field error" v-if="error">
+        {{error}}
+      </div>
     </main>
 
 
@@ -54,11 +56,18 @@ export default {
       message:'',
       to:'order@unicso.ru',
       subject:'Поддержка клиентов',
-      email_sended:false
+      email_sended:false,
+      error:false
 
     }
   },
+  watch:{
+    company(){this.error=false},
+    name(){this.error=false},
+    email(){this.error=false},
+    message(){this.error=false},
 
+  },
   methods:{
 
     async sendMessage(){
@@ -78,7 +87,8 @@ export default {
 
       if(result.error == false)
         this.email_sended = true
-
+      else
+        this.error = result.body
     }
 
   }
@@ -156,5 +166,9 @@ input[type=button]{
     display: block;
   }
 
+}
+.error{
+  color: red;
+  font-size: 1.2rem;
 }
 </style>
