@@ -3,7 +3,7 @@
   <manager-menu/>
 
   <manager-clients v-if="$route.params.manager_components == 'clients'"/>
-  {{$route.params}}
+
 </section>
 </template>
 

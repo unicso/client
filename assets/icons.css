@@ -31,7 +31,7 @@
 .paper_1_black.icons {
     background-position: 0px -96px;
 }
-.office_folder.icons {
+.office_folder.icons, .tovary-dlya-ofisa-i-shkoly.icons {
     background-position: 0px -128px;
 }
 .office_folder_black.icons {
@@ -43,31 +43,31 @@
 .favorites_black.icons {
     background-position: 0px -224px;
 }
-.cleaning.icons {
+.cleaning.icons, .hozyaystvennye-tovary-i-bytovaya-himiya.icons {
     background-position: 0px -256px;
 }
 .cleaning_black.icons {
     background-position: 0px -288px;
 }
-.medicine.icons {
+.medicine.icons, .medicina.icons {
     background-position: 0px -320px;
 }
 .medicine_black.icons {
     background-position: 0px -352px;
 }
-.specodejda.icons {
+.specodejda.icons, .rabochaya-specodezhda-i-siz.icons {
     background-position: 0px -384px;
 }
 .specodejda_black.icons {
     background-position: 0px -416px;
 }
-.paper.icons {
+.paper.icons, .bumazhnaya-produkciya.icons {
     background-position: 0px -448px;
 }
 .paper_black.icons {
     background-position: 0px -480px;
 }
-.printer.icons {
+.printer.icons, .tehnika-rashodnye-materialy-i-torgovoe-oborudovanie.icons {
     background-position: 0px -512px;
 }
 .printer_black.icons {

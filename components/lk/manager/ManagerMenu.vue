@@ -2,7 +2,7 @@
 <section>
   <ul>
     <li>
-      <nuxt-link to="/user/lk/manager/users">Пользователи</nuxt-link>
+      <nuxt-link to="/user/lk/manager/documents">Документы</nuxt-link>
     </li>
 
     <li>

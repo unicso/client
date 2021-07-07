@@ -11,7 +11,7 @@
          :key="main.id"
         @mouseover="selectCategory(main)">
       <div class="item_name">
-        <div class="icons icons16" :class="main.icon"></div>
+        <div class="icons icons16" :class="main.cef_name"></div>
         <div>{{main.name}}</div>
       </div>
     </li>
