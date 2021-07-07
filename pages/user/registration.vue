@@ -101,7 +101,6 @@ export default {
 
           if(result.error == false)
             this.email_sended = true
-
         }
     }
 

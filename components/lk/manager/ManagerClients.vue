@@ -1,6 +1,7 @@
 <template>
 <section v-if="registration_user == false">
   <h1>Список клиентов</h1>
+  {{result}}
   <table class="table">
     <thead>
     <tr>
@@ -82,12 +83,13 @@
     <label>Соглашение по умолчанию</label>
     <select v-model="default_price_type">
       <option v-for="price_type in contragent_price_type" :value="price_type.guid">{{price_type.name}}</option>
-
     </select>
+    <label>Отображать товары только из соглашения<input type="checkbox" v-model="price_type_strong"></label>
   </div>
   <div class="input__field">
     <button class="btn-std" @click="registrationClient">Зарегистрировать</button>
   </div>
+  <div v-if="error">{{error}}</div>
 </div>
 
 </section>
@@ -117,10 +119,11 @@ export default {
       registration_role:'',
       registration_password:'',
       contragent_price_type:false,
+      price_type_strong:false,
       default_price_type:'',
 
       contragent_users:false,
-
+      error:false,
       result:{}
     }
   },
@@ -142,6 +145,7 @@ export default {
     },
     async getContragents(){
       const result = await this.$store.dispatch('api/get',{endpoint:'lk/manager/clients'})
+
       if(result.error == false)
       {
         this.contragents = result.body
@@ -176,7 +180,7 @@ export default {
               password:this.registration_password,
               phone:this.registration_phone,
               role:10,
-
+              price_type_strong:this.price_type_strong,
               contragent:this.registration_user,
               price_type:this.default_price_type
 
@@ -185,7 +189,7 @@ export default {
 
       const result = await this.$store.dispatch('api/post', params);
       this.result = result
-
+    console.log(result)
       if(result.error == false)
       {
         location.reload()
