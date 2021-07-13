@@ -39,6 +39,12 @@
     <button class="btn-std" @click="saveInfo">Сохранить изменения</button>
     <div class="message" v-if="message">{{message}}</div>
 
+    <div class="btn-std" @click="change_password=true">Изменить пароль</div>
+    <div class="input__field" v-if="change_password">
+      <label>Новый пароль (не менее 6 символов)</label>
+      <input type="text" v-model="new_password">
+      <button class="btn-std" @click="changePassword">Сохранить изменения</button>
+    </div>
   </div>
 
 </section>
@@ -51,7 +57,9 @@ export default {
   data(){
     return{
       user_info:false,
-      message:false
+      message:false,
+      change_password:false,
+      new_password:''
     }
   },
   mounted() {
@@ -76,6 +84,18 @@ export default {
         setTimeout(()=>{this.message = false}, 3000)
         this.getInfo()
       }
+
+    },
+    async changePassword()
+    {
+      let params = {
+        password:this.new_password
+      }
+      const result = await this.$store.dispatch('api/post', {endpoint:'lk/client/changepassword',params:params})
+
+        this.message = result.body
+        setTimeout(()=>{this.message = false}, 3000)
+
 
     }
 

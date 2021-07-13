@@ -1,11 +1,11 @@
 <template>
   <ul class="breadcrumbs" v-if="breadcrumbs!=false">
     <li class="hide__on__mobile">
-      <nuxt-link to="/">Главная|Каталог » </nuxt-link>
+      <nuxt-link to="/">Главная|Каталог /&nbsp;</nuxt-link>
     </li>
 
     <li v-for="bread in breadcrumbs" :key="bread.name" v-if="typeof bread.link == 'string'">
-      <nuxt-link :to="bread.link">{{bread.name}}<i v-if="bread.name">»</i></nuxt-link>
+      <nuxt-link :to="bread.link">{{bread.name}}<i v-if="bread.name">/ </i></nuxt-link>
     </li>
     <li  class="hide__on__mobile" v-if="last_cef_link && $device.isDesktop">
       <nuxt-link :to="last_cef_link">{{last_name}}</nuxt-link>

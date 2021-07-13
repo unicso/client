@@ -32,9 +32,28 @@
           <i v-else v-html="$store.state.icons.empty_image"></i>
         </div>
 
-        <div class="description">
-          {{description}}
+        <div class="description" >
+          <div class="select_description">
+            <b @click="showDescription=true" :class="[!showDescription?'disabled':'']">Описание</b>
+            <b @click="showDescription=false" :class="[showDescription?'disabled':'']">Характеристики</b>
+            <hr>
+
+          </div>
+          <table class="table__2" v-if="!showDescription">
+            <tbody>
+            <tr v-for="(item,index) in properties" >
+              <td>{{index}}</td>
+              <td>{{item}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <div v-if="showDescription">
+            {{description}}
+          </div>
+
         </div>
+
+
         <div class="item_price">
             <div class="item_price_unit">Цена {{price_unit}}.</div>
             <div class="price">{{priceSet(price)}}</div>
@@ -92,9 +111,10 @@ export default {
       item_count:1,
       price_summ:0,
       cef_name:'',
-
+      properties:{},
       show:false,
-      showImageImg:false
+      showImageImg:false,
+      showDescription:true
     }
   },
   created() {
@@ -139,6 +159,7 @@ export default {
     {
       var item_id = this.$route.params['id'];
       const result = await this.$store.dispatch('api/get', {endpoint:'shop/item/'+item_id})
+
       if(result.error == false)
       {
         this.show= true
@@ -151,7 +172,7 @@ export default {
         this.name = item.name
         this.article = item.article
         this.code = item.code
-
+        this.properties = item.properties
         this.price = item.price
         this.price_unit = item.price_view
         this.cef_name = item.cef_name
@@ -271,5 +292,15 @@ input[type=range],  .price_counter{
   background-size: contain;
   background-position: center;
   border: 1px solid rgba(0,0,0,0.2);
+}
+.select_description .disabled{
+  font-weight: normal;
+}
+.select_description b{
+  cursor: pointer;
+  margin-right: 10px;
+}
+.table__2 tbody tr td{
+  padding: 4px;
 }
 </style>
