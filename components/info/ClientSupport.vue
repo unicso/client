@@ -27,6 +27,11 @@
       </textarea>
       </div>
       <div class="field__block">
+        <label>Добавить вложение</label>
+        <input type="file" id="files" ref="files" multiple  v-on:change="handleFileUpload()" class="btn-std"/>
+
+      </div>
+      <div class="field__block">
         <label></label>
         <input type="button" value="Отправить" class="btn-std base_shadow_hover" @click="sendMessage">
       </div>
@@ -57,7 +62,8 @@ export default {
       to:'order@unicso.ru',
       subject:'Поддержка клиентов',
       email_sended:false,
-      error:false
+      error:false,
+      files:false
 
     }
   },
@@ -68,8 +74,26 @@ export default {
     message(){this.error=false},
 
   },
+  mounted() {
+   this.selectTo()
+  },
   methods:{
+    selectTo(){
+      if(this.$route.query.email == 'devzak@unicso.ru' ||
+          this.$route.query.email == 'contact@unicso.ru' ||
+          this.$route.query.email == 'dev@unicso.ru' ||
+        this.$route.query.email == 'order@unicso.ru' ) {
+        this.to = this.$route.query.email
+        this.subject = this.$route.query.subject
+      }
 
+    console.log(this.to)
+      console.log(this.subject)
+  },
+
+    handleFileUpload(){
+      this.files = this.$refs.files.files;
+    },
     async sendMessage(){
 
       let params = {
@@ -83,8 +107,15 @@ export default {
 
 
       }
+      for( var i = 0; i < this.files.length; i++ ){
+        let file = this.files[i];
+
+        params['files[' + i + ']'] = file;
+      }
+      console.log(params)
       const result = await this.$store.dispatch('api/post', {endpoint:'support/email', params:params})
 
+      console.log(result)
       if(result.error == false)
         this.email_sended = true
       else

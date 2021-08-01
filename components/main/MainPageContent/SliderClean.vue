@@ -5,17 +5,25 @@
            type="radio" name="point"
            :id="'slide'+  (index + 1)"
            :value="'slide'+  (index + 1)"
-           v-model="checkedSlide">
+           v-model="checkedSlide"
+
+    >
 
 
     <div class="slider">
+
+
       <div  v-for="(slide,index) in slides"  class="slides"
             :class="'slide'+  (index + 1)"
-            :style="'background-image: url('+ slide.url +')'"></div>
+            :style="'background-image: url('+ slide.url +')'"
+            @click="redirectToProducts()"
+      >
+
+      </div>
 
     </div>
     <div class="controls">
-      <label v-for="(slide,index) in slides" :for="'slide'+ (index + 1)" @click="stopInterval"></label>
+      <label v-for="(slide,index) in slides" :for="'slide'+ (index + 1)" @click="stopInterval(index)"></label>
 
     </div>
   </div>
@@ -33,8 +41,10 @@ export default {
       interval:'',
       checkedSlide: 'slide1',
       slides:[
-        {url:"/files/client/images/slider/main/unicso.jpg", link:false},
-        {url:"/files/client/images/slider/main/translojica.jpg", link:false},
+        {url:"/files/client/images/slider/main/unicso.jpg", link:"/info/about"},
+        {url:"/files/client/images/slider/main/gloves.jpg", link:"/catalog/search?search=перчатки"},
+        {url:"/files/client/images/slider/main/labels.jpg", link:false},
+        {url:"/files/client/images/slider/main/translojica.jpg", link:"/catalog/manufacturer?manufacturer=manufactor"},
         {url:"/files/client/images/slider/main/ateuco.jpg", link:false},
         {url:"/files/client/images/slider/main/taipit.jpg", link:false},
 
@@ -56,9 +66,17 @@ export default {
     }, 5000)
   },
   methods:{
-    stopInterval()
+    stopInterval(slide)
     {
+      setTimeout(()=>this.current_slide = slide + 1, 500)
       clearInterval(this.interval)
+    },
+    redirectToProducts()
+    {
+      let link = this.slides[this.current_slide - 1].link
+        if(link != false)
+          this.$router.replace(link)
+      console.log(this.current_slide)
     }
   }
 }

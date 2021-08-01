@@ -67,10 +67,15 @@
             <input type="range" min="0" max="1000" step="10" v-model="item_count">
             <br>
             <h3 class="summ" v-if="item_count>0">{{'Сумма: ' + priceSet(price*item_count)}}</h3>
-          <button v-if="$store.state.order.basket.items!= undefined && itemInBasket()"
 
-                  class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket" disabled>В корзине</button>
-          <button v-else class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">В корзину</button>
+          <div class="button__block">
+            <button v-if="$store.state.order.basket.items!= undefined && itemInBasket()"
+
+                    class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket" disabled>В корзине</button>
+            <button v-else class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">В корзину</button>
+
+            <add-to-favorite :code="code" :as_icon="true"/>
+          </div>
 
 
         </div>
@@ -90,9 +95,10 @@ import ProductCategory from "../../../components/main/ProductCategory";
 import BreadcrumbComponent from "../../../components/catalog/BreadcrumbComponent";
 import ModalWindow from "../../../components/ModalWindow";
 import ShowImage from "../../../components/catalog/ShowImage";
+import AddToFavorite from "../../../components/forms/AddToFavorite";
 export default {
   name: "catalog_item",
-  components: {ShowImage, BreadcrumbComponent, ProductCategory},
+  components: {AddToFavorite, ShowImage, BreadcrumbComponent, ProductCategory},
   data(){
     return{
       item:{},
@@ -302,5 +308,12 @@ input[type=range],  .price_counter{
 }
 .table__2 tbody tr td{
   padding: 4px;
+}
+.button__block{
+  padding-right: 15px;
+}
+.button__block .btn-std{
+  width: 150px;
+  margin-bottom: 10px;
 }
 </style>
