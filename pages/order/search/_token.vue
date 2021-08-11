@@ -17,6 +17,13 @@
           <div class="created_at" v-if="order.created_at">Создан: {{order.created_at}}</div>
           <div class="updated_at" v-if="order.updated_at">Обновлён: {{order.updated_at}}</div>
           <div class="summ" v-if="order.summ">Сумма: {{priceSet(order.summ)}}</div>
+          <div class="comment">
+            <br><b>Комментарий:</b><br>
+            <pre>
+              {{order.customer_comments}}
+            </pre>
+
+          </div>
           <table class="table">
             <caption><h3>Список товаров</h3></caption>
           <tr>

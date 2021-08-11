@@ -228,6 +228,7 @@ name: "basket",
     }
       const request = await this.$store.dispatch('api/post', params)
       this.result = request
+      console.log(request);
 
       if(request.error === true)
       {

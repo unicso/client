@@ -17,8 +17,15 @@
                 <div class="accept_menu">
                   <br>
                   <button class="btn-std base_shadow_hover" @click="acceptOrder">Согласовать</button>
-                  <button class="btn-std base_shadow_hover">Отказать</button>
+                  <button class="btn-std base_shadow_hover" v-if="!show_decline_comment" @click="show_decline_comment=true">Отказать</button>
+                  <div class="input__field" v-if="show_decline_comment">
+                    <label>Комментарий:</label>
+                    <textarea   v-model="comment"/>
+                    <button class="btn-std base_shadow_hover" @click="declineOrder" >Отказать</button>
 
+
+
+                  </div>
 
                 </div>
               </div>
@@ -42,7 +49,8 @@ export default {
   data(){
     return{
       show_accept_menu:true,
-
+      show_decline_comment:false,
+      comment:''
     }
   },
   methods:{
@@ -50,14 +58,22 @@ export default {
     async acceptOrder(){
       const result = await this.$store.dispatch('api/get',{endpoint:'lk/reconcilement/order/'+ this.chain_data.order + '/true'})
       console.log(result)
-
       if(result.error == false)
       {
         location.reload()
-
       }
+    },
+    async declineOrder(){
+      const result = await this.$store.dispatch('api/get',{endpoint:'lk/reconcilement/order/'+ this.chain_data.order + '/false?comment=' + this.comment})
 
-    }
+     console.log(result)
+      if(result.error == false)
+      {
+        location.reload()
+      }
+    },
+
+
 
   }
 

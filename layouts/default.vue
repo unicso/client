@@ -44,6 +44,12 @@ import LeftBanners from "../components/main/LeftBanners";
 
 export default {
   name: "default.vue",
+  head:{
+
+    meta:[
+
+    ]
+  },
   components:{
     LeftBanners,
     ProductCategory,
@@ -51,6 +57,7 @@ export default {
     FooterComponent,
     MainMenuDesktop
   },
+
   data(){
         return{
           scroll_to_top_show:false,

@@ -98,6 +98,10 @@ ul li{
 }
 .sigin_description{
   margin-top: 32px;
-  margin-left: -4px;
+  width: 64px;
+  position: absolute;
+  margin-left: -16px;
+  text-align: center;
+
 }
 </style>
