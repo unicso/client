@@ -172,10 +172,11 @@ footer.content_block{
   padding-right: 0px;
 }
 .full__width{width: 100%}
-
+.height__fit{height: fit-content}
 .link__with__text{
 
 }
+.align__vertical{align-items: baseline}
 .link__with__text >div:first-child{
 
 }
@@ -238,7 +239,10 @@ font-size: 0.9rem;
 .default__link{
   cursor: pointer;
 }
-
+.table caption{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 .table th, .table td{
   border-bottom: 1px solid grey;
   border-top: 1px solid grey;
@@ -282,4 +286,89 @@ TABLE 2
 }
 .table__2 tbody tr:nth-child(even){
   background: #f3f3f3;
+}
+.text__center{
+  text-align: center;
+}
+/*
+ДЕРЕВО СОГЛАСОВАНИЙ
+ */
+.tree{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.tree ul li{
+  background-color: #fff;
+  border: 2px solid rgb(255,73,0);
+  border-radius: 15px;
+  padding: 10px;
+
+  position: relative;
+
+  text-align: center;
+
+}
+.tree ul  li.deactive {
+  border: 2px solid rgb(69, 68, 68);
+
+}
+
+.tree ul li.active{
+  border: 2px solid limegreen;
+
+}
+
+
+
+.vertical ul li {
+  margin-top: 25px;
+}
+.horizontal ul li:first-child, .horizontal ul li:nth-last-child(2){
+  margin-bottom: 25px;
+}
+.vertical ul li:not(:last-child):after{
+  border: medium solid transparent;
+  content: "";
+  top: 100%;
+  left: 50%;
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-color: rgb(255,73,0) rgba(255, 73, 0, 0) rgba(255, 73, 0, 0);
+  border-width: 25px;
+  margin-left: -25px;
+}
+
+.horizontal ul li:first-child:after{
+  border: medium solid transparent;
+  content: "";
+  top: 100%;
+  left: 50%;
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-color: rgb(255,73,0) rgba(255, 73, 0, 0) rgba(255, 73, 0, 0);
+  border-width: 25px;
+  margin-left: -25px;
+}
+.horizontal ul li:nth-last-child(2):after{
+  border: medium solid transparent;
+  content: "";
+  top: 100%;
+  left: 50%;
+  position: absolute;
+  height: 0;
+  width: 0;
+  border-color: rgb(255,73,0) rgba(255, 73, 0, 0) rgba(255, 73, 0, 0);
+  border-width: 25px;
+  margin-left: -25px;
+}
+.horizontal ul li .sub_item:after{
+  border: none;
+}
+.horizontal .sub_item{
+  padding-right: 10px;
+}
+.horizontal .btn-disabled{
+  border: 3px dotted rgb(255,73,0) !important;
 }

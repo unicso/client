@@ -1,7 +1,7 @@
 <template>
 <div>
 
-<div class="main_page_content">
+<div class="main_page_content" v-if="basket_summ>0">
 
   <div class="orders_basket ">
     <h1>Оформление заказа</h1>
@@ -83,9 +83,6 @@
           </div>
 
         </div>
-        <br>
-        <button form="out_form" v-if="basket.count>0" class="btn-std base_shadow_hover base_shadow" @click="addOrder" :disabled="!policy_accept">Оформить заказ</button>
-        <div class="error_message" v-if="error" v-html="error"></div>
         <div  class="policy">
           <input type="checkbox" name="policy_accept" id="policy_accept" v-model="policy_accept">
           <label for="policy_accept">Я согласен с использованием моих персональных данных в соответствии с
@@ -93,12 +90,24 @@
           </label>
 
         </div>
+        <br>
+        <button form="out_form" v-if="basket.count>0" class="btn-std base_shadow_hover base_shadow" @click="addOrder" :disabled="!policy_accept">Оформить заказ</button>
+        <div class="error_message" v-if="error" v-html="error"></div>
+
       </form>
     </div>
   </div>
 
 </div>
+<div class="main_page_content text__center" v-else>
+  <h2>Ваша корзина пуста.</h2>
+  <h4>Чтобы заполнить корзину, выберите понравившийся Вам товар в нашем интернет-магазине и нажмите на кнопку «В корзину»</h4>
+<pre>
+  {{$store.state.user}}
 
+</pre>
+
+</div>
 </div>
 
 
@@ -233,7 +242,8 @@ name: "basket",
 
         this.load_basket()
       if(typeof request.body.order_token != 'undefined')
-        this.$router.push('/order/search/'+request.body.order_token)
+      //  this.$router.push('/order/search/'+request.body.order_token)
+        location.replace('/order/search/'+request.body.order_token)
       }
 
     },
@@ -362,5 +372,8 @@ input:focus{
 }
 .update_basket{
   margin-top: 15px;
+}
+textarea{
+  width: 100% !important;
 }
 </style>

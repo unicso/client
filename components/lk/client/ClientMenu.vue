@@ -7,6 +7,7 @@
     <li>
       <nuxt-link to="/user/lk/client/orders">Заказы</nuxt-link>
     </li>
+
   </ul>
 </section>
 </template>

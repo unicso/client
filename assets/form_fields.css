@@ -1,5 +1,6 @@
 input[type=text],input[type=number], input[type=email], input[type=password], .price_counter, select {
     width: 100%;
+    height: fit-content;
     padding: 5px 13px;
     box-sizing: border-box;
     border: 2px solid grey;
@@ -53,7 +54,18 @@ input[type=text]:focus,.price_counter:focus, select:focus {
     background-color: white;
     transition: 0.5s;
     text-align: center !important;
+    margin: 5px;
 }
+.btn-disabled{
+    border-radius: 10px;
+    border: 2px solid grey;
+    padding: 8px 13px;
+    background-color: white;
+    transition: 0.5s;
+    text-align: center !important;
+    margin: 5px;
+}
+
 .btn-std:hover{
     border: 2px solid rgb(255,73,0);
     cursor: pointer;
@@ -189,4 +201,5 @@ input[type=range]:focus::-ms-fill-upper {
 
 .input__field {
     margin-bottom: 10px;
+    align-items: baseline;
 }

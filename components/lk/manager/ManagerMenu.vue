@@ -8,6 +8,9 @@
     <li>
       <nuxt-link to="/user/lk/manager/clients">Клиенты</nuxt-link>
     </li>
+    <li>
+      <nuxt-link to="/user/lk/manager/reconcilement">Согласования</nuxt-link>
+    </li>
 
   </ul>
 

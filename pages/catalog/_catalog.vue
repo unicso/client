@@ -126,7 +126,11 @@ export default {
   mounted(){
     this.page = this.$route.params.catalog;
     this.load_catalog()
+    this.$store.state.shop.current_category = this.page
 
+  },
+  beforeDestroy() {
+    this.$store.state.shop.current_category = false
   },
   watch:{
     '$route.query.search'()
@@ -136,7 +140,15 @@ export default {
     '$store.state.order.favorite_items'()
     {
       this.load_catalog()
+    },
+    '$store.state.shop.data_filter':{
+      handler(data){
+        this.load_catalog()
+      },
+      deep:true
+
     }
+
   },
   methods:{
     has(object, key) {
@@ -199,7 +211,13 @@ export default {
       }
 
       else {
-        var result = await this.$store.dispatch('api/get', {endpoint: 'shop/category/' + this.page})
+
+        let params ={filter: this.$store.state.shop.data_filter};
+
+        var result = await this.$store.dispatch('api/get', {endpoint: 'shop/category/' + this.page, params})
+
+
+
       }
 
 
@@ -208,13 +226,19 @@ export default {
           this.not_found = false;
           this.catalog_items = result.body.products
           this.category = result.body.products.category
+          let data = []
+          for(var key in this.catalog_items)
+          {
+            data.push(key)
 
-
+          }
+          this.$store.state.shop.showedProducts = data
         }
 
       else
 
       {
+        this.$store.state.shop.showedProducts = []
         this.catalog_items = false;
         this.not_found = result.body
       }

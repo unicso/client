@@ -1,6 +1,11 @@
 export const strict = false
 export const state = () =>({
-    category:{}
+    category:{},
+    current_category:false,
+    data_filter:{},
+    data_filter_selected:{},
+    showedProducts:[],
+
 
 
 })
@@ -13,6 +18,9 @@ export const mutations = {
 
     setCategory(state, category){
         state.category = category
+    },
+    setFilter(state, data){
+        state.data_filter = data
     }
 
 }

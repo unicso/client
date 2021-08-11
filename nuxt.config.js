@@ -9,7 +9,7 @@ export default {
     middleware: 'preload'
   },
   head: {
-    title: 'Сайт компании Юниксо',
+    title: 'Юниксо - надежный помощник Вашего бизнеса.',
     htmlAttrs: {
       lang: 'ru',
       translate:'no'
@@ -18,13 +18,13 @@ export default {
 
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Компания ООО «Юниксо» осуществляет коммерческую деятельность, ориентированную на предоставление заказчикам комплексных решений по планированию, разработке, обеспечению и управлению процессами закупочной деятельности организаций.' },
 
-      { property:"og:url", content:"https://unicso.ru"},
+      { property:"og:url", content:"https://market.unicso.ru"},
       { property:"og:type", content:"website"},
       { property:"og:title", content:"Сайт компании Юниксо"},
       { property:"og:description", content:"Сайт компании Юниксо"},
-      { property:"og:image", content:"https://unicso.ru"}
+      { property:"og:image", content:"https://market.unicso.ru"}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/files/client/images/favicon.ico' }

@@ -3,6 +3,7 @@
   <manager-menu/>
 
   <manager-clients v-if="$route.params.manager_components == 'clients'"/>
+  <manager-reconcilement v-if="$route.params.manager_components == 'reconcilement'"/>
 
 </section>
 </template>
@@ -11,9 +12,10 @@
 
 import ManagerMenu from "../../../../components/lk/manager/ManagerMenu";
 import ManagerClients from "../../../../components/lk/manager/ManagerClients";
+import ManagerReconcilement from "../../../../components/lk/manager/ManagerReconcilement";
 export default {
   name: "manager_components",
-  components: {ManagerClients, ManagerMenu},
+  components: {ManagerReconcilement, ManagerClients, ManagerMenu},
   data(){
     return{
       show_component:false

@@ -1,30 +1,40 @@
 <template>
-<section class="left__banners hide__on__mobile">
+<section>
+  <section class="left__banners hide__on__mobile" v-if="$store.state.shop.current_category!=121312321312">
 
-
-  <div class="banner" v-for="banner in banners" :style="'width:'+coof+'%;height:'+coof+'%;'">
-    <nuxt-link v-if="banner.link" :to="banner.link">
-      <img :src="banner.uri" class="content_block" width="100%" height="100%"/>
-    </nuxt-link>
+    <div class="banner"  v-for="banner in banners" :style="'width:'+coof+'%;height:'+coof+'%;'">
+      <nuxt-link v-if="banner.link" :to="banner.link">
+        <img :src="banner.uri" class="content_block" width="100%" height="100%"/>
+      </nuxt-link>
       <img v-else :src="banner.uri" class="content_block" width="100%" height="100%"/>
-  </div>
+    </div>
+
+  </section>
+  <product-filters v-else/>
+
 
 </section>
+
+
 </template>
 
 <script>
+import ProductFilters from "../common/ProductFilters";
 export default {
   name: "LeftBanners",
-
+  components: {ProductFilters},
   data(){
     return{
       banners:[
         {uri:"/files/client/images/slider/left/unicare.jpg", link: '/catalog/manufacturer?manufacturer=unicare'},
         {uri:"/files/client/images/slider/left/canc.jpg", link: '/catalog/ofisnye-prinadlezhnosti'},
       ],
-      coof:100
-
+      coof:100,
+      show_filters:false
     }
+  },
+  mounted() {
+
   }
 }
 </script>

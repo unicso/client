@@ -3,51 +3,60 @@
   <button class="btn-std backward__button" @click="$router.go(-1)">Назад</button>
   <h1>Данные заказа</h1>
 
-  <div class="view_order" v-if="order!=false">
+  <section class="view_order" v-if="order!=false">
 
-  <div class="code" v-if="order.code">Код: {{order.code}}</div>
-  <div class="status" v-if="order.status" :class="[order.status=='Отменен'?'color_red':'']">Статус: {{order.status}}</div>
-  <div class="contragent" v-if="order.contragent">Наименование: {{order.contragent}}</div>
-  <div class="inn" v-if="order.inn">ИНН: {{order.inn}}</div>
-  <div class="kpp" v-if="order.kpp">КПП: {{order.kpp}}</div>
-  <div class="customer_email" v-if="order.customer_email">email: {{order.customer_email}}</div>
-  <div class="customer_phone" v-if="order.customer_phone">Телефон: {{order.customer_phone}}</div>
-  <div class="customer_address" v-if="order.customer_address">Адрес доставки: {{order.customer_address}}</div>
+          <div class="code" v-if="order.code">Код: {{order.code}}</div>
+          <div class="status" v-if="order.status" :class="[order.status=='Отменен'?'color_red':'']">Статус: {{order.status}}</div>
+          <div class="contragent" v-if="order.contragent">Наименование: {{order.contragent}}</div>
+          <div class="inn" v-if="order.inn">ИНН: {{order.inn}}</div>
+          <div class="kpp" v-if="order.kpp">КПП: {{order.kpp}}</div>
+          <div class="customer_email" v-if="order.customer_email">email: {{order.customer_email}}</div>
+          <div class="customer_phone" v-if="order.customer_phone">Телефон: {{order.customer_phone}}</div>
+          <div class="customer_address" v-if="order.customer_address">Адрес доставки: {{order.customer_address}}</div>
 
-  <div class="created_at" v-if="order.created_at">Создан: {{order.created_at}}</div>
-  <div class="updated_at" v-if="order.updated_at">Обновлён: {{order.updated_at}}</div>
-  <div class="summ" v-if="order.summ">Сумма: {{priceSet(order.summ)}}</div>
-  <table>
-    <caption><h3>Список товаров</h3></caption>
-  <tr>
-    <th>Наименование</th>
-    <th>Кол-во</th>
-    <th>Цена</th>
-    <th>Сумма</th>
-  </tr>
-  <tbody>
-  <tr v-for="item in order.items" :key="item.guid">
-    <td>{{item.name}}</td>
-    <td>{{item.count}}</td>
-    <td>{{item.price}}</td>
-    <td>{{item.summ}}</td>
-  </tr>
+          <div class="created_at" v-if="order.created_at">Создан: {{order.created_at}}</div>
+          <div class="updated_at" v-if="order.updated_at">Обновлён: {{order.updated_at}}</div>
+          <div class="summ" v-if="order.summ">Сумма: {{priceSet(order.summ)}}</div>
+          <table class="table">
+            <caption><h3>Список товаров</h3></caption>
+          <tr>
+            <th>Наименование</th>
+            <th>Кол-во</th>
+            <th>Цена</th>
+            <th>Сумма</th>
+          </tr>
+          <tbody>
+          <tr v-for="item in order.items" :key="item.guid">
+            <td>{{item.name}}</td>
+            <td>{{item.count}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.price*item.count}}</td>
+          </tr>
 
-  </tbody>
+          </tbody>
 
-  </table>
-<div class="btn-std delete_order" @click="deleteOrder" v-if="order.status !='Отменен' && confirm==false">Отменить заказ</div>
-<div class="confirm_delete" v-if="confirm">
-  <h3>Подтверждаете отмену заказа?</h3>
-  <button class="btn-std" @click="deleteOrderConfirm">Подтверждаю</button>
-  <button class="btn-std" @click="confirm=false">Нет</button>
+          </table>
+        <div class="btn-std delete_order" @click="deleteOrder" v-if="order.status !='Отменен' && confirm==false">Отменить заказ</div>
+        <div class="confirm_delete" v-if="confirm">
+          <h3>Подтверждаете отмену заказа?</h3>
+          <button class="btn-std" @click="deleteOrderConfirm">Подтверждаю</button>
+          <button class="btn-std" @click="confirm=false">Нет</button>
 
-</div>
+        </div>
 
-</div>
-  <div v-if="order =='empty' ">
+    <div>
+      <chains-action :chain_data="chains"/>
+
+    </div>
+</section>
+
+
+
+
+
+  <section v-if="order =='empty' ">
     <h2>Заказ не найден</h2>
-  </div>
+  </section>
   <loader v-if="order==false" :important="true"/>
 
 </div>
@@ -56,15 +65,17 @@
 <script>
 
 import Loader from "../../../components/loader";
+import ChainsAction from "../../../components/common/Reconcilement/ChainsAction";
 export default {
 name: "token",
-  components: {Loader},
+  components: {ChainsAction, Loader},
   data(){
   return{
     order:false,
     token:'',
     confirm:false,
-    previos_page:''
+    previos_page:'',
+    chains:false
   }},
 
 
@@ -88,10 +99,11 @@ name: "token",
     }
 
     const response = await this.$store.dispatch('api/get', request)
-
+console.log(response)
     if(response.error != true)
     {
       this.order = response.body
+      this.getOrderChains()
     }
 
 
@@ -110,7 +122,18 @@ name: "token",
       }
       this.getOrder()
     },
+    async getOrderChains(){
 
+        const result = await this.$store.dispatch('api/get',{endpoint:'lk/reconcilement/order/stages/'+ this.order.guid})
+      console.log(result)
+
+      if(result.error == false)
+      {
+        this.chains = result.body
+
+      }
+
+    }
   }
 
 }

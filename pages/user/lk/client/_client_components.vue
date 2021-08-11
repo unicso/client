@@ -4,6 +4,7 @@
 
   <client-profile  v-if="$route.params.client_components == 'profile'"/>
   <client-orders   v-if="$route.params.client_components == 'orders'"/>
+  <client-reconcilement v-if="$route.params.client_components == 'reconcilement'"/>
 </section>
 </template>
 
@@ -13,9 +14,10 @@
 import ClientMenu from "../../../../components/lk/client/ClientMenu";
 import ClientProfile from "../../../../components/lk/client/ClientProfile";
 import ClientOrders from "../../../../components/lk/client/ClientOrders";
+import ClientReconcilement from "../../../../components/lk/client/ClientReconcilement";
 export default {
   name: "client_components",
-  components: {ClientOrders, ClientProfile, ClientMenu},
+  components: {ClientReconcilement, ClientOrders, ClientProfile, ClientMenu},
   data(){
     return{
       show_component:false

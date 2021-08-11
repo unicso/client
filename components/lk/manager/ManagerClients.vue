@@ -6,33 +6,29 @@
     <p>
       Чтобы была возможность регистрации пользователя для клиента необходимо в 1С в индивидуальном соглашении во вкладке <i>Прочие условия</i>
       поставить галочку <i>Доступно внешним пользователям и для обмена с сайтом.</i>. Соглашение должно быть действующим, чтобы установились цены на номеклатуру.<br>
-      Индивидуальные соглашения и список клиентов выгружаются пока что 1 раз в час или по запросу на dev@unicso.ru (в последующем время будет уменьшено). <br>
+      Индивидуальные соглашения и список клиентов выгружаются 1 раз в час или по запросу на dev@unicso.ru (временной интервал будет уменьшен). <br>
       Для регистрации клиента необходимо в списке клиентов нажать на нужного и откроется форма регистрации пользователя и список уже зарегистрированных.
     </p>
   </details>
   <br>
-
+  <input type="text" v-model="filter" placeholder="Поиск"/>
   <table class="table">
     <thead>
     <tr>
-      <th>наименование</th>
-      <th>Офиициальное название</th>
+      <th>Рабочее</th>
+      <th>Сокр. наименование</th>
       <th>ИНН</th>
 
     </tr>
-    <tr>
-      <th><input type="text" v-model="filter_name"></th>
-      <th><input type="text" v-model="filter_official_name"></th>
-      <th></th>
 
-    </tr>
     </thead>
     <tbody>
     <tr v-for="contragent in contragents" class="contragent__item"
         v-if="
-        contragent.name.toUpperCase().indexOf(filter_name.toUpperCase())>=0
-        &&
-        contragent.official_name.toUpperCase().indexOf(filter_official_name.toUpperCase())>=0
+        contragent.name.toUpperCase().indexOf(filter.toUpperCase())>=0
+        || contragent.official_name.toUpperCase().indexOf(filter.toUpperCase())>=0
+        || (''+contragent.inn).toUpperCase().indexOf(''+filter)>=0
+
         "
         @click="contragent_name=contragent.name; show_registration(contragent.guid)"
         >
@@ -135,6 +131,7 @@ export default {
       password:'',
       client:false,
       filter_name:'',
+      filter:'',
       filter_official_name:'',
       registration_user:false,
       filter_inn:'',

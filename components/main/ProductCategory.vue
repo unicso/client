@@ -43,8 +43,10 @@
 </template>
 
 <script>
+import ProductFilters from "../common/ProductFilters";
 export default {
 name: "ProductCategory",
+  components: {ProductFilters},
   data(){
     return{
 

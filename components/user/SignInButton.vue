@@ -2,17 +2,18 @@
 <section>
 
     <div  class="private_zone icons avatar_hovered text_hovered"   @click="show_submenu=!show_submenu">
-      <div class="sigin_description menu__icon__text ">Личный<br>кабинет</div>
+      <div v-if="!$store.state.user.isAuth" class="sigin_description menu__icon__text ">Личный<br>кабинет</div>
+      <div v-else class="sigin_description menu__icon__text ">{{$store.state.user.name}}</div>
+
     </div>
 
   <div class="submenu on_top_200" v-if="show_submenu" >
     <div class="dropdown_forward">
       <ul class="content_block ">
         <li class="full__width">
-          <nuxt-link class="full__width  std_link" to="/user/auth" >Личный кабинет
-            <b v-if="$store.state.user.isAuth">{{$store.state.user.email}}</b>
-          </nuxt-link>
+          <nuxt-link class="full__width  std_link" to="/user/auth" >Личный кабинет</nuxt-link>
           <div class="close_submenu icon_base icon_close" @click="show_submenu=false"></div>
+
         </li>
 
 
