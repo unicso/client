@@ -1,9 +1,7 @@
 <template>
 <div>
   <h1>Поиск на сайте.</h1>
-  <pre>
-{{$route.query['search_string']}}
-  </pre>
+
 </div>
 </template>
 
