@@ -126,7 +126,7 @@ export default {
   mounted(){
     this.page = this.$route.params.catalog;
     this.load_catalog()
-    this.$store.state.shop.current_category = this.page
+
 
   },
   beforeDestroy() {
@@ -216,7 +216,7 @@ export default {
 
         var result = await this.$store.dispatch('api/get', {endpoint: 'shop/category/' + this.page, params})
 
-
+        this.$store.state.shop.current_category = this.page
 
       }
 

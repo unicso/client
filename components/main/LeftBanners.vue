@@ -1,6 +1,7 @@
 <template>
 <section>
-  <section class="left__banners hide__on__mobile" v-if="$store.state.shop.current_category!=121312321312">
+
+  <section class="left__banners hide__on__mobile" v-if="$store.state.shop.current_category==false">
 
     <div class="banner"  v-for="banner in banners" :style="'width:'+coof+'%;height:'+coof+'%;'">
       <nuxt-link v-if="banner.link" :to="banner.link">

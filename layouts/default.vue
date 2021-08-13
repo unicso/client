@@ -11,10 +11,10 @@
       <main-menu-mobile />
     </header>
 
-    <main>
-      <div>
+    <main >
+      <div >
         <product-category/>
-        <left-banners/>
+        <left-banners  />
       </div>
       <section  class="nuxt__content">
         <div class="empty_block"></div>
@@ -61,7 +61,7 @@ export default {
   data(){
         return{
           scroll_to_top_show:false,
-
+          mainHeight:'100%'
          }
   },
   beforeMount() {
@@ -71,11 +71,16 @@ export default {
     this.login()
     this.$store.dispatch('shop/fetchShopData')
 
-    this.scroll()
+
     this.$store.dispatch('config/getConfig')
+
+
+
+ //   window.addEventListener('scroll', this.scroll);
   },
 
   methods: {
+
 
     scrollToTop() {
      var position = window.pageYOffset-100
@@ -104,19 +109,11 @@ export default {
     },
 
     scroll(person) {
+
+
       window.onscroll = () => {
         //let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        let menu_coord = (this.$refs['main_menu_desktop'].clientHeight)/2
-        let position = window.pageYOffset
 
-        if(position>menu_coord)
-        {
-          this.scroll_to_top_show = true;
-        }
-        else
-        {
-          this.scroll_to_top_show = false;
-        }
 
       }
 

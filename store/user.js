@@ -31,7 +31,7 @@ export const mutations = {
         state.lk_link = data.lk_link
         state.type = data.type
         state.name = data.name.split(' ')[0]
-        console.log(data)
+//        console.log(data)
 
 
     },

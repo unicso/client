@@ -1,8 +1,7 @@
 <template>
-<section class="left__banners filters hide__on__mobile">
+<section class="left__banners filters hide__on__mobile" ref="element_filter">
   <br><br><br>
-
-  <ul class="" >
+  <ul class="" v-if="2==3">
     <li class="selected_filter content_block" v-for="(selected, guid) in $store.state.shop.data_filter_selected">
 
       {{selected.name}} - {{selected.value}}
@@ -11,7 +10,7 @@
     </li>
 
   </ul>
-  <div class="input__field" v-for="data in filters">
+  <div class="input__field" v-for="data in filters" >
 
     <label>{{data['name']}}</label>
     <div class="select_filter">
@@ -23,10 +22,12 @@
     </div>
   </div>
   <div class="input__field">
-    <button class="btn-std" @click="$store.state.shop.data_filter= {}">Очистить</button>
+    <button class="btn-std " @click="$store.state.shop.data_filter= {}">Очистить</button>
   </div>
 
 
+
+    <div v-html="'<style>.nuxt__content{min-height: ' + filterHeight +  'px}</style>'"></div>
 </section>
 </template>
 
@@ -37,7 +38,8 @@ export default {
     return{
       filters:false,
       category:'',
-      filter_params:{}
+      filter_params:{},
+      filterHeight:1
     }
   },
   computed: {
@@ -55,10 +57,18 @@ export default {
     this.category = this.$route.params.catalog;
     this.getProductFilter()
 
+    new ResizeObserver(this.onResize).observe(this.$refs.element_filter)
+
   },
 
   methods:{
+    onResize()
+    {
 
+  if(this.$refs!=undefined && this.$refs.element_filter!=undefined )
+     this.filterHeight = +this.$refs.element_filter.offsetHeight + 200
+
+    },
     async getProductFilter()
     {
       let products = JSON.stringify(this.$store.state.shop.showedProducts)
@@ -75,7 +85,7 @@ export default {
       if(result.error == false)
       {
         this.filters = result.body
-
+        this.onResize()
 
       }
 
@@ -127,13 +137,15 @@ width: 200px;
 
 .btn-std{
   width: 100%;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 .select_filter{
   display: inline-flex;
   width: 100%;
   align-items: baseline;
 }
-.select_filter select, .select_filter .btn__close, {
+.select_filter select, .select_filter .btn__close {
   display: inline-flex;
 }
 .selected_filter{

@@ -36,6 +36,42 @@
 
 
       </div>
+      <div class="" v-if="chain_data.type === 'horizontal'">
+
+        <div class="tree horizontal" >
+          <ul>
+            <li  class="btn-std" :class="[chain_data.chains[0].success?'active':'base_shadow_hover']">{{chain_data.chains[0].user_name}} - {{chain_data.chains[0].user_email}}</li>
+            <li   class="btn-disabled" >
+              <ul>
+                <li  v-for="(item, index) in chain_data.chains"  class="btn-std sub_item" :class="[item.success?'active':'base_shadow_hover']" v-if="index>0">
+                  {{item.user_name}} - {{item.user_email}}
+                        <div v-if="show_accept_menu
+                        && item.user_email == $store.state.user.email
+                        && !item.success ">
+
+                          <div class="accept_menu">
+                            <br>
+                            <button class="btn-std base_shadow_hover" @click="acceptOrder">Согласовать</button>
+                            <button class="btn-std base_shadow_hover" v-if="!show_decline_comment" @click="show_decline_comment=true">Отказать</button>
+                            <div class="input__field" v-if="show_decline_comment">
+                              <label>Комментарий:</label>
+                              <textarea   v-model="comment"/>
+                              <button class="btn-std base_shadow_hover" @click="declineOrder" >Отказать</button>
+
+
+
+                            </div>
+
+                          </div>
+                        </div>
+
+                </li>
+              </ul>
+            </li>
+            <li :class="[(chain_data.next_chain===true?'active':'')]">Отправка поставщику</li>
+          </ul>
+        </div>
+    </div>
 
   </section>
 </template>

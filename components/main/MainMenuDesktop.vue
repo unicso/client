@@ -1,7 +1,6 @@
 <template>
 
     <div class="main_menu_desktop ">
-
       <div class="graph__menu2">
         <div class="logo">
           <nuxt-link to="/"> <div v-html="$store.state.icons.logotype_vertical"></div></nuxt-link>
@@ -76,7 +75,8 @@ name: "MainMenuDesktop",
     return{
     search_string:'',
 
-      fix_menu:false
+      fix_menu:false,
+
     }
   },
   created() {
@@ -97,6 +97,12 @@ name: "MainMenuDesktop",
 
     scroll() {
       window.onscroll = () => {
+        var scrollHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        );
+
 
 
         if(window.pageYOffset>20)
