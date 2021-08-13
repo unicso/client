@@ -1,6 +1,7 @@
 <template>
-<section class="left__banners filters hide__on__mobile" ref="element_filter">
+<section class="left__banners filters hide__on__mobile" ref="element_filter" v-if="Object.keys(filters).length>0">
   <br><br><br>
+
   <ul class="" v-if="2==3">
     <li class="selected_filter content_block" v-for="(selected, guid) in $store.state.shop.data_filter_selected">
 
@@ -49,14 +50,15 @@ export default {
     '$store.state.shop.showedProducts'(newVal)
     {
       this.getProductFilter()
-    }
+    },
+
 
   },
 
   mounted() {
     this.category = this.$route.params.catalog;
     this.getProductFilter()
-
+    if(Object.keys(this.filters).length>0)
     new ResizeObserver(this.onResize).observe(this.$refs.element_filter)
 
   },

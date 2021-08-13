@@ -137,10 +137,17 @@ export default {
     {
       this.load_catalog()
     },
+    page(newVal)
+    {
+      this.$store.state.shop.data_filter = {};
+      this.$store.state.shop.data_filter_selected = {};
+
+    },
     '$store.state.order.favorite_items'()
     {
       this.load_catalog()
     },
+
     '$store.state.shop.data_filter':{
       handler(data){
         this.load_catalog()
@@ -211,6 +218,7 @@ export default {
       }
 
       else {
+
 
         let params ={filter: this.$store.state.shop.data_filter};
 
