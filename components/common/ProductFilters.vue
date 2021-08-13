@@ -56,6 +56,8 @@ export default {
   },
 
   mounted() {
+    this.$store.state.shop.data_filter = {};
+    this.$store.state.shop.data_filter_selected = {};
     this.category = this.$route.params.catalog;
     this.getProductFilter()
     if(Object.keys(this.filters).length>0)
