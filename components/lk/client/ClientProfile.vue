@@ -36,10 +36,11 @@
       <input type="text" v-model="user_info.manager_email" disabled>
     </div>
 
-    <button class="btn-std" @click="saveInfo">Сохранить изменения</button>
     <div class="message" v-if="message">{{message}}</div>
 
-    <div class="btn-std" @click="change_password=true">Изменить пароль</div>
+    <div class="btn-std-100" @click="saveInfo">Сохранить изменения</div>
+
+    <div class="btn-std-100" @click="change_password=true">Изменить пароль</div>
     <div class="input__field" v-if="change_password">
       <label>Новый пароль (не менее 6 символов)</label>
       <input type="text" v-model="new_password">
@@ -62,6 +63,17 @@ export default {
       new_password:''
     }
   },
+  watch:{
+    user_info:{
+      handler()
+      {
+        this.message = false
+      },
+      deep:true
+    }
+
+
+  },
   mounted() {
     this.getInfo()
   },
@@ -81,8 +93,8 @@ export default {
       const result = await this.$store.dispatch('api/put', {endpoint:'lk/client/info',params:params})
       if(result.error == false) {
         this.message = result.body
-        setTimeout(()=>{this.message = false}, 3000)
-        this.getInfo()
+
+        //this.getInfo()
       }
 
     },
@@ -94,8 +106,7 @@ export default {
       const result = await this.$store.dispatch('api/post', {endpoint:'lk/client/changepassword',params:params})
 
         this.message = result.body
-        setTimeout(()=>{this.message = false}, 3000)
-
+        this.change_password = false
 
     }
 
@@ -117,4 +128,5 @@ export default {
   font-size: 1.3rem;
   color:green;
 }
+
 </style>

@@ -372,3 +372,14 @@ TABLE 2
 .horizontal .btn-disabled{
   border: 3px dotted rgb(255,73,0) !important;
 }
+
+.basket_count, .favorites_count{
+  border-radius: 50%;
+  background-color: rgb(255,73,0);
+  color: white;
+  padding: 4px;
+  min-width: 10px;
+  min-height: 10px;
+  text-align: center;
+  font-size: 0.7rem;
+}
