@@ -32,6 +32,12 @@ a:visited{
     font-family: "MicrosoftSansSerif";
     src: url("/files/client/fonts/MicrosoftSansSerif.woff2") format("woff2");
 }
+@font-face {
+    font-family: "Logotype";
+    src: url("/files/client/fonts/Logotype.woff2") format("woff2");
+}
+
+
 body{
     font-size: 1.04rem;
 }

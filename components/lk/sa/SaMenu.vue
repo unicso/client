@@ -8,6 +8,12 @@
     <li>
       <nuxt-link to="/user/lk/sa/clients">Клиенты</nuxt-link>
     </li>
+    <li>
+      <nuxt-link to="/user/lk/sa/product_report">Продукты</nuxt-link>
+    </li>
+    <li>
+      <nuxt-link to="/user/lk/sa/sachat">Чат</nuxt-link>
+    </li>
 
   </ul>
 

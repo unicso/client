@@ -1,6 +1,6 @@
 <template>
 <section>
-<slider-clean/>
+<h2><nuxt-link to="/testmain2">ПОСАДОЧНАЯ 1</nuxt-link></h2>
 
 </section>
 </template>

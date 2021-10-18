@@ -103,6 +103,12 @@
 .mebel_black.icons {
     background-position: 0px -864px;
 }
+.produkty-pitaniya.icons {
+    background-position: 0px -896px;
+}
+.produkty-pitaniya_black.icons {
+    background-position: 0px -928px;
+}
 
 
 
@@ -153,8 +159,8 @@
 
     line-height: 1;
     top: -5px;
-    left: 6px;
-    transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);
+    left: 0px;
+  /*  transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);*/
 }
 .btn__close:hover:before {
     content: '+';
@@ -163,10 +169,8 @@
 
     transform: rotate(45deg);
 
-    line-height: 1;
-    top: -5px;
-    left: 6px;
-    transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);
+
+  /*  transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);*/
 }
 .btn__close_hover {
     width: 40px;
@@ -174,7 +178,7 @@
     border-radius: 40px;
     position: relative;
 
-    margin: 20px auto;
+
     cursor: pointer;
 }
 .btn__close_hover:before {
@@ -185,8 +189,7 @@
     transform: rotate(45deg);
     font-size: 50px;
     line-height: 1;
-    top: -5px;
-    left: 6px;
+
     transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);
 }
 .btn__close_hover:after {
@@ -208,4 +211,35 @@
 .btn__close_hover:hover:before {
     transform: scale(0.8) rotate(45deg);
     color: #fff;
+}
+.arrow_left, .arrow_right{
+    display: flex;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+}
+.arrow_left{
+
+
+}
+.arrow_left svg, .arrow_right svg{
+    width: 35px;
+    fill:grey;
+}
+.arrow_left svg:hover, .arrow_right svg:hover{
+    fill: rgb(255,73,0)
+}
+.arrow_right{
+
+    transform: rotateY(180deg);
+}
+.arrow_right, .arrow_left {
+    padding: 5px;
+    margin-top:-7px;
+}
+.arrow_hovered:hover, .arrow_hovered:hover {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 50%;
+
 }

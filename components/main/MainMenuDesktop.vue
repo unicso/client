@@ -9,7 +9,10 @@
         <div class="menu__items">
           <div class="string__menu" :class="[fix_menu?'fixed_menu_string on_top_100':'']">
             <ul class=" " >
+              <li><nuxt-link to="/test" class="std_link">ТЕСТ</nuxt-link></li>
+
               <li><nuxt-link to="/" class="std_link">Главная</nuxt-link></li>
+
               <li><nuxt-link to="/info/about" class="std_link">О компании</nuxt-link></li>
 
               <li><nuxt-link to="/info/delivery" class="std_link">Доставка</nuxt-link></li>
@@ -26,7 +29,7 @@
             <div class="search">
               <p>
                 <input class="base_shadow_hover" type="text" name="search" placeholder="Поиск" v-model="search_string" v-on:keyup.enter="$router.push({path:'/catalog/search', query:{search:search_string}})">
-                <span v-if="search_string!=''" class="clear__search_string" @click="search_string=''">&#10006;</span>
+                <span v-if="search_string!=''" class="clear__search_string" @click="search_string=''">+</span>
                 <i  class="search_svg_icon" v-html="$store.state.icons.search" @click="$router.push({path:'/catalog/search', query:{search:search_string}})"></i>
               </p>
             </div>
@@ -259,10 +262,14 @@ name: "MainMenuDesktop",
   width: 420px;
 }
 .clear__search_string{
+  transform: rotate(45deg);
   margin-left: -30px;
-  font-size: 25px;
+  margin-top: -12px;
+  font-size: 45px;
   cursor: pointer;
   text-align: left;
+  font-weight: normal;
+  font-family: initial;
 }
 .clear__search_string:hover{
   color: rgb(255,73,0);

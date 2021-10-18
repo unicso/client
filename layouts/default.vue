@@ -31,7 +31,7 @@
 
     <footer-component class="footer_desktop"/>
     <div v-if="scroll_to_top_show" class="scroll_to_top" v-html="$store.state.icons.scroll_up" @click="scrollToTop"></div>
-
+    <socket-chat/>
   </div>
 </template>
 <script>
@@ -40,17 +40,19 @@ import FooterComponent from "../components/main/FooterComponent";
 import MainMenuMobile from "../components/main/MainMenuMobile";
 import ProductCategory from "../components/main/ProductCategory";
 import LeftBanners from "../components/main/LeftBanners";
+import SocketChat from "../components/common/chat/SocketChat";
 
 
 export default {
   name: "default.vue",
   head:{
-
+    title:'Компания ООО «Юниксо» осуществляет коммерческую деятельность, ориентированную на предоставление заказчикам комплексных решений по планированию, разработке, обеспечению и управлению процессами закупочной деятельности организаций',
     meta:[
 
     ]
   },
   components:{
+    SocketChat,
     LeftBanners,
     ProductCategory,
     MainMenuMobile,
@@ -139,6 +141,7 @@ footer {
  /* height: 30px;*/
 }
 .nuxt__content{
+  min-height: 1160px;
   margin-left: 10px;
 }
 

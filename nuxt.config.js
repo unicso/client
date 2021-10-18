@@ -17,7 +17,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Компания ООО «Юниксо» осуществляет коммерческую деятельность, ориентированную на предоставление заказчикам комплексных решений по планированию, разработке, обеспечению и управлению процессами закупочной деятельности организаций.' },
+      { hid: 'description', name: 'description', content: 'Компания ООО «Юниксо» осуществляет коммерческую деятельность, ориентированную на предоставление заказчикам комплексных решений по планированию, разработке, обеспечению и управлению процессами закупочной деятельности организаций' },
 
       { property:"og:url", content:"https://market.unicso.ru"},
       { property:"og:type", content:"website"},
@@ -64,7 +64,8 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     '~/plugins/axios',
-    { src: '~/plugins/vue-modal.js', mode: 'client' }
+    { src: '~/plugins/vue-modal.js', mode: 'client' },
+    '~plugins/filters.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

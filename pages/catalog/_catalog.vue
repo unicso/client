@@ -10,11 +10,12 @@
 
       <breadcrumb-component  :cef_name="page"/>
       <div class="view_box">
-        <div class="sort_by"  v-if="2==3">
-          <select>
-            <option selected>По популярности</option>
-            <option>По возрастанию цены</option>
-            <option>По убыванию цены</option>
+        <div class="sort_by" v-if="show_orderby">
+          <select v-model="orderby">
+            <option selected value="name asc">По наименования А-Я</option>
+            <option  value="name desc">По наименования Я-А</option>
+            <option value="price desc">По убыванию цены</option>
+            <option value="price asc">По возрастанию цены</option>
 
 
           </select>
@@ -28,8 +29,7 @@
 
 
       <div class="catalog_items_tile_view" v-if="$store.state.config.view_type_catalog=='tile' && !$device.isMobile">
-        <article  class="content_block on_top_2" v-for="item in catalog_items">
-
+        <article  class="content_block on_top_2" v-for="(item, index, count) in catalog_items">
           <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
           :style="'background-image: url('+ item.image + '/tmb)'">
           </div>
@@ -57,7 +57,9 @@
 
       </div>
       <div class="catalog_items_list_view" v-else>
-        <article  class=" catalog_items content_block base_shadow_hover on_top_2" v-for="item in catalog_items" >
+
+
+        <article v-if="2==3" class=" catalog_items content_block base_shadow_hover on_top_2" v-for="(item, index, count) in catalog_items" >
 
           <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
                :style="'background-image: url('+ item.image + '/tmb)'">
@@ -76,6 +78,8 @@
             </div>
 
           <div class="item_price">
+
+
             <div class="unit">Цена {{item.price_view}}</div>
             <div class="price">{{priceSet(item.price)}}</div>
 
@@ -88,11 +92,37 @@
           </div>
 
         </article>
-
+        <catalog-item-list-view v-for="(item, index, count) in catalog_items" :item="item"  v-if="catalog_items!=false && count>=pagination.start  && count<pagination.end"/>
       </div>
+    <div class="pagination" v-if="pagination.pages>1">
+      <ul>
+        <li class="content_block"  v-for="index in pagination.pages" @click="pagination_page=index;  scrollToTop();" :class="[index==pagination_page?'active':'']"> {{index}} </li>
+      </ul>
+
+    </div>
+
+
     </div>
   </div>
-    <loader  :important="true" v-if="not_found==false && !catalog_items"/>
+  <div class="" v-if="subcategory != false">
+
+    <h1>{{subcategory.name}}</h1>
+    <ul class="subcategory">
+      <li class="subcategory_item" v-for="item in subcategory.categories">
+      <nuxt-link :to="'/catalog/'+item.cef_name">
+        <div class="subcategory_item_image" :style="'background-image: url(' + item.product + ')'"></div>
+        <div class="subcategory_item_name">{{ item.name }}</div>
+      </nuxt-link>
+      </li>
+    </ul>
+
+
+    <pre>
+      {{subcategory}}
+    </pre>
+
+  </div>
+    <loader  :important="true" v-if="not_found==false && !catalog_items && subcategory == false" />
   </div>
 </template>
 
@@ -101,13 +131,22 @@ import ProductCategory from "../../components/main/ProductCategory";
 import BreadcrumbComponent from "../../components/catalog/BreadcrumbComponent";
 import Loader from "../../components/loader";
 import AddToFavorite from "../../components/forms/AddToFavorite";
+import CatalogItemListView from "../../components/catalog/CatalogItemListView";
 export default {
   name: "MainCatalog",
-  components: {AddToFavorite, Loader, BreadcrumbComponent, ProductCategory},
+  components: {CatalogItemListView, AddToFavorite, Loader, BreadcrumbComponent, ProductCategory},
 
   data(){
     return{
       catalog_items:false,
+
+      orderby:'name asc',
+      pagination_page:1,
+      catalog_items_count:0,
+      pagination_pages:3,
+      pagination_show_items:5,
+
+      catalog_all_items:false,
       category:'',
       show:false,
       count_items: [],
@@ -115,25 +154,52 @@ export default {
       not_found:false,
       show_item:false,
       page:'',
-      view_method:'list'
+      view_method:'list',
+      show_orderby:false,
+      subcategory:false
     }
   },
 
   computed:{
 
+    pagination(){
+        let offset = this.pagination_page * this.pagination_show_items
+      let start = offset-this.pagination_show_items
+      let end = offset
+      let pages = Math.ceil(this.catalog_items_count/this.pagination_show_items)
+
+      let data = {start:start, end:end, pages:pages}
+
+      return  data
+    },
+
+
+
 
   },
   mounted(){
+
     this.page = this.$route.params.catalog;
-    this.load_catalog()
+
+
+
+      if(this.$route.params.catalog == 'bumaga-dlya-printerov-i-kopirov')
+        this.orderby = 'price asc'
+
+   // this.load_catalog()
 
 
   },
   beforeDestroy() {
     this.$store.state.shop.current_category = false
   },
+
   watch:{
     '$route.query.search'()
+    {
+      this.load_catalog()
+    },
+    orderby(newVal)
     {
       this.load_catalog()
     },
@@ -166,6 +232,8 @@ export default {
       this.$store.commit('config/setViewTypeCatalog', type)
 
     },
+
+    scrollToTop(){ window.scroll(0,0)},
     itemInBasket(item){
 
 
@@ -186,16 +254,11 @@ export default {
           price_sep   = price_sep.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ");
       return price_sep + ' ₽';
     },
-    itemSumm(count, price){
-
-      return count*price
-    },
-    addToFavorite()
-    {
-
-
-    },
+    itemSumm(count, price){return count*price},
     async load_catalog(){
+    //  let orderby = this.orderby
+
+
 
       if(this.$route.params.catalog =='search')
        var result = await this.$store.dispatch('api/get', {endpoint:'shop/search', params:{search:this.$route.query.search}})
@@ -218,11 +281,16 @@ export default {
       }
 
       else {
+        this.show_orderby = true
 
-
-        let params ={filter: this.$store.state.shop.data_filter};
+        let params ={filter: this.$store.state.shop.data_filter, orderby: this.orderby};
 
         var result = await this.$store.dispatch('api/get', {endpoint: 'shop/category/' + this.page, params})
+        if(result.body.products == false)
+          this.subcategory = result.body
+        else
+          this.subcategory = false
+
 
         this.$store.state.shop.current_category = this.page
 
@@ -233,7 +301,10 @@ export default {
         if (result.error == false && result.body.products != false) {
           this.not_found = false;
           this.catalog_items = result.body.products
+
+          this.catalog_items_count = Object.keys(this.catalog_items).length
           this.category = result.body.products.category
+
           let data = []
           for(var key in this.catalog_items)
           {
@@ -243,8 +314,11 @@ export default {
           this.$store.state.shop.showedProducts = data
         }
 
+      else if (result.error == false && result.body.products == false)
+        {
+            this.is_subcategory = 'ТЕСТ'
+        }
       else
-
       {
         this.$store.state.shop.showedProducts = []
         this.catalog_items = false;
@@ -252,8 +326,7 @@ export default {
       }
 
     },
-    async  addItemToBasket(item)
-    {
+    async  addItemToBasket(item){
       item['count'] = 1
       var uri = 'basket/'+item.code + '/' + item.count
       var result = await this.$store.dispatch('api/post', {endpoint:uri})
@@ -261,13 +334,7 @@ export default {
 
     },
 
-    viewItem(item)
-    {
-
-      this.$router.push('/catalog/'+this.page+'/'+item.code)
-
-
-    }
+    viewItem(item){this.$router.push('/catalog/'+this.page+'/'+item.code)}
 
 
   }
@@ -275,6 +342,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 /**
 VIEW LIST START
 */
@@ -404,6 +473,7 @@ width: 100%;
 .view_tile, .view_list{  border: 1px solid rgb(255,73,0); border-radius: 3px}
 .sort_by{
   display: inline-block;
+  margin-right: 20px;
 }
 .sort_by select{
   border: 1px solid grey;
@@ -440,5 +510,66 @@ text-align: center;
   height: 150px;
   margin-left: auto;
   margin-right: auto;
+}
+.pagination{
+  display: flex;
+  justify-content: center;
+}
+.pagination ul{
+  list-style: none;
+  display: inline-flex;
+  flex-wrap: wrap;  margin: 0 auto;
+}
+.pagination ul  li.active {
+  cursor: default;
+  background-color: rgba(0,0,0,0.2);
+}
+.pagination ul li{
+  margin-top: 15px;
+  cursor: pointer;
+  width: 20px;
+  height: content-box;
+  padding: 3px;
+  text-align: center;
+  border-radius: 60% 60% 60% 60%;
+}
+.subcategory_item_image{
+  width: 150px;
+  height: 150px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.subcategory_item{
+  width: 50%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 40px;
+  margin-top: 50px;
+
+}
+.subcategory_item a{
+  width: 70%;
+  text-align: center;
+  border-radius: 7px;
+  padding: 5px;
+  box-shadow: 0 0 5px 2px rgba(0,0,0,0.2);
+}
+
+.subcategory_item a:hover{
+  box-shadow: 0 0 5px 7px rgba(0,0,0,0.2);
+
+}
+.subcategory_item_image:hover{
+
+
+}
+.subcategory_item_image:hover{
+
+
 }
 </style>

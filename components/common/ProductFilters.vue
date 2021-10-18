@@ -135,8 +135,8 @@ export default {
 
 <style scoped>
 .filters{
-width: 200px;
-  margin-left: 40px !important;
+  width: 200px;
+  margin-left: 10px !important;
 }
 
 .btn-std{
@@ -151,6 +151,14 @@ width: 200px;
 }
 .select_filter select, .select_filter .btn__close {
   display: inline-flex;
+
+
+}
+.btn__close:before{
+  font-family: initial;
+  font-size: 3rem;
+  margin-top: 2px;
+
 }
 .selected_filter{
   display: inline-flex;
@@ -158,6 +166,7 @@ width: 200px;
 .selected_filter .btn__close{
 font-size: 30px;
   align-items: baseline;
+
 }
 .content_block{
   margin-left: 0px;

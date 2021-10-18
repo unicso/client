@@ -42,8 +42,6 @@ export default {
       checkedSlide: 'slide1',
       slides:[
         {url:"/files/client/images/slider/main/unicso.jpg", link:"/info/about"},
-        {url:"/files/client/images/slider/main/gloves.jpg", link:false},
-        {url:"/files/client/images/slider/main/labels.jpg", link:false},
         {url:"/files/client/images/slider/main/promet.jpg", link:false},
         {url:"/files/client/images/slider/main/translojica.jpg", link:"/catalog/manufacturer?manufacturer=manufactor"},
         {url:"/files/client/images/slider/main/ateuco.jpg", link:false},

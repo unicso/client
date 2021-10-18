@@ -1,6 +1,6 @@
 <template>
 <section>
-  <div class="btn-std show_catalog on_top_1 hide__on__mobile" @click="show_catalog = !show_catalog">Каталог</div>
+  <div class="btn-std show_catalog on_top_1 hide__on__mobile" @click="show_catalog = !show_catalog">Каталог товаров</div>
 
 
 
@@ -111,7 +111,7 @@ li:hover{
 }
 .product_category{
   position: absolute;
-  grid-column-gap: 20px;
+  grid-column-gap: 0px;
   max-width: 1200px;
 }
 .sub_menu{
@@ -150,6 +150,7 @@ li:hover{
   display: inline-flex;
   max-width: 390px;
   min-width: 200px;
+
 }
 .sub_category ul li:not(:first-child){
   margin-left: 10px;
@@ -159,5 +160,9 @@ li:hover{
 }
 .sub_category ul li h4{
   margin-bottom: 5px;
+}
+.sub_menu{
+  min-height: 200px;
+  z-index: 100;
 }
 </style>

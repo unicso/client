@@ -50,6 +50,7 @@ export default {
   margin: 130px 0;
   -webkit-perspective: 780px;
   perspective: 780px;
+  z-index: 555555;
 }
 
 .cssload-inner {
