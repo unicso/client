@@ -14,6 +14,9 @@
     <li>
       <nuxt-link to="/user/lk/sa/sachat">Чат</nuxt-link>
     </li>
+    <li>
+      <nuxt-link to="/user/lk/sa/config">Конфигуратор</nuxt-link>
+    </li>
 
   </ul>
 

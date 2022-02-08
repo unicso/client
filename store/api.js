@@ -23,6 +23,8 @@ export const actions = {
   },
   async put({context}, data)
   {
+
+
     var formData = new URLSearchParams(data.params).toString();
 
     const result = await this.$axios.$put(data.endpoint, formData)

@@ -75,7 +75,6 @@ export default {
       let link = this.slides[this.current_slide - 1].link
         if(link != false)
           this.$router.replace(link)
-      console.log(this.current_slide)
     }
   }
 }
@@ -93,22 +92,22 @@ export default {
 
 
 .slider_clean {
-  height: 300px;
+  height: 330px;
   position: relative;
   width: 100%;
 
 }
 
 .slider {
-  border-radius: 10px;
+ /* border-radius: 10px;*/
   height: inherit;
   overflow: hidden;
   position: relative;
   width: inherit;
-  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+/*  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .5);
   -moz-box-shadow: 0 0 20px rgba(0, 0, 0, .5);
   -o-box-shadow: 0 0 20px rgba(0, 0, 0, .5);
-  box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, .5);*/
 }
 
 .slides {
@@ -153,7 +152,7 @@ export default {
   -moz-transform: scale(1);
   -o-transform: scale(1);
   transform: scale(1);
-  background-size: cover;
+  background-size: 1200px 330px;
   background-repeat: no-repeat;
 }
 @media all and (max-width: 480px) {

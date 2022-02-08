@@ -10,8 +10,9 @@
         <div class="product_title">
 
           <h1>{{name}}</h1>
-          <div class="article"> Код товара: {{code}}</div>
+          <div class="article" v-if="item.custom==false"> Код товара: {{code}}</div>
           <div class="article" v-if="manufacturer!= 'NoName'"> Производитель: {{manufacturer}}</div>
+          <a :href="item.link" class="link default__link" v-if="typeof item.link!='undefined' && item.link && $store.state.user.type>=50" target="_blank"> Ссылка на товар</a>
 
 
         </div>
@@ -33,7 +34,7 @@
         </div>
 
         <div class="description" >
-          <div class="select_description">
+          <div class="select_description" v-if="item.custom == false">
             <b @click="showDescription=true" :class="[!showDescription?'disabled':'']">Описание</b>
             <b @click="showDescription=false" :class="[showDescription?'disabled':'']">Характеристики</b>
             <hr>
@@ -41,7 +42,7 @@
           </div>
           <table class="table__2" v-if="!showDescription">
             <tbody>
-            <tr v-for="(item,index) in properties" >
+            <tr v-for="(item,index) in properties" v-if="properties_hide[index]=='false'">
               <td>{{index}}</td>
               <td>{{item}}</td>
             </tr>
@@ -55,28 +56,28 @@
 
 
         <div class="item_price">
-            <div class="item_price_unit">Цена {{price_unit}}.</div>
-            <div class="price">{{priceSet(price)}}</div>
+            <div class="item_price_unit" v-if="show_price==true">Цена {{price_unit}}.</div>
+            <div class="price" v-if="show_price==true">{{priceSet(price)}}</div>
 
-            <div class="price_counter btn-std base_shadow_hover">
+            <div class="price_counter btn-std base_shadow_hover" v-if="show_price==true">
               <button @click="[item_count>1?--item_count:1]"><i v-html="$store.state.icons.back"></i> </button>
               <input type="number" class="item_count" maxlength="6" min="1" max="1000" v-model="item_count">
               <button @click="++item_count"><i v-html="$store.state.icons.forward"></i> </button>
             </div>
            <br>
-            <input type="range" min="0" max="1000" step="10" v-model="item_count">
+            <input type="range" min="0" max="1000" step="10" v-model="item_count" v-if="show_price==true">
             <br>
-            <h3 class="summ" v-if="item_count>0">{{'Сумма: ' + priceSet(price*item_count)}}</h3>
+            <h3 class="summ" v-if="item_count>0 && show_price==true"  >{{'Сумма: ' + priceSet(price*item_count)}}</h3>
 
-          <div class="button__block">
+          <div class="button__block" v-if="show_price==true">
             <button v-if="$store.state.order.basket.items!= undefined && itemInBasket()"
 
-                    class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket" disabled>В корзине</button>
+                    class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket" disabled >В корзине</button>
             <button v-else class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket">В корзину</button>
 
-            <add-to-favorite :code="code" :as_icon="true"/>
-          </div>
 
+          </div>
+          <add-to-favorite :code="code" :as_icon="true"/>
 
         </div>
       </div>
@@ -118,9 +119,11 @@ export default {
       price_summ:0,
       cef_name:'',
       properties:{},
+      properties_hide:{},
       show:false,
       showImageImg:false,
-      showDescription:true
+      showDescription:true,
+      show_price:false
     }
   },
   created() {
@@ -179,6 +182,9 @@ export default {
         this.article = item.article
         this.code = item.code
         this.properties = item.properties
+        this.properties_hide = item.properties_hide
+        this.show_price = item.show_price
+
         this.price = item.price
         this.price_unit = item.price_view
         this.cef_name = item.cef_name
@@ -315,5 +321,9 @@ input[type=range],  .price_counter{
 .button__block .btn-std{
   width: 150px;
   margin-bottom: 10px;
+}
+.product{
+  width: 900px;
+  margin: 0 auto;
 }
 </style>

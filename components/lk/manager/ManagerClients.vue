@@ -71,7 +71,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="c_user in contragent_users">
+      <tr v-for="c_user in contragent_users" @click="$router.push('/user/lk/manager/client_edit?user='+c_user.user)">
         <td>{{c_user.user_name}}</td>
         <td>{{c_user.email}}</td>
         <td>{{c_user.phone}}</td>
@@ -82,7 +82,11 @@
       </tbody>
     </table>
 
-<div class="btn-std cancel__registration" @click="registration_user=false">Отмена</div>
+<div class="btn-std cancel__registration" @click="registration_user=false; show_user=false; ">Отмена</div>
+
+  <div v-if="registration_user!=false && show_user==false">
+
+
   <h1>Добавления пользователя к {{contragent_name}}</h1>
 <div class="registration__form">
   <div class="input__field">
@@ -92,6 +96,10 @@
   <div class="input__field">
     <label>email</label>
     <input type="text" v-model="registration_email">
+    <label class="checkbox std_link">
+      <input type="checkbox" v-model="registration_email_send">
+      Отправлять сообщение о регистрации
+    </label>
   </div>
   <div class="input__field">
     <label>Пароль</label>
@@ -114,15 +122,16 @@
   </div>
   <div v-if="error" class="error">{{error}}</div>
 </div>
-
+  </div>
 </section>
 
 </template>
 
 <script>
+import ClientInfo from "./ClientInfo";
 export default {
   name: "ManagerClients",
-
+  components: {ClientInfo},
   data(){
     return{
       contragents:{},
@@ -139,6 +148,7 @@ export default {
     //------------------------
       registration_name:'',
       registration_email:'',
+      registration_email_send:true,
       registration_phone:'',
       registration_role:'',
       registration_password:'',
@@ -148,6 +158,7 @@ export default {
 
       contragent_users:false,
       error:false,
+      show_user:false,
       result:{}
     }
   },
@@ -206,14 +217,15 @@ export default {
               role:10,
               price_type_strong:this.price_type_strong,
               contragent:this.registration_user,
-              price_type:this.default_price_type
+              price_type:this.default_price_type,
+              email_send:this.registration_email_send
 
             }
       }
 
       const result = await this.$store.dispatch('api/post', params);
       this.result = result
-    console.log(result)
+
       if(result.error == false)
       {
         location.reload()

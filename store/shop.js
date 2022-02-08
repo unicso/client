@@ -5,7 +5,7 @@ export const state = () =>({
     data_filter:{},
     data_filter_selected:{},
     showedProducts:[],
-
+    show_filters:false
 
 
 })
@@ -32,7 +32,7 @@ export const actions = {
             endpoint:'shop/config'
         }
         const result = await  this.dispatch('api/get',params)
-
+             
 
         if(result.body.category)
         {

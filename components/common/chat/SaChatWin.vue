@@ -71,7 +71,7 @@ export default {
 
       const result = await this.$store.dispatch('api/post',params);
 
-      console.log(result)
+
 
       if(result.code == '200' || this.first_load == true)
       {
@@ -127,7 +127,7 @@ export default {
         )
         this.first_load = false
       }
-      console.log(result)
+
       this.message = '';
 
       // historys[last_element].scrollIntoView({behavior: "smooth"});

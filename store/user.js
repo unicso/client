@@ -9,7 +9,9 @@ export const state = () =>({
     version:1,
     lk_link:'user/auth',
     type:1,
-    name:''
+    name:'',
+    current_price_type:false,
+    favorite_name:false
 
 
 })
@@ -31,8 +33,6 @@ export const mutations = {
         state.lk_link = data.lk_link
         state.type = data.type
         state.name = data.name.split(' ')[0]
-//        console.log(data)
-
 
     },
     logout(state){
@@ -41,7 +41,11 @@ export const mutations = {
         state.email = false
         state.version = 1
         state.type = 1
+        state.current_price_type = false
+
             state.lk_link = '/user/auth'
+
+
 
     }
 

@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <h2 v-if="$route.path=='/catalog/favorits'" style="text-align: center">Избранные товары</h2>
   <product-category v-if="2==3"/>
     <div class="not__found" v-if="not_found">{{not_found}}</div>
   <div class="catalog_all" v-if="catalog_items!=false">
@@ -9,11 +10,11 @@
       <div class="not__found" v-if="not_found">{{not_found}}</div>
 
       <breadcrumb-component  :cef_name="page"/>
-      <div class="view_box">
+      <div class="view_box" v-if="2==3">
         <div class="sort_by" v-if="show_orderby">
           <select v-model="orderby">
-            <option selected value="name asc">По наименования А-Я</option>
-            <option  value="name desc">По наименования Я-А</option>
+            <option selected value="name asc">По наименованию А-Я</option>
+            <option  value="name desc">По наименованию Я-А</option>
             <option value="price desc">По убыванию цены</option>
             <option value="price asc">По возрастанию цены</option>
 
@@ -21,14 +22,14 @@
           </select>
         </div>
 
-        <div class="view__method" v-if="!$device.isMobile">Вид:
+        <div class="view__method" v-if="!$device.isMobile && show_orderby">Вид:
           <div class="icons" @click="selectViewType('list')" :class="[$store.state.config.view_type_catalog=='list'?'view_list':'view_list_black']"></div>
           <div class="icons" @click="selectViewType('tile')" :class="[$store.state.config.view_type_catalog=='tile'?'view_tile':'view_tile_black']"></div>
         </div>
       </div>
+      <h4  v-if="$route.query.search && not_found==false" >Результаты поиска по ключевым словам: {{$route.query.search}}</h4>
+      <div class="catalog_items_tile_view" v-if="($store.state.config.view_type_catalog=='tile' && !$device.isMobile) || $route.path=='/catalog/favorits'">
 
-
-      <div class="catalog_items_tile_view" v-if="$store.state.config.view_type_catalog=='tile' && !$device.isMobile">
         <article  class="content_block on_top_2" v-for="(item, index, count) in catalog_items">
           <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
           :style="'background-image: url('+ item.image + '/tmb)'">
@@ -42,13 +43,15 @@
 
             </div>
           <div class="item_price">
-            <div class="unit">{{item.price_view}}</div>
-            <div class="price">{{priceSet(item.price)}}</div>
+            <div class="unit"  v-if="$store.state.user.current_price_type!=false">{{item.price_view}}</div>
+            <div class="price"  v-if="$store.state.user.current_price_type!=false">{{priceSet(item.price)}}</div>
 
 
-            <button v-if="itemInBasket(item)" class="btn-std base_shadow_hover add_to_cart"   @click="viewItem(item)"  style="font-size: inherit">Изменить</button>
-            <button v-else class="btn-std base_shadow_hover add_to_cart"  @click="addItemToBasket(item)"  style="font-size: inherit">В корзину</button>
-            <br><br>
+
+              <button v-if="itemInBasket(item) && $store.state.user.current_price_type!=false" class="btn-std base_shadow_hover add_to_cart"   @click="$router.push('/order/basket')"  style="font-size: inherit">Изменить</button>
+              <button v-else-if="!itemInBasket(item) && $store.state.user.current_price_type!=false" class="btn-std base_shadow_hover add_to_cart"  @click="addItemToBasket(item)"  style="font-size: inherit">В корзину</button>
+
+
             <add-to-favorite :code="item.code" :as_icon="true"/>
 
           </div>
@@ -58,6 +61,12 @@
       </div>
       <div class="catalog_items_list_view" v-else>
 
+        <div class="pagination" v-if="pagination.pages>1">
+          <ul>
+            <li class="content_block"  v-for="index in pagination.pages" @click="pagination_page=index;  scrollToTop();" :class="[index==pagination_page?'active':'']"> {{index}} </li>
+          </ul>
+
+        </div>
 
         <article v-if="2==3" class=" catalog_items content_block base_shadow_hover on_top_2" v-for="(item, index, count) in catalog_items" >
 
@@ -92,7 +101,9 @@
           </div>
 
         </article>
-        <catalog-item-list-view v-for="(item, index, count) in catalog_items" :item="item"  v-if="catalog_items!=false && count>=pagination.start  && count<pagination.end"/>
+        <catalog-item-list-view v-for="(item, index, count) in catalog_items" :item="item"  v-if="catalog_items!=false && count>=pagination.start  && count<pagination.end">
+
+        </catalog-item-list-view>
       </div>
     <div class="pagination" v-if="pagination.pages>1">
       <ul>
@@ -104,10 +115,11 @@
 
     </div>
   </div>
+
   <div class="" v-if="subcategory != false">
 
     <h1>{{subcategory.name}}</h1>
-    <ul class="subcategory">
+    <ul class="subcategory" v-if="subcategory.depth==2">
       <li class="subcategory_item" v-for="item in subcategory.categories">
       <nuxt-link :to="'/catalog/'+item.cef_name">
         <div class="subcategory_item_image" :style="'background-image: url(' + item.product + ')'"></div>
@@ -117,13 +129,19 @@
     </ul>
 
 
-    <pre>
-      {{subcategory}}
-    </pre>
-
+    <ul class="subcategory"  v-if="subcategory.depth==1">
+      <li class="subcategory_item" v-for="item in subcategory.categories">
+        <nuxt-link :to="'/catalog/'+item.cef_name">
+          <div class="subcategory_item_image" :style="'background-image: url(' + item.product + ')'"></div>
+          <div class="subcategory_item_name">{{ item.name }}</div>
+        </nuxt-link>
+      </li>
+    </ul>
   </div>
     <loader  :important="true" v-if="not_found==false && !catalog_items && subcategory == false" />
   </div>
+
+
 </template>
 
 <script>
@@ -144,7 +162,7 @@ export default {
       pagination_page:1,
       catalog_items_count:0,
       pagination_pages:3,
-      pagination_show_items:5,
+      pagination_show_items:10,
 
       catalog_all_items:false,
       category:'',
@@ -159,7 +177,12 @@ export default {
       subcategory:false
     }
   },
+  beforeRouteLeave(to, from, next){
+    this.$store.state.shop.show_filters = false
 
+      next()
+
+  },
   computed:{
 
     pagination(){
@@ -178,7 +201,8 @@ export default {
 
   },
   mounted(){
-
+    //if(!this.$route.query.page)
+    this.$router.push({path:this.$route.fullPath, query:{'page':1}})
     this.page = this.$route.params.catalog;
 
 
@@ -190,17 +214,24 @@ export default {
 
 
   },
+
   beforeDestroy() {
     this.$store.state.shop.current_category = false
+    this.$router.push({path:this.$route.fullPath, query:{}})
   },
 
   watch:{
+    '$store.state.user.current_price_type'(){
+      this.load_catalog()
+    },
     '$route.query.search'()
     {
+
       this.load_catalog()
     },
     orderby(newVal)
     {
+
       this.load_catalog()
     },
     page(newVal)
@@ -211,12 +242,18 @@ export default {
     },
     '$store.state.order.favorite_items'()
     {
+
       this.load_catalog()
     },
-
+    pagination_page(newVal)
+    {
+      this.$router.push({path:this.$route.fullPath, query:{page:newVal}})
+    },
     '$store.state.shop.data_filter':{
       handler(data){
+
         this.load_catalog()
+        this.pagination_page = 1
       },
       deep:true
 
@@ -261,7 +298,7 @@ export default {
 
 
       if(this.$route.params.catalog =='search')
-       var result = await this.$store.dispatch('api/get', {endpoint:'shop/search', params:{search:this.$route.query.search}})
+       var result = await this.$store.dispatch('api/get', {endpoint:'shop/search', params:this.$route.query})
       else if(this.$route.params.catalog =='profit')
         var result = await this.$store.dispatch('api/get', {endpoint:'shop/promotions/profit'})
       else if(this.$route.params.catalog =='favorits')
@@ -286,10 +323,14 @@ export default {
         let params ={filter: this.$store.state.shop.data_filter, orderby: this.orderby};
 
         var result = await this.$store.dispatch('api/get', {endpoint: 'shop/category/' + this.page, params})
-        if(result.body.products == false)
+        if(result.body.products == false) {
           this.subcategory = result.body
-        else
+          this.$store.state.shop.show_filters = false
+        }
+        else {
           this.subcategory = false
+          this.$store.state.shop.show_filters = true
+        }
 
 
         this.$store.state.shop.current_category = this.page
@@ -342,7 +383,9 @@ export default {
 </script>
 
 <style scoped>
-
+h4{
+  text-align: center;
+}
 
 /**
 VIEW LIST START
@@ -460,6 +503,7 @@ width: 100%;
   text-align: right;
   padding-right: 40px;
   padding-bottom: 10px;
+  margin-bottom: -10px;
 }
 .view__method{
   line-height: 22px;
@@ -470,7 +514,7 @@ width: 100%;
   margin-left: 10px;
 }
 .view_tile_black, .view_list_black{  border: 1px solid grey; border-radius: 3px}
-.view_tile, .view_list{  border: 1px solid rgb(255,73,0); border-radius: 3px}
+.view_tile, .view_list{  border: 1px solid var(--base-color); border-radius: 3px}
 .sort_by{
   display: inline-block;
   margin-right: 20px;
@@ -548,7 +592,6 @@ text-align: center;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 40px;
   margin-top: 50px;
 
 }

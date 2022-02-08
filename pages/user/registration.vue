@@ -123,7 +123,7 @@ section{
 
 }
 .client_support header{
-  background: linear-gradient(45deg, rgb(255,73,0), rgb(255, 100, 50));
+  background: linear-gradient(45deg, var(--base-color), rgb(255, 100, 50));
   border-radius: inherit;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;

@@ -1,6 +1,16 @@
 <template>
 <section>
-  <div class="btn-std show_catalog on_top_1 hide__on__mobile" @click="show_catalog = !show_catalog">Каталог товаров</div>
+  <div class="btn-std-2 show_catalog on_top_1  hide__on__mobile" @click="show_catalog = !show_catalog">
+    <div class="hamburger" :class="{'active':show_catalog}">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <div class="image-1"></div>
+    <div class="image-2"></div>
+
+    Каталог товаров
+  </div>
 
 
 
@@ -11,7 +21,9 @@
          :key="main.id"
         @mouseover="selectCategory(main)">
       <div class="item_name">
-        <div class="icons icons16" :class="main.cef_name"></div>
+        <div class="icons icons16 custom_icon" :class="main.cef_name" v-if="main.icon!='false' && main.icon!=''" :style="'background-image: url('+main.icon+ '); background-size: contain;'"></div>
+        <div class="icons icons16" :class="main.cef_name" v-else></div>
+
         <div>{{main.name}}</div>
       </div>
     </li>
@@ -76,22 +88,24 @@ name: "ProductCategory",
 
 <style scoped>
 .show_catalog{
-  position: absolute;
-  width: 250px;
+ /* position: absolute;*/
+ /* width: 250px;*/
   margin-left: 8px;
+  width: 170px;
+  display: inline-flex;
 
 }
 .sub_menu, .show_catalog{
 
 }
-.product_category{
-  margin-top: 40px;
-}
+
 .parent_category {
-padding-top: 15px;
+  padding-top: 15px;
   align-self: baseline;
   min-width: 300px;
   /*font-size: 1.2rem;*/
+  margin-top: 5px;
+  left: 10px;
 
 }
 li p{
@@ -113,6 +127,8 @@ li:hover{
   position: absolute;
   grid-column-gap: 0px;
   max-width: 1200px;
+  margin-left: -50px;
+
 }
 .sub_menu{
   position: relative;
@@ -121,6 +137,11 @@ li:hover{
   grid-template-rows: auto auto;
 */
   column-count: 2;
+  min-height: 500px;
+  height: 100%;
+  margin-left: 4px;
+  width: 800px;
+
 }
 .sub_menu{
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 15px rgba(0,0,0,0.22);
@@ -150,6 +171,7 @@ li:hover{
   display: inline-flex;
   max-width: 390px;
   min-width: 200px;
+  width: 100%;
 
 }
 .sub_category ul li:not(:first-child){
@@ -163,6 +185,95 @@ li:hover{
 }
 .sub_menu{
   min-height: 200px;
+  min-height: 100%;
+
   z-index: 100;
 }
+.btn-std-2{
+  position: relative;
+  height: 37px;
+  align-items: center;
+  border-top: 3px solid var(--base-color);
+  border-bottom: 3px solid var(--base-color);
+
+}
+.btn-std-2:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.5s ease-in-out;
+}
+.custom_icon{
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.btn-std{
+  margin-top: 0;
+  padding: 5px;
+  border: 2px solid var(--base-color);
+}
+.image-1{
+  background-image: url("/files/client/images/template2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 44px;
+  width: inherit;
+  position: absolute;
+  left: -15px;
+  top: -3px;
+}
+.image-2{
+  background-image: url("/files/client/images/template2.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 44px;
+  width: inherit;
+  position: absolute;
+  left: -6px;
+  transform: scale(-1, 1);
+  margin-left: 20px;
+  top: -3px;
+}
+
+.btn-std{
+
+}
+
+input{
+  padding: 7px;
+}
+/**
+HAMBURGER
+ */
+.hamburger{
+  width: 30px;
+  margin-right: 10px;
+  zoom: 0.8;
+}
+.hamburger .line{
+  width: inherit;
+  height: 5px;
+  background-color: black;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  opacity: 1;
+  transform: rotate(0) translate(0, 0);
+  transition: 0.5s ease-in-out;
+}
+.hamburger.active .line:nth-child(2){
+  opacity: 0;
+
+  transform: rotate(0deg);
+}
+.hamburger.active .line:nth-child(1){
+  transform: rotate(45deg) translate(8px, 12px);
+}
+.hamburger.active .line:nth-child(3){
+  transform: rotate(-45deg) translate(3px, -5px);
+}
+.btn-std-2{
+  font-size: 1.1rem;
+}
+
+
 </style>

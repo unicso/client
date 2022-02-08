@@ -5,9 +5,9 @@
   <sa-users v-if="$route.params.sa_components == 'users'"/>
   <product-report  v-if="$route.params.sa_components == 'product_report'"/>
   <sa-chat  v-if="$route.params.sa_components == 'sachat'"/>
-
-  {{$store.state.user}}
+  <sa-config   v-if="$route.params.sa_components == 'config'"/>
 </section>
+<access-denied-please-login v-else/>
 </template>
 
 <script>
@@ -15,18 +15,26 @@ import SaMenu from "../../../../components/lk/sa/SaMenu";
 import SaUsers from "../../../../components/lk/sa/SaUsers";
 import ProductReport from "../../../../components/lk/sa/ProductReport";
 import SaChat from "../../../../components/lk/sa/SaChat";
+import AccessDeniedPleaseLogin from "../../../../components/user/AccessDeniedPleaseLogin";
+import SaConfig from "../../../../components/lk/sa/SaConfig";
+import OnlineHelperChatAdmin from "../../../../components/lk/sa/OnlineHelperChatAdmin";
 export default {
   name: "sa_components",
-  components: {SaChat, ProductReport, SaUsers, SaMenu},
+  components: {OnlineHelperChatAdmin, SaConfig, AccessDeniedPleaseLogin, SaChat, ProductReport, SaUsers, SaMenu},
   data(){
     return{
       show_component:false
     }
   },
+  watch:{
+    '$store.state.user.type'(newVal){
+      if(newVal>=100)
+        this.show_component = true
+    }
+
+  },
   mounted() {
-    if(this.$store.state.user.type != 100)
-      this.$router.push('/user/auth')
-    else
+    if(this.$store.state.user.type >= 100)
       this.show_component = true
   }
 }

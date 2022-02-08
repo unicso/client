@@ -8,7 +8,7 @@ a:link{
     color: inherit;
 }
 a:hover, .text_hovered:hover{
-    color: rgb(255,73,0);
+    color: var(--base-color);
 }
 a:visited{
     color: inherit;
@@ -39,7 +39,7 @@ a:visited{
 
 
 body{
-    font-size: 1.04rem;
+    font-size: 1.1rem;
 }
 .default__link:link{
     text-decoration: underline;
@@ -49,11 +49,11 @@ body{
     color: blue;
 }
 .default__link:hover{
-    color: rgb(255,73,0);
+    color: var(--base-color);
 }
 a.nuxt-link-exact-active{
     font-weight: bold;
-    color: rgb(255,73,0);
+    color: var(--base-color);
 }
 .menu__icon__text{
     font-size: 0.8rem;

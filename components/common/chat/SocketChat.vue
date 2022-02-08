@@ -7,11 +7,9 @@
     <input type="text" class="name" v-model="name" placeholder="Введите ваше имя" :disabled="block_name">
     <div class="message_history " ref="history">
       <ul>
-        <li v-for="(item, index) in message_history"  :class="[item.message_type=='my'?'your_message':'manager_message']">
+        <li v-for="(item, index) in message_history"  :class="[item.message_type=='my'?'mine messages':' yours messages']">
           <div class="message_name" v-if="item.message_type!='my'">Менеджер:</div>
-
-
-          <div class="message_message">{{item.message}}</div>
+          <div class="message last">{{item.message}}</div>
         </li>
       </ul>
 
@@ -69,10 +67,12 @@ mounted() {
 
       const result = await this.$store.dispatch('api/post',params);
 
-      console.log(result)
+
 
       if(result.code == '200' || this.first_load == true)
       {
+        if(result.body.messages!= false)
+          this.playSound()
         this.message_history = result.body.messages
         this.name = this.message_history[0].name;
         this.block_name = true
@@ -85,6 +85,11 @@ mounted() {
         this.first_load = false
       }
 
+    },
+    playSound()
+    {
+      var audio = new Audio('/sounds/message_in.mp3');
+      audio.play();
     },
     async sendMessage(){
 
@@ -125,7 +130,7 @@ mounted() {
         )
         this.first_load = false
       }
-      console.log(result)
+
       this.message = '';
 
       // historys[last_element].scrollIntoView({behavior: "smooth"});
@@ -182,8 +187,10 @@ mounted() {
   height: 300px;
   margin-top: 10px;
 
-  box-shadow: 0 0 5px 2px rgba(0,0,0,0.2);
+ /* box-shadow: 0 0 5px 2px rgba(0,0,0,0.2);*/
+  padding: 5px;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 
@@ -268,6 +275,93 @@ mounted() {
 
 }
 
+/**
+IOS
+ */
+
+.messages {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.yours {
+  align-items: flex-start;
+}
+
+.yours .message {
+  margin-right: 25%;
+  background-color: #eee;
+  position: relative;
+}
+
+.yours .message.last:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: -7px;
+  height: 20px;
+  width: 20px;
+  background: #eee;
+  border-bottom-right-radius: 15px;
+}
+.yours .message.last:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: -10px;
+  width: 10px;
+  height: 20px;
+  background: white;
+  border-bottom-right-radius: 10px;
+}
+
+.mine {
+  align-items: flex-end;
+}
+
+.mine .message {
+  color: white;
+  margin-left: 25%;
+  background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+  background-attachment: fixed;
+  position: relative;
+}
+
+.mine .message.last:before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  right: -8px;
+  height: 20px;
+  width: 20px;
+  background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+  background-attachment: fixed;
+  border-bottom-left-radius: 15px;
+}
+
+.mine .message.last:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: -10px;
+  width: 10px;
+  height: 20px;
+  background: white;
+  border-bottom-left-radius: 10px;
+}
 
 
 </style>

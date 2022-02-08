@@ -1,18 +1,27 @@
 <template>
-  <section>
+  <section class="smart_services">
     <cartridge-selection v-if="$route.params.name=='cartridge-selection'"/>
+    <smart-ohrana  v-if="$route.params.name=='smart-ohrana'"/>
+    <smart-skud   v-if="$route.params.name=='smart-skud'"/>
+    <smart-request v-if="$route.params.name=='smart-request'"/>
 
   </section>
 </template>
 
 <script>
 import CartridgeSelection from "../../components/smart/CartridgeSelection";
+import SmartOhrana from "../../components/smart/SmartOhrana";
+import SmartSkud from "../../components/smart/SmartSkud";
+import SmartRequest from "../../components/smart/SmartRequest";
 export default {
   name: "smart",
-  components: {CartridgeSelection},
+  components: {SmartRequest, SmartSkud, SmartOhrana, CartridgeSelection},
 }
 </script>
 
-<style scoped>
+<style>
+.smart_services h1{
+  font-size: 1.5rem;
 
+}
 </style>

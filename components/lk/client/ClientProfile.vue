@@ -2,6 +2,7 @@
 <section>
 <h1>Личный кабинет</h1>
   <div class="user_info">
+    <select-price-type :show="true"/>
     <div class="input__field">
       <label>Имя</label>
       <input type="text" v-model="user_info.name">
@@ -27,11 +28,11 @@
       <input type="text" v-model="user_info.contragent_kpp"  disabled>
     </div>
 
-    <div class="input__field">
+    <div class="input__field" v-if="2==3">
       <label>Ваш менеджер</label>
       <input type="text" v-model="user_info.manager_name"  disabled>
     </div>
-    <div class="input__field">
+    <div class="input__field" v-if="2==3">
       <label>Email менеджера</label>
       <input type="text" v-model="user_info.manager_email" disabled>
     </div>
@@ -52,9 +53,10 @@
 </template>
 
 <script>
+import SelectPriceType from "./SelectPriceType";
 export default {
   name: "ClientProfile",
-
+  components: {SelectPriceType},
   data(){
     return{
       user_info:false,

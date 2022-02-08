@@ -1,22 +1,22 @@
 <template>
-  <article class="item" @click="toItem">
-    <section class="item_image" :style="'background-image: url('+ item_image + ')'">
+  <article class="item">
+    <section class="item_image" :style="'background-image: url('+ item_image + ')'"  @click="toItem">
 
     </section>
-    <section class="item_description">
+    <section class="item_description"  @click="toItem">
         <h3>{{item.name}}</h3>
-        <span>Код товара: {{item.code}}</span>
+        <span v-if="item.custom==false">Код товара: {{item.code}}</span>
         <div class="desc">
           {{item.description}}
         </div>
     </section>
 
     <section class="item_price">
-      <div class="new_product" v-if="item.new!=false"></div>
-        <div class="unit">Цена {{item.price_view}}</div>
-        <div class="price">{{item.price | price}}</div>
+      <div class="new_product" v-if="typeof item.new == 'string'"></div>
+        <div class="unit"  v-if="$store.state.user.current_price_type!=false" >Цена {{item.price_view}}</div>
+        <div class="price" v-if="$store.state.user.current_price_type!=false">{{item.price | price}}</div>
         <div class="buttons">
-          <div class="to_basket">
+          <div class="to_basket" v-if="$store.state.user.current_price_type!=false">
             <button class="btn-std add_to_cart" v-if="item_in_basket" disabled>В корзине</button>
             <button class="btn-std add_to_cart base_shadow_hover" v-else @click="addItemToBasket">В корзину</button>
           </div>

@@ -116,7 +116,7 @@ li div{
 
 .promotion_item:hover{
   cursor: pointer;
-  border: 1px solid rgb(255,73,0);
+  border: 1px solid var(--base-color);
   border-radius: 5px;
   transition: 0.1s;
 }

@@ -1,23 +1,15 @@
 <template>
-  <section v-if="loaded==false">
-    <h1>dasd</h1>
-  </section>
 
-
-  <section class="products_slider" v-else>
+  <section class="products_slider" v-if="2==2">
      <div class="products_header">
        <h4>{{name}}</h4>
        <div class="navigation">
-         <div @click="toLeft(); stopTimer();" class="arrow_left arrow_hovered" v-html="$store.state.icons.arrow"></div>
-         <div @click="toRight(); stopTimer();" class="arrow_right arrow_hovered" v-html="$store.state.icons.arrow"></div>
+         <div @click="toLeft(); stopTimer();" class="arrow_left arrow_hovered" v-html="$store.state.icons.arrow" :class="[step==1?'stop':'']"></div>
+         <div @click="toRight(); stopTimer();" class="arrow_right arrow_hovered" v-html="$store.state.icons.arrow" :class="[step==item_pages?'stop':'']"></div>
        </div>
      </div>
-
-     <div class="products_block content_block">
-
+     <div class="products_block ">
        <div class="products_line" :style="items_margin+ '; width: '+line_width + 'px;'+ 'transition-delay:'+ delay + 's'">
-
-
          <div v-if="item_rows==2" class="product_item" v-for="item in items" :style="'width: '+ item_width + 'px;' + item_height">
            <nuxt-link :to="item.link" class="std_link" :style="itemImage(item.image) + with_border">
              <div class="products_name">
@@ -29,7 +21,7 @@
          <div v-if="item_rows==1"  class="product_item one_line" v-for="item in items" :style="'width: '+ item_width + 'px;' + item_height">
            <nuxt-link :to="item.link" class="std_link" :style="itemImage(item.image) + with_border">
 
-             <div class="products_name">
+             <div class="products_name"   v-if="names==true">
                {{item.name}}
              </div>
            </nuxt-link>
@@ -55,15 +47,21 @@
      </div>
 
   </section>
+  <section v-else>
+    <pre>
+      {{items}}
 
+    </pre>
+
+
+  </section>
 </template>
 
 <script>
 export default {
   name: "ItemsSlider2",
   props:[
-    'items', 'name', 'transition_delay',
-      'rows','columns'
+    'data_arr',  'transition_delay'
   ],
   data(){
     return{
@@ -75,27 +73,38 @@ export default {
 
 
       ],
+      names:true,
       loaded:true,
       step:1,
+      items:false,
       item_count:4,
       item_pages:1,
       item_rows:1,
+      name:'',
+      height:'',
       margin:0,
       border:true,
       delay:0,
       list_timer:{},
-      list_timer_timeout:7000,
+      list_timer_timeout:117000,
       list_timer_kuda:true,
-      block_height: 300
+      block_height: 300,
+      test:{},
+      current_items:0,
+      type:'items',
+      size:'contain',
+      position:'center'
+
     }
   },
   computed:{
     item_width(){
-      return Math.ceil(870/this.item_count);
+      return Math.ceil(1200/this.item_count);
     },
     items_in_line(){
       return Math.ceil(Object.keys(this.items).length/this.item_rows);
     },
+
     items_margin(){
       return 'margin-left: -'+ this.margin + 'px'
     },
@@ -106,16 +115,45 @@ export default {
     item_height(){
       let k = this.item_rows == 1? 1.3: 1
       let height = (this.block_height/this.item_rows)/k
-      return '; height: ' + height + 'px'
+
+      if(typeof this.data_arr.height != "undefined")
+        return '; height: ' + this.data_arr.height + 'px'
+      else
+        return '; height: ' + height + 'px'
+
+
     },
+    last_page_items(){
+      let temp = this.items_in_line - Math.floor(this.items_in_line/this.item_count)*this.item_count
+      return temp
+    },
+    next_page_items(){
+      let temp = (this.step+1)*this.item_count - this.items_in_line
+      if(temp<=0)
+        return this.item_count
+      else
+        return this.item_count - temp
+    },
+
     with_border(){
       return this.border == false? ';border-radius: 0;': 'border-radius: 7px;'
     }
   },
   watch:{
-    items(newVal){
+
+    data_arr(newVal){
       if(newVal!= false && newVal!= undefined ) {
         this.loaded = true
+        this.items = this.data_arr.items
+        this.item_count = this.data_arr.cols
+        this.item_rows = this.data_arr.rows
+        this.name = this.data_arr.name
+        this.names = this.data_arr.names
+        if(this.data_arr.size != 'undefined')
+          this.size = this.data_arr.size;
+        if(this.data_arr.position != 'undefined')
+          this.position = this.data_arr.position;
+
         this.loadItems()
       }
     }
@@ -124,13 +162,23 @@ export default {
   mounted() {
   /*  if(this.items == false)
       this.items = this.temp_items*/
+    //  if(this.data.type == 'type')
+        this.type = 'items'
 
-    if(this.rows!= undefined)
-      this.item_rows = this.rows
-    if(this.columns!= undefined)
-      this.item_count = this.columns
-    if(this.transition_delay!= undefined)
-      this.delay = this.transition_delay
+       this.items = this.data_arr.items
+
+      this.item_count = this.data_arr.cols
+      this.item_rows = this.data_arr.rows
+      this.name = this.data_arr.name
+    this.names = this.data_arr.names
+    if(this.data_arr.size != 'undefined' && this.data_arr.size)
+      this.size = this.data_arr.size;
+    if(this.data_arr.position != 'undefined' && this.data_arr.position)
+      this.position = this.data_arr.position;
+
+
+    this.loadItems()
+
 
   },
 
@@ -142,7 +190,9 @@ export default {
     },
     itemImage(image){
    //   let size = 'width: ' + (this.item_width - 2) + 'px;' + 'height: ' + (this.item_width - 2) + 'px;'
-      return 'background-image: url(' + image + '); ' //+ size;
+      let img = 'background-position: ' + this.position + ';'+' background-size: ' + this.size + ';'
+
+      return 'background-image: url(' + image + '); ' + img //+ size;
     },
     blockSize(){
       return 'width: ' + (this.item_width - 2) + 'px;' + 'height: ' + (this.item_width - 2) + 'px;'
@@ -150,7 +200,7 @@ export default {
      loadItems(){
        this.item_pages = Math.ceil((Object.keys(this.items).length/this.item_rows)/this.item_count)
 
-       console.log(this.item_pages)
+
        this.list_timer = setInterval(()=>{
          if(this.step == this.item_pages)
            this.list_timer_kuda = false
@@ -165,7 +215,15 @@ export default {
 
     },
     toLeft(){
-      var margin = this.item_width*this.item_count
+
+      this.current_items =  this.step*this.item_count - this.items_in_line
+      if(this.current_items<=0)
+        this.current_items = this.item_count
+      else
+        this.current_items = this.item_count - this.current_items
+
+
+      var margin = this.item_width*this.current_items
 
 
       if((this.margin - margin)>=0)
@@ -176,7 +234,14 @@ export default {
 
     },
     toRight(){
-      var margin = this.item_width*this.item_count
+    //  var margin = this.item_width*this.item_count
+      this.current_items =  (this.step+1)*this.item_count - this.items_in_line
+      if(this.current_items<=0)
+        this.current_items = this.item_count
+      else
+        this.current_items = this.item_count - this.current_items
+
+      var margin = this.item_width*this.current_items
 
 
       if((this.margin + margin)<margin*this.item_pages)
@@ -185,7 +250,6 @@ export default {
         this.step++
 
       }
-
 
     },
 
@@ -206,7 +270,7 @@ export default {
 
 <style scoped>
 section{
-  width: 870px;
+  width: 1200px;
   padding: 0px;
   margin-bottom: 20px;
 }
@@ -239,18 +303,20 @@ section{
 .product_item a {
   display: flex;
   width: 100%;
-  box-shadow: 0px 0px 8px 4px rgb(34 60 80 / 20%);
+ /* box-shadow: 0px 0px 8px 4px rgb(34 60 80 / 20%);*/
   overflow: hidden;
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+/*  background-position: center;*/
+  background-size: contain;
+  background-size: 100% auto;
   margin: 5px;
+
 }
 .one_line.product_item a{
 
   background-size: contain;
   background-position: 0 30px;
-
+/*  background-position: center;*/
 }
 
 .product_item:hover{
@@ -274,9 +340,14 @@ section{
   margin-top: 2px;
 
   align-self: flex-end;
-  background-color: rgba(0,0,0,0.5);
-  color: white;
+
+ /* border: 1px solid var(--base-color);
+  border-radius: 7px;*/
+ /* background: linear-gradient(var(--base-color-o07), 30%, var(--base-color-o07));*/
+  color: black;
+
   font-size: 1.1rem;
+
 }
 .one_line.product_item .products_name{
 
@@ -287,10 +358,11 @@ section{
   padding: 10px 25px 10px 1px;
   margin-top: 10px;
   height: 30px;
+  margin-bottom: -7px;
 }
 .products_header h4{
   float: left;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin: 0;
   padding: 0;
 }
@@ -351,5 +423,8 @@ section{
   50%{opacity: 0.3}
   100%{opacity: 0.1}
 }
-
+.stop{
+  cursor: not-allowed;
+  cursor: no-drop;
+}
 </style>

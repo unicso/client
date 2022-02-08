@@ -1,6 +1,10 @@
 <template>
 <section>
-<h2><nuxt-link to="/testmain2">ПОСАДОЧНАЯ 1</nuxt-link></h2>
+<h2><nuxt-link to="/testmain">ПОСАДОЧНАЯ 1</nuxt-link></h2>
+
+
+
+
 
 </section>
 </template>

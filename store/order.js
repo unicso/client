@@ -46,6 +46,8 @@ export const mutations = {
             state.favorite_items.push(code)
             state.favorite_count = state.favorite_items.length
         this.$cookies.set('favorites', state.favorite_items)
+
+
     },
     deleteFromFavorite(state,code){
 

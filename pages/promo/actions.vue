@@ -40,7 +40,7 @@ export default {
   }
   article:hover{
     box-shadow: 0px 0px 8px 10px rgb(34 60 80 / 20%);
-  /*  box-shadow: 0px 0px 8px 10px rgba(255,73,0, 0.3);*/
+  /*  box-shadow: 0px 0px 8px 10px var(--base-color-o03);*/
     transition: 0.3s ease-in-out;
     cursor: pointer;
 
@@ -56,6 +56,6 @@ export default {
   h1:hover {
     text-shadow: 1px 1px white,
     2px 2px tomato;
-    color: rgb(255,73,0);
+    color: var(--base-color);
   }
 </style>

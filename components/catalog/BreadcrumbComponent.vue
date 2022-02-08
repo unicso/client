@@ -62,7 +62,7 @@ name: "BreadcrumbComponent",
   flex-wrap: wrap;
 }
 .breadcrumbs li a:hover{
-  color: rgb(255,73,0);
+  color: var(--base-color);
 }
 .breadcrumbs li:not(:first-child):before{
  /* content: "» ";*/

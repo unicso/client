@@ -1,13 +1,16 @@
 <template>
 <section>
 
-    <div  class="private_zone icons avatar_hovered text_hovered"   @click="show_submenu=!show_submenu">
-      <div v-if="!$store.state.user.isAuth" class="sigin_description menu__icon__text ">Личный<br>кабинет</div>
+    <div class="as-text  text_hovered" v-if="astext" @click="show_submenu=!show_submenu">
+      <div v-if="!$store.state.user.isAuth" class="sigin_description" >Личный кабинет</div>
+      <div v-else class=" ">{{$store.state.user.name}}</div>
+    </div>
+    <div v-else  class="private_zone icons avatar_hovered text_hovered"   @click="show_submenu=!show_submenu">
+      <div v-if="!$store.state.user.isAuth" class="sigin_description menu__icon__text " >Личный<br>кабинет</div>
       <div v-else class="sigin_description menu__icon__text ">{{$store.state.user.name}}</div>
-
     </div>
 
-  <div class="submenu on_top_200" v-if="show_submenu" >
+  <div class="submenu on_top_200" v-if="show_submenu" @mouseleave="show_submenu=false">
     <div class="dropdown_forward">
       <ul class="content_block ">
         <li class="full__width">
@@ -15,8 +18,13 @@
           <div class="close_submenu icon_base icon_close" @click="show_submenu=false"></div>
 
         </li>
+        <li>
+          <nuxt-link to="/catalog/favorits">Избранное</nuxt-link>
+        </li>
+        <li v-if="2==3">
+          <select-price-type />
 
-
+        </li>
         <li class="new__client" v-if="$store.state.user.isAuth">
           <div class="default__link" @click="logout">Выйти</div>
         </li>
@@ -30,8 +38,11 @@
 </template>
 
 <script>
+import SelectPriceType from "../lk/client/SelectPriceType";
 export default {
   name: "SignInButton",
+  components: {SelectPriceType},
+  props:['astext'],
   data(){
     return{
       show_submenu:false
@@ -57,6 +68,7 @@ export default {
       if(result.is_guest)
       {
         this.$store.commit('user/logout');
+        this.$cookies.removeAll();
       }
 
     }
@@ -76,14 +88,14 @@ ul{
   position: absolute;
 
   width: 200px;
-  height: 100px;
+/*  height: 100px;*/
   margin-left: -50px;
 }
 .submenu.content_block{
   padding-right: 2px;
 }
 li{
-  display: inline-flex;
+  /*display: inline-flex;*/
 }
 .close_submenu{
   float: right;
@@ -91,17 +103,44 @@ li{
 .close_submenu:hover{
   cursor: pointer;
 
-  color: rgb(255,72,0)
+  color: var(--base-color)
 }
 ul li{
   padding-bottom: 10px;
 }
-.sigin_description{
+.private_zone .sigin_description{
   margin-top: 32px;
   width: 64px;
   position: absolute;
   margin-left: -16px;
   text-align: center;
 
+}
+.as-text{
+  font-size: inherit;
+  margin: inherit;
+  display: block;
+}
+.as-text:hover{
+  cursor: pointer;
+}
+.as-text .sigin_description{
+
+  margin-left: -16px;
+  text-align: center;
+
+}
+.submenu{
+  font-size: 1em;
+}
+.submenu{
+
+  box-shadow: 0 0 5px 2px rgb(0 0 0 / 20%);
+  border-radius: 7px;
+  margin-top: 10px;
+  z-index: 600;
+}
+.content_block{
+  margin: 0;
 }
 </style>

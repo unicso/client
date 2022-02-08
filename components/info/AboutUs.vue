@@ -114,7 +114,7 @@ export default {
         {
           animateItem.classList.add('active')
 
-         // console.log(animateItem)
+
         }
 
 
@@ -160,9 +160,7 @@ h2{
 h1{
   font-size: 2rem;
 }
-.about_us{
-  width: 100%;
-}
+
 .first_block{
   align-items: center;
   display: inline-flex;

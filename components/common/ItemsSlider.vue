@@ -1,7 +1,7 @@
 <template>
   <section class="products_slider">
     <div class="products_header">
-      <h4>{{name}}</h4>
+      <h4>{{name}} {{item_pages}}</h4>
       <div class="navigation">
         <div @click="toLeft(); stopTimer();" class="arrow_left arrow_hovered" v-html="$store.state.icons.arrow"></div>
         <div @click="toRight(); stopTimer();" class="arrow_right arrow_hovered" v-html="$store.state.icons.arrow"></div>

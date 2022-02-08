@@ -106,7 +106,7 @@ name: "token",
     }
 
     const response = await this.$store.dispatch('api/get', request)
-console.log(response)
+
     if(response.error != true)
     {
       this.order = response.body
@@ -132,7 +132,7 @@ console.log(response)
     async getOrderChains(){
 
         const result = await this.$store.dispatch('api/get',{endpoint:'lk/reconcilement/order/stages/'+ this.order.guid})
-      console.log(result)
+
 
       if(result.error == false)
       {

@@ -11,7 +11,18 @@
     </li>
 
   </ul>
-  <div class="input__field" v-for="data in filters" >
+
+  <div class="input__field">
+    <label>Производитель</label>
+    <div class="select_filter">
+      <select v-model="$store.state.shop.data_filter['Производитель']" >
+        <option v-for="item in filters['Производитель']" :value="item">{{item}}</option>
+      </select>
+      <div class="btn__close" @click="deleteFilter('Производитель')"></div>
+
+    </div>
+  </div>
+  <div class="input__field" v-for="(data, name ) in filters" v-if="name!='Производитель' && data['hide']=='false'">
 
     <label>{{data['name']}}</label>
     <div class="select_filter">
@@ -51,7 +62,11 @@ export default {
     {
       this.getProductFilter()
     },
+    "$route.params.catalog"(newVal){
+      this.category = newVal;
+      this.getProductFilter()
 
+    }
 
   },
 
@@ -123,7 +138,7 @@ export default {
        }
      }
 
-     // console.log(this.$store.state.shop.data_filter)
+
    }
 
 

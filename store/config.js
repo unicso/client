@@ -1,8 +1,8 @@
 export const strict = false
 export const state = () =>({
 
-    view_type_catalog:'list'
-
+    view_type_catalog:'list',
+    show_chat:true
 
 })
 export const getters = {

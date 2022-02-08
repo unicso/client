@@ -16,7 +16,7 @@
   </section>
   <section class="item_thumb_as_link" v-else>
     <div class="open_close"  @click="show=true"></div>
-    <div class="title"   @click="show=true">
+    <div class="title"   @click="show=true" v-if="title">
       {{title}}
 
     </div>
@@ -95,7 +95,7 @@ export default {
   background-color: rgba(0,0,0,0.5);
   color: white;
   text-align: center;
-
+  padding: 7px 0;
   width: 100%;
   font-size: 1.3rem;
   transform: translate(0, -100%);

@@ -159,6 +159,7 @@ name: "basket",
     customer_kpp(newVal) {this.error = false},
     customer_address(newVal) {this.error = false},
     '$store.state.user.isAuth'(newVal){if(newVal==true) this.getInfo()},
+    '$store.state.user.current_price_type'(newVal){this.load_basket()},
   },
   mounted() {
   this.load_basket()
@@ -227,8 +228,10 @@ name: "basket",
             params:{order:JSON.stringify(order)}
     }
       const request = await this.$store.dispatch('api/post', params)
+
+      if(request.error == false)
       this.result = request
-      console.log(request);
+
 
       if(request.error === true)
       {
@@ -286,10 +289,10 @@ i{
 }
 .view_item:not(:nth-last-child(2))
 {
-  border-bottom: 1px solid rgb(255,73,0);
+  border-bottom: 1px solid var(--base-color);
 }
 .summary {
-  border-top: 2px solid rgb(255,73,0);
+  border-top: 2px solid var(--base-color);
   padding-top: 10px;
 
 }
@@ -366,7 +369,7 @@ sup {
   cursor: no-drop;
 }
 input:focus{
-  border: 1px solid rgb(255,73,0)`;
+  border: 1px solid var(--base-color)`;
 }
 .update_basket{
   margin-top: 15px;

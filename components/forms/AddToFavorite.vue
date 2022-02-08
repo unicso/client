@@ -21,8 +21,17 @@ export default {
     'code', 'as_icon'
   ],
   name: "AddToFavorite",
+  data(){
+    return{
+    cookiename:''
+
+    }
+  },
   created() {
 
+
+  },
+  mounted() {
 
   },
   methods:{

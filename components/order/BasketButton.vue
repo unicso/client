@@ -81,7 +81,10 @@ name: "BasketButton",
 watch:{
   '$store.state.order.basket_load_item'(newVal, oldVal)
   {
-
+    this.load_basket()
+  },
+  '$store.state.user.current_price_type'()
+  {
     this.load_basket()
   }
 
@@ -182,10 +185,10 @@ i{
 }
 .view_item:not(:nth-last-child(2))
 {
- /* border-bottom: 1px solid rgb(255,73,0);*/
+ /* border-bottom: 1px solid var(--base-color);*/
 }
 .summary {
-  border-top: 2px solid rgb(255,73,0);
+  border-top: 2px solid var(--base-color);
   padding-top: 10px;
 
 }
@@ -206,7 +209,7 @@ i{
 .basket_title{
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid rgb(255,73,0);
+  border-bottom: 1px solid var(--base-color);
 }
 .basket_title .name{
   text-align: left;
@@ -222,14 +225,14 @@ i{
   margin-top:-7px
 }
 .view_item:hover{
-  color: rgb(255,73,0);
+  color: var(--base-color);
   cursor: pointer;
 }
 .delete_item{
   color: black ;
 }
 .delete_item:hover{
-  color: rgb(255,73,0);
+  color: var(--base-color);
 }
 .shoping_cart{
   display: inline-flex;

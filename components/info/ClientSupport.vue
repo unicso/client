@@ -42,6 +42,7 @@
 
 
   </div>
+
   <div v-else>
     <h3>Сообщение отправлено</h3>
 
@@ -87,8 +88,6 @@ export default {
         this.subject = this.$route.query.subject
       }
 
-    console.log(this.to)
-      console.log(this.subject)
   },
 
     handleFileUpload(){
@@ -112,10 +111,9 @@ export default {
 
         params['files[' + i + ']'] = file;
       }
-      console.log(params)
       const result = await this.$store.dispatch('api/post', {endpoint:'support/email', params:params})
 
-      console.log(result)
+
       if(result.error == false)
         this.email_sended = true
       else
@@ -140,7 +138,7 @@ section{
 
 }
 .client_support header{
-   background: linear-gradient(45deg, rgb(255,73,0), rgb(255, 100, 50));
+   background: linear-gradient(45deg, var(--base-color), rgb(255, 100, 50));
   border-radius: inherit;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;

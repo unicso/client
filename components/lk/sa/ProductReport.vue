@@ -1,18 +1,19 @@
 <template>
 <section>
   <h1>Отчет по продуктам.</h1>
-
+  <sub>*Для выделения товаров за определеную дату кликните на требуюмую дату в таблице.</sub>
   <table class="table">
      <thead>
      <tr><td>Дата</td><td>Кол-во</td></tr>
      </thead>
     <tbody>
-    <tr v-for="(item, index) in report.products">
+    <tr v-for="(item, index) in report.products" @click="select_date=index">
       <td>{{index}}</td><td>{{(Object.keys(item)).length}}</td>
     </tr>
     </tbody>
   </table>
-
+{{report.count}}
+  {{select_date}}
   <table class="table">
     <thead>
       <tr><td>Наименование</td><td>Дата добавления</td></tr>
@@ -32,7 +33,8 @@ export default {
   name: "ProductReport",
   data(){
     return{
-      report:false
+      report:false,
+      select_date:false
     }
   },
 

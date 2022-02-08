@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="info_page">
 
   <politika-konfidentsialnosti v-if="$route.params.cef_name=='politika-konfidentsialnosti'"/>
   <contacts v-if="$route.params.cef_name=='contacts'"/>
@@ -29,6 +29,9 @@ name: "cef_name",
 }
 </script>
 
-<style scoped>
-
+<style >
+.info_page > * {
+  width: 900px;
+  margin: 0 auto;
+}
 </style>

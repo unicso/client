@@ -93,7 +93,7 @@ export default {
 
     async acceptOrder(){
       const result = await this.$store.dispatch('api/get',{endpoint:'lk/reconcilement/order/'+ this.chain_data.order + '/true'})
-      console.log(result)
+
       if(result.error == false)
       {
         location.reload()
@@ -102,7 +102,7 @@ export default {
     async declineOrder(){
       const result = await this.$store.dispatch('api/get',{endpoint:'lk/reconcilement/order/'+ this.chain_data.order + '/false?comment=' + this.comment})
 
-     console.log(result)
+
       if(result.error == false)
       {
         location.reload()

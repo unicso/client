@@ -1,5 +1,7 @@
 <template>
   <div class="wrapper">
+
+    <div class="warning"></div>
     <div class="show__alert">
       Ваш браузер устарел и не соответствует требованиям безопасности, а так же не позволяет полноценно использовать сайт.
     </div>
@@ -13,11 +15,11 @@
 
     <main >
       <div >
-        <product-category/>
-        <left-banners  />
+        <product-category v-if="2==3" />
+        <left-banners  v-if="two_columns"/>
       </div>
-      <section  class="nuxt__content">
-        <div class="empty_block"></div>
+      <section  class="nuxt__content" :class="{'nuxt__content__two_columns':two_columns}">
+        <div class="empty_block" ></div>
         <Nuxt class=""/>
       </section>
     </main>
@@ -31,7 +33,10 @@
 
     <footer-component class="footer_desktop"/>
     <div v-if="scroll_to_top_show" class="scroll_to_top" v-html="$store.state.icons.scroll_up" @click="scrollToTop"></div>
-    <socket-chat/>
+    <socket-chat v-if="$store.state.config.show_chat && 2==3"/>
+    <online-helper v-if="$store.state.config.show_chat  && 2==3"/>
+
+    <select-price-type :show="false"/>
   </div>
 </template>
 <script>
@@ -41,6 +46,8 @@ import MainMenuMobile from "../components/main/MainMenuMobile";
 import ProductCategory from "../components/main/ProductCategory";
 import LeftBanners from "../components/main/LeftBanners";
 import SocketChat from "../components/common/chat/SocketChat";
+import OnlineHelper from "../components/common/chat/OnlineHelper";
+import SelectPriceType from "../components/lk/client/SelectPriceType";
 
 
 export default {
@@ -52,6 +59,8 @@ export default {
     ]
   },
   components:{
+    SelectPriceType,
+    OnlineHelper,
     SocketChat,
     LeftBanners,
     ProductCategory,
@@ -63,8 +72,31 @@ export default {
   data(){
         return{
           scroll_to_top_show:false,
-          mainHeight:'100%'
+          mainHeight:'100%',
+          two_columns:false
          }
+  },
+  watch:{
+    '$route.fullPath'(newVal){
+      if(newVal == '/catalog/favorits')
+        this.showTwoColumns()
+
+    },
+    "$route.name"(newVal){
+      this.showTwoColumns();
+    },
+    "$store.state.user.isAuth"(newVal)
+    {
+      this.$store.dispatch('shop/fetchShopData')
+      this.$store.dispatch('api/get', {endpoint:'lk/client/info'})
+    },
+    "$store.state.user.current_price_type"(newVal, oldVal)
+    {
+      this.$store.dispatch('shop/fetchShopData')
+     // if(newVal!=oldVal)
+        //location.reload()
+    },
+
   },
   beforeMount() {
 
@@ -77,12 +109,21 @@ export default {
     this.$store.dispatch('config/getConfig')
 
 
+    this.showTwoColumns();
 
  //   window.addEventListener('scroll', this.scroll);
   },
 
   methods: {
+    showTwoColumns()
+    {
+      if(this.$route.name=='catalog-catalog' && this.$route.path!='/catalog/favorits')
+        this.two_columns = true;
+      else
+        this.two_columns = false;
 
+      console.log(this.$route.name)
+    },
 
     scrollToTop() {
      var position = window.pageYOffset-100
@@ -99,8 +140,8 @@ export default {
 
     async login() {
       var params = {
-        'username': '123',
-        'password': '123'
+        'username': '',
+        'password': ''
       };
       const response = await this.$store.dispatch('api/put', {'endpoint': 'user/auth', 'params': params});
 
@@ -141,8 +182,21 @@ footer {
  /* height: 30px;*/
 }
 .nuxt__content{
-  min-height: 1160px;
+  min-height: 1200px;
   margin-left: 10px;
 }
+.empty_block{
+  width: 10px;
+  display: none;
+}
+.main_page{
+  width: 100%;
+}
+.nuxt__content__two_columns{
+  grid-template-columns: minmax(300px, 1fr) minmax(500px, 4fr);
+}
+.nuxt__content__two_columns .empty_block{
 
+  display: flex;
+}
 </style>

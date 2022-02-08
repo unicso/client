@@ -120,7 +120,7 @@ td{
   text-align: center;
 }
 .countdown tr:first-child td{
-  background-color: rgba(255,73,0, 1);
+  background-color: var(--base-color);
   color:white;
   font-size: 1.2rem;
 }
@@ -155,7 +155,7 @@ caption{
   margin-top: 20px;
   font-size: 2.5rem;
   font-weight: bold;
-  color: rgb(255,73,0);
+  color: var(--base-color);
 
 }
 .price span{

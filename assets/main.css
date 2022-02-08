@@ -1,4 +1,26 @@
+:root{
+  --base-color: rgba(253,73,5, 1);
+  --base-color-o09: rgba(253,73,5, 0.9);
+  --base-color-o08: rgba(253,73,5, 0.8);
+  --base-color-o07: rgba(253,73,5, 0.7);
+  --base-color-o06: rgba(253,73,5, 0.6);
+  --base-color-o05: rgba(253,73,5, 0.5);
+  --base-color-o04: rgba(253,73,5, 0.4);
+  --base-color-o03: rgba(253,73,5, 0.3);
+  --base-color-o02: rgba(253,73,5, 0.2);
+  --base-color-o01: rgba(253,73,5, 0.1);
+  --base-color-o00: rgba(253,73,5, 0);
+  --base-color-light: rgba(246,130,100, 1);
+
+
+
+
+
+
+}
+
 html, body {
+
   margin: 0px;
   padding: 0px;
 }
@@ -55,7 +77,7 @@ ul{
   border: none;
 }
 .std_link:hover{
-  color: rgb(255,73,0);
+  color: var(--base-color);
   cursor: pointer;
 }
 .std_link:hover{
@@ -63,7 +85,7 @@ ul{
   cursor: pointer;
 }
 .std_link a:hover{
-  color: rgb(255,73,0);
+  color: var(--base-color);
   cursor: pointer;
 }
 
@@ -300,7 +322,7 @@ TABLE 2
 }
 .tree ul li{
   background-color: #fff;
-  border: 2px solid rgb(255,73,0);
+  border: 2px solid var(--base-color);
   border-radius: 15px;
   padding: 10px;
 
@@ -335,7 +357,7 @@ TABLE 2
   position: absolute;
   height: 0;
   width: 0;
-  border-color: rgb(255,73,0) rgba(255, 73, 0, 0) rgba(255, 73, 0, 0);
+  border-color: var(--base-color) var(--base-color-o00) var(--base-color-o00);
   border-width: 25px;
   margin-left: -25px;
 }
@@ -348,7 +370,7 @@ TABLE 2
   position: absolute;
   height: 0;
   width: 0;
-  border-color: rgb(255,73,0) rgba(255, 73, 0, 0) rgba(255, 73, 0, 0);
+  border-color: var(--base-color) var(--base-color-o00) var(--base-color-o00);
   border-width: 25px;
   margin-left: -25px;
 }
@@ -360,7 +382,7 @@ TABLE 2
   position: absolute;
   height: 0;
   width: 0;
-  border-color: rgb(255,73,0) rgba(255, 73, 0, 0) rgba(255, 73, 0, 0);
+  border-color: var(--base-color) var(--base-color-o00) var(--base-color-o00);
   border-width: 25px;
   margin-left: -25px;
 }
@@ -371,12 +393,12 @@ TABLE 2
   padding-right: 10px;
 }
 .horizontal .btn-disabled{
-  border: 3px dotted rgb(255,73,0) !important;
+  border: 3px dotted var(--base-color) !important;
 }
 
 .basket_count, .favorites_count{
   border-radius: 50%;
-  background-color: rgb(255,73,0);
+  background-color: var(--base-color);
   color: white;
   padding: 4px;
   min-width: 10px;

@@ -103,12 +103,27 @@
 .mebel_black.icons {
     background-position: 0px -864px;
 }
+
 .produkty-pitaniya.icons {
     background-position: 0px -896px;
 }
 .produkty-pitaniya_black.icons {
     background-position: 0px -928px;
 }
+
+.professionalnaya-himiya.icons {
+    background-position: 0px -960px;
+}
+.professionalnaya-himiya_black.icons {
+    background-position: 0px -992px;
+}
+.dopolnitelnyy-assortiment.icons {
+    background-position: 0px -1024px;
+}
+.dopolnitelnyy-assortiment_black.icons {
+    background-position: 0px -1056px;
+}
+
 
 
 
@@ -164,7 +179,7 @@
 }
 .btn__close:hover:before {
     content: '+';
-    color: rgb(255,73,0);
+    color: var(--base-color);
     position: absolute;
 
     transform: rotate(45deg);
@@ -183,7 +198,7 @@
 }
 .btn__close_hover:before {
     content: '+';
-    color: rgb(255,73,0);
+    color: var(--base-color);
     position: absolute;
 
     transform: rotate(45deg);
@@ -200,7 +215,7 @@
     width: 100%;
     height: 100%;
     border-radius: 100%;
-    background: rgb(255,73,0);
+    background: var(--base-color);
 
     transition: all 0.3s cubic-bezier(0.77, 0, 0.2, 0.85);
     transform: scale(0.01);
@@ -228,7 +243,7 @@
     fill:grey;
 }
 .arrow_left svg:hover, .arrow_right svg:hover{
-    fill: rgb(255,73,0)
+    fill: var(--base-color)
 }
 .arrow_right{
 
@@ -242,4 +257,8 @@
     background-color: rgba(0,0,0,0.1);
     border-radius: 50%;
 
+}
+
+.icon_close_std:before{
+    content: "\2716";
 }

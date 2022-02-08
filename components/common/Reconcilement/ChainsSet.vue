@@ -132,7 +132,7 @@ export default {
     async getContragentChains(){
 
       const result = await this.$store.dispatch('api/get',{endpoint:'lk/reconcilement/client/'+this.contragent.guid})
-     console.log(result)
+
 
       if(result.error == false)
       {
