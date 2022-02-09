@@ -68,7 +68,7 @@ export default {
       return 'background-image: url("'+ image + '")'
     },
     async loadData(){
-      const result = await  this.$store.dispatch('api/get', {endpoint:'https://dev.unicso.ru/v1/shop/promotions/businesstype?type=' + this.type})
+      const result = await  this.$store.dispatch('api/get', {endpoint:'/shop/promotions/businesstype?type=' + this.type})
 
       this.items = result.body
       this.products = result.body.products

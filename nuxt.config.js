@@ -9,7 +9,7 @@ export default {
     middleware: 'preload'
   },
   head: {
-    title: 'Юниксо - надежный помощник Вашего бизнеса.',
+    title: 'Юниксо - надежный помощник Вашего бизнеса',
     htmlAttrs: {
       lang: 'ru',
       translate:'no'
@@ -22,7 +22,7 @@ export default {
       { property:"og:url", content:"https://market.unicso.ru"},
       { property:"og:type", content:"website"},
       { property:"og:title", content:"Сайт компании Юниксо"},
-      { property:"og:description", content:"Сайт компании Юниксо"},
+      { property:"og:description", content:"Юниксо - надежный помощник Вашего бизнеса"},
       { property:"og:image", content:"https://market.unicso.ru"}
     ],
     link: [
