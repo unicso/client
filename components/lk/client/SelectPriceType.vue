@@ -26,7 +26,8 @@ export default {
   watch:{
     "$store.state.user.current_price_type"(newVal)
     {
-      this.$cookies.set('price_type', newVal)
+
+        this.$cookies.set('price_type', newVal)
 
     }
 

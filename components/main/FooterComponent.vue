@@ -1,6 +1,6 @@
 <template>
 <footer class="content_block">
-
+asdsadsadsadasdsad
   <main>
   <section class="logotype">
     <nuxt-link to="/" v-html="$store.state.icons.logotype_vertical"></nuxt-link>

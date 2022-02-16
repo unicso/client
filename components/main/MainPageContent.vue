@@ -9,9 +9,8 @@
     <products-slider v-if="2==3"/>
 
     <promotions-block class="promotions_block" v-if="2==3" />
-
     <ul>
-      <li><items-slider2 v-for="data in items" :data_arr="data"/></li>
+      <li><items-slider2 v-for="data in $store.state.shop.main_page_items" :data_arr="data"/></li>
 
     </ul>
   </div>
@@ -59,19 +58,18 @@ export default {
 
   },
   mounted() {
-    this.loadData();
+  this.$store.dispatch('shop/getMainPage')
   },
 
   methods:{
+    async load()
+    {
 
-    async loadData(){
-      const result = await  this.$store.dispatch('api/get', {endpoint:'shop/promotions/mainpage'})
+   //   const result = await  this.$store.dispatch('api/get', {endpoint:'shop/promotions/mainpage'})
 
-     if(result.error==false)
-     {
-       this.items = result.body;
+     // this.items = result
 
-     }
+
 
 
 
