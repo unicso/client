@@ -37,7 +37,7 @@
       </ul>
     </div>
   </div>
-  <div class="empty_result content_block" v-else-if="result!=false && error==true">
+  <div class="empty_result content_block" v-else-if="result!=false && error==true && 2==3">
     <h3>Извините, совпадений не найдено.</h3>
 
   </div>

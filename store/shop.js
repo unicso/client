@@ -39,6 +39,7 @@ export const actions = {
         if(result.body.category)
         {
             this.commit('shop/setCategory', result.body.category)
+            this.state.user.current_price_type = result.body.price_type
         }
     },
 

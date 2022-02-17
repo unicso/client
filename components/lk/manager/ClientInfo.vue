@@ -51,10 +51,7 @@
       <button class="btn-std" @click="save">Сохранить</button>
 
     </div>
-
-    <pre>{{soglashenie}}</pre>
-    <pre>{{info.manager}}</pre>
-
+    
   </section>
 </template>
 

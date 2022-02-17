@@ -60,7 +60,7 @@
           </div>
           <div class="threat_menu">
 
-            <promotions-menu/>
+            <promotions-menu v-if="2==3"/>
           </div>
 
         </div>

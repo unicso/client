@@ -92,8 +92,8 @@ export default {
     },
     "$store.state.user.current_price_type"(newVal, oldVal)
     {
-      if(typeof newVal == 'undefined' ||  newVal!=false)
-        this.$store.state.user.current_price_type = false;
+  //    if(typeof newVal == 'undefined' ||  newVal!=false)
+ //       this.$store.state.user.current_price_type = false;
 
         this.$store.dispatch('shop/fetchShopData')
      // if(newVal!=oldVal)

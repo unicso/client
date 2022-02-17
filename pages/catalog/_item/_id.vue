@@ -1,7 +1,8 @@
 <template>
 <div>
   <product-category  v-if="2==3"/>
-  <div class="catalog_item" v-if="show">
+
+  <div class="catalog_item" v-if="show!=4">
     <div class="empty_block"></div>
 <article class="">
        <breadcrumb-component :cef_name="cef_name" :last_cef_link="$route.fullPath" :last_name="name"/>
@@ -53,23 +54,21 @@
           </div>
 
         </div>
-
-
         <div class="item_price">
-            <div class="item_price_unit" v-if="show_price==true">Цена {{price_unit}}.</div>
-            <div class="price" v-if="show_price==true">{{priceSet(price)}}</div>
+            <div class="item_price_unit" v-if="$store.state.user.current_price_type!=false">Цена {{price_unit}}.</div>
+            <div class="price" v-if="$store.state.user.current_price_type!=false">{{priceSet(price)}}</div>
 
-            <div class="price_counter btn-std base_shadow_hover" v-if="show_price==true">
+            <div class="price_counter btn-std base_shadow_hover" v-if="$store.state.user.current_price_type!=false">
               <button @click="[item_count>1?--item_count:1]"><i v-html="$store.state.icons.back"></i> </button>
               <input type="number" class="item_count" maxlength="6" min="1" max="1000" v-model="item_count">
               <button @click="++item_count"><i v-html="$store.state.icons.forward"></i> </button>
             </div>
            <br>
-            <input type="range" min="0" max="1000" step="10" v-model="item_count" v-if="show_price==true">
+            <input type="range" min="0" max="1000" step="10" v-model="item_count" v-if="$store.state.user.current_price_type!=false">
             <br>
-            <h3 class="summ" v-if="item_count>0 && show_price==true"  >{{'Сумма: ' + priceSet(price*item_count)}}</h3>
+            <h3 class="summ" v-if="item_count>0 && $store.state.user.current_price_type!=false"  >{{'Сумма: ' + priceSet(price*item_count)}}</h3>
 
-          <div class="button__block" v-if="show_price==true">
+          <div class="button__block" v-if="$store.state.user.current_price_type!=false">
             <button v-if="$store.state.order.basket.items!= undefined && itemInBasket()"
 
                     class="btn-std base_shadow_hover add_to_cart" style="font-size: inherit" @click="addItemToBasket" disabled >В корзине</button>
@@ -82,8 +81,8 @@
         </div>
       </div>
 </article>
-  </div>
 
+  </div>
 
   <show-image :modal_name="'show_image'" :images="images" :current_image="image"/>
 
@@ -171,6 +170,7 @@ export default {
 
       if(result.error == false)
       {
+
         this.show= true
         var item = result.body.products
 

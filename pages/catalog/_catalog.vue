@@ -177,9 +177,12 @@ export default {
       subcategory:false
     }
   },
+  async fetch() {
+    this.$router.push({path:this.$route.fullPath, query:{'page':1}})
+
+  },
   beforeRouteLeave(to, from, next){
     this.$store.state.shop.show_filters = false
-
       next()
 
   },
@@ -196,19 +199,14 @@ export default {
       return  data
     },
 
-
-
-
   },
   mounted(){
     //if(!this.$route.query.page)
-    this.$router.push({path:this.$route.fullPath, query:{'page':1}})
+
     this.page = this.$route.params.catalog;
 
-
-
-      if(this.$route.params.catalog == 'bumaga-dlya-printerov-i-kopirov')
-        this.orderby = 'price asc'
+    if(this.$route.params.catalog == 'bumaga-dlya-printerov-i-kopirov')
+      this.orderby = 'price asc'
 
    // this.load_catalog()
 
@@ -222,41 +220,30 @@ export default {
 
   watch:{
     '$store.state.user.current_price_type'(){
+    //     this.load_catalog()
+    },
+    '$route.query.search'(){
       this.load_catalog()
     },
-    '$route.query.search'()
-    {
-
+    orderby(newVal) {
       this.load_catalog()
     },
-    orderby(newVal)
-    {
-
-      this.load_catalog()
-    },
-    page(newVal)
-    {
+    page(newVal) {
       this.$store.state.shop.data_filter = {};
       this.$store.state.shop.data_filter_selected = {};
-
     },
-    '$store.state.order.favorite_items'()
-    {
-
+    '$store.state.order.favorite_items'(){
       this.load_catalog()
     },
-    pagination_page(newVal)
-    {
+    pagination_page(newVal) {
       this.$router.push({path:this.$route.fullPath, query:{page:newVal}})
     },
     '$store.state.shop.data_filter':{
       handler(data){
-
         this.load_catalog()
         this.pagination_page = 1
       },
       deep:true
-
     }
 
   },
@@ -264,10 +251,8 @@ export default {
     has(object, key) {
       return object ? hasOwnProperty.call(object, key) : false;
     },
-    selectViewType(type)
-    {
+    selectViewType(type) {
       this.$store.commit('config/setViewTypeCatalog', type)
-
     },
 
     scrollToTop(){ window.scroll(0,0)},
@@ -275,12 +260,9 @@ export default {
 
 
 
-      if(this.has(this.$store.state.order.basket.items, item.code))
-      {
+      if(this.has(this.$store.state.order.basket.items, item.code)) {
         return true
-      }
-      else
-      {
+      } else {
         return false
       }
 
@@ -293,19 +275,19 @@ export default {
     },
     itemSumm(count, price){return count*price},
     async load_catalog(){
-    //  let orderby = this.orderby
 
-
-
-      if(this.$route.params.catalog =='search')
-       var result = await this.$store.dispatch('api/get', {endpoint:'shop/search', params:this.$route.query})
-      else if(this.$route.params.catalog =='profit')
-        var result = await this.$store.dispatch('api/get', {endpoint:'shop/promotions/profit'})
-      else if(this.$route.params.catalog =='favorits')
-      {
+      if(this.$route.params.catalog =='search') {
+        /** ЕСЛИ ПОИСК **/
+        var result = await this.$store.dispatch('api/get', {endpoint: 'shop/search', params: this.$route.query})
+      }
+      else if(this.$route.params.catalog =='profit') {
+        /** ЕСЛИ ПРОФИТ **/
+        var result = await this.$store.dispatch('api/get', {endpoint: 'shop/promotions/profit'})
+      }
+      else if(this.$route.params.catalog =='favorits') {
+        /** ЕСЛИ ИЗБРАННОЕ **/
         var items = {}
         const data = await this.$store.dispatch('api/post', {endpoint:'shop/favorites', params:{codes:this.$store.state.order.favorite_items}})
-
         if(data.error==false)
           var result = {error:false, body:{products:data.body.products}}
         else

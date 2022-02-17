@@ -28,10 +28,12 @@ export default {
     }
   },
   mounted() {
-    this.loadBannerItems()
+  //  this.loadBannerItems()
   },
   watch:{
-    '$store.state.user.current_price_type'(){this.loadBannerItems()},
+    '$store.state.user.current_price_type'(){
+   //   this.loadBannerItems()
+    },
   },
   methods: {
     async loadBannerItems(){

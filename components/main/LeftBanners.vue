@@ -76,7 +76,7 @@ export default {
   */
   },
   mounted() {
-      this.loadBannerItems()
+     // this.loadBannerItems()
   },
 
   methods:{
