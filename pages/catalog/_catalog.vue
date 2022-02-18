@@ -177,10 +177,7 @@ export default {
       subcategory:false
     }
   },
-  async fetch() {
-    this.$router.push({path:this.$route.fullPath, query:{'page':1}})
 
-  },
   beforeRouteLeave(to, from, next){
     this.$store.state.shop.show_filters = false
       next()
@@ -208,7 +205,7 @@ export default {
     if(this.$route.params.catalog == 'bumaga-dlya-printerov-i-kopirov')
       this.orderby = 'price asc'
 
-   // this.load_catalog()
+    this.load_catalog()
 
 
   },
@@ -220,7 +217,7 @@ export default {
 
   watch:{
     '$store.state.user.current_price_type'(){
-    //     this.load_catalog()
+         this.load_catalog()
     },
     '$route.query.search'(){
       this.load_catalog()

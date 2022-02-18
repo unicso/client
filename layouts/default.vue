@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-
+    {{$store.state.user.current_price_type}}
     <div class="warning"></div>
     <div class="show__alert">
       Ваш браузер устарел и не соответствует требованиям безопасности, а так же не позволяет полноценно использовать сайт.

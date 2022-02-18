@@ -43,7 +43,9 @@ export const mutations = {
         state.type = 1
         state.current_price_type = false
 
-            state.lk_link = '/user/auth'
+        state.lk_link = '/user/auth'
+
+
 
 
 
