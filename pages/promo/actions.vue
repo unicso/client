@@ -30,13 +30,18 @@ export default {
 </script>
 
 <style scoped>
+
   article{
-    width: 100%;
+    width: 870px;
     height: 300px;
-    box-shadow: 0px 0px 8px 5px rgb(34 60 80 / 20%);
+ /*   box-shadow: 0px 0px 8px 5px rgb(34 60 80 / 20%);*/
 
     border-radius: 7px;
+
+    margin: 0 auto;
     margin-top: 20px;
+    background-repeat: no-repeat;
+
   }
   article:hover{
     box-shadow: 0px 0px 8px 10px rgb(34 60 80 / 20%);

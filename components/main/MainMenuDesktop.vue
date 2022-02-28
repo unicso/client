@@ -60,7 +60,7 @@
           </div>
           <div class="threat_menu">
 
-            <promotions-menu v-if="2==3"/>
+            <promotions-menu v-if="2==2"/>
           </div>
 
         </div>
@@ -267,7 +267,7 @@ position: relative;
   width: 100%;
   left: 0px;
   top:0px;
-  overflow: hidden;
+ /* overflow: hidden;*/
   background-color: white;
   animation: 1s show_fixed forwards;
 }

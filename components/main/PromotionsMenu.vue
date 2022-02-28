@@ -1,5 +1,5 @@
 <template>
-  <section class="promotions_menu" v-if="2==3">
+  <section class="promotions_menu">
     <ul v-if="items!=false">
       <li v-for="(item, name) in items">
         <nuxt-link :to="item.link+ ''">
@@ -28,11 +28,11 @@ export default {
     }
   },
   mounted() {
-  //  this.loadBannerItems()
+    this.loadBannerItems()
   },
   watch:{
     '$store.state.user.current_price_type'(){
-   //   this.loadBannerItems()
+      this.loadBannerItems()
     },
   },
   methods: {
@@ -57,12 +57,13 @@ export default {
 }
 .promotions_menu ul{
   display: flex;
-  justify-content: space-between;
+/*  justify-content: space-between;*/
+
   height: 50px;
 }
 .promotions_menu ul li{
   display: inline-flex;
-  width: 100%;
+  width: 20%;
   transition: 0.5s ease-in-out;
 }
 .promotions_menu ul li:hover{

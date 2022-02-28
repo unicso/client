@@ -71,12 +71,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="c_user in contragent_users" @click="$router.push('/user/lk/manager/client_edit?user='+c_user.user)">
-        <td>{{c_user.user_name}}</td>
-        <td>{{c_user.email}}</td>
-        <td>{{c_user.phone}}</td>
+      <tr v-for="c_user in contragent_users" >
+        <td @click="$router.push('/user/lk/manager/client_edit?user='+c_user.user)"  class="std_link">{{c_user.user_name}}</td>
+        <td @click="$router.push('/user/lk/manager/client_edit?user='+c_user.user)"  class="std_link">{{c_user.email}}</td>
+        <td @click="$router.push('/user/lk/manager/client_edit?user='+c_user.user)"  class="std_link">{{c_user.phone}}</td>
 
-        <td>{{c_user.price_type}}</td>
+        <td @click="$router.push('/user/lk/manager/client_edit?user='+c_user.user)"  class="std_link">{{c_user.price_type}}</td>
 
       </tr>
       </tbody>
@@ -115,7 +115,7 @@
     <select v-model="default_price_type">
       <option v-for="price_type in contragent_price_type" :value="price_type.guid">{{price_type.name}}</option>
     </select>
-    <label class="checkbox std_link"><input type="checkbox" v-model="price_type_strong">Отображать товары только из соглашения</label>
+    <label v-if="2==3" class="checkbox std_link"><input type="checkbox" v-model="price_type_strong">Отображать товары только из соглашения</label>
   </div>
   <div class="input__field">
     <button class="btn-std" @click="registrationClient">Зарегистрировать</button>
@@ -174,6 +174,8 @@ export default {
   },
 
   methods:{
+
+
     async show_registration(guid){
       this.registration_user = guid
       this.getContragentPriceTypes()

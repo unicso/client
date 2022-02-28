@@ -13,10 +13,10 @@
 
     <section class="item_price">
       <div class="new_product" v-if="typeof item.new == 'string'"></div>
-        <div class="unit"  v-if="$store.state.user.current_price_type!=false" >Цена {{item.price_view}}</div>
-        <div class="price" v-if="$store.state.user.current_price_type!=false">{{item.price | price}}</div>
+        <div class="unit"  v-if="item.show_price!=false" >Цена {{item.price_view}}</div>
+        <div class="price" v-if="item.show_price!=false">{{item.price | price}}</div>
         <div class="buttons">
-          <div class="to_basket" v-if="$store.state.user.current_price_type!=false">
+          <div class="to_basket" v-if="item.show_price!=false!=false">
             <button class="btn-std add_to_cart" v-if="item_in_basket" disabled>В корзине</button>
             <button class="btn-std add_to_cart base_shadow_hover" v-else @click="addItemToBasket">В корзину</button>
           </div>
@@ -47,7 +47,7 @@ export default {
     item_image(){
       if(typeof this.item.image != "undefined")
       {
-        return this.item.image + '/tmb'
+        return this.item.image // + '/tmb'
       }
     },
     item_in_basket(){

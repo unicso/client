@@ -33,7 +33,7 @@ export const mutations = {
         state.lk_link = data.lk_link
         state.type = data.type
         state.name = data.name.split(' ')[0]
-
+        state.current_price_type = data.price_type
     },
     logout(state){
         state.isAuth = false

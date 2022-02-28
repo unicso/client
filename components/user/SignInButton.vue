@@ -53,9 +53,11 @@ export default {
       this.show_submenu = false
     },
     '$store.state.user.isAuth'(newVal){
-      if(newVal == false)
+     if(newVal == false)
        // this.$router.replace('/')
         location.reload()
+
+
     }
 
   },

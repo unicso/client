@@ -91,7 +91,7 @@ watch:{
 },
   mounted()
   {
-    this.load_basket()
+  //  this.load_basket()
 
   },
 

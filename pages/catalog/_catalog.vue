@@ -32,7 +32,7 @@
 
         <article  class="content_block on_top_2" v-for="(item, index, count) in catalog_items">
           <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
-          :style="'background-image: url('+ item.image + '/tmb)'">
+          :style="'background-image: url('+ item.image + ')'">
           </div>
           <div v-else class="item_image"    @click="$router.push('/catalog/'+page+'/'+item.code)">
             <div v-html="$store.state.icons.empty_image"></div>
@@ -43,13 +43,13 @@
 
             </div>
           <div class="item_price">
-            <div class="unit"  v-if="$store.state.user.current_price_type!=false">{{item.price_view}}</div>
-            <div class="price"  v-if="$store.state.user.current_price_type!=false">{{priceSet(item.price)}}</div>
+            <div class="unit"  v-if="item.show_price!=false">{{item.price_view}}</div>
+            <div class="price"  v-if="item.show_price!=false">{{priceSet(item.price)}}</div>
 
 
 
-              <button v-if="itemInBasket(item) && $store.state.user.current_price_type!=false" class="btn-std base_shadow_hover add_to_cart"   @click="$router.push('/order/basket')"  style="font-size: inherit">Изменить</button>
-              <button v-else-if="!itemInBasket(item) && $store.state.user.current_price_type!=false" class="btn-std base_shadow_hover add_to_cart"  @click="addItemToBasket(item)"  style="font-size: inherit">В корзину</button>
+              <button v-if="itemInBasket(item) && item.show_price!=false" class="btn-std base_shadow_hover add_to_cart"   @click="$router.push('/order/basket')"  style="font-size: inherit">Изменить</button>
+              <button v-else-if="!itemInBasket(item) && item.show_price!=false" class="btn-std base_shadow_hover add_to_cart"  @click="addItemToBasket(item)"  style="font-size: inherit">В корзину</button>
 
 
             <add-to-favorite :code="item.code" :as_icon="true"/>
@@ -71,7 +71,7 @@
         <article v-if="2==3" class=" catalog_items content_block base_shadow_hover on_top_2" v-for="(item, index, count) in catalog_items" >
 
           <div class="item_image"  v-if="typeof item.image != 'undefined' &&  item.image"  @click="$router.push('/catalog/'+page+'/'+item.code)"
-               :style="'background-image: url('+ item.image + '/tmb)'">
+               :style="'background-image: url('+ item.image + ')'">
           </div>
           <div v-else class="item_image"    @click="$router.push('/catalog/'+page+'/'+item.code)">
             <div v-html="$store.state.icons.empty_image"></div>
@@ -202,8 +202,8 @@ export default {
 
     this.page = this.$route.params.catalog;
 
-    if(this.$route.params.catalog == 'bumaga-dlya-printerov-i-kopirov')
-      this.orderby = 'price asc'
+   // if(this.$route.params.catalog == 'bumaga-dlya-printerov-i-kopirov')
+  //    this.orderby = 'price asc'
 
     this.load_catalog()
 
@@ -216,6 +216,10 @@ export default {
   },
 
   watch:{
+    '$route.fullPath'()
+    {
+      this.load_catalog()
+    },
     '$store.state.user.current_price_type'(){
          this.load_catalog()
     },

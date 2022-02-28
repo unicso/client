@@ -6,7 +6,15 @@
       <caption>Доступные соглашения</caption>
       <thead>
         <tr>
-          <th>Контрагент</th><th>Соглашение</th><th>Автор</th><th>Вирт. скидка (%)</th><th>Активно</th>
+          <th>Контрагент</th>
+          <th>Соглашение</th>
+          <th>Автор</th>
+          <th>Вирт. скидка (%)</th>
+          <th>Активно</th>
+          <th>Отображать цены</th>
+          <th>Отображать фото</th>
+
+          <th>Удаление</th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +24,11 @@
         <td  @click="$router.push('/user/lk/manager/edit_price_type?type='+item.price_type)">{{item.fullname}}</td>
         <td>{{item.discount}}</td>
         <td><input type="checkbox" v-model="info.current[index].active" @change="saveStatus(item)"></td>
+        <td><input type="checkbox" v-model="info.current[index].price" @change="saveStatus(item)"></td>
+        <td><input type="checkbox" v-model="info.current[index].images" @change="saveStatus(item)"></td>
+
+        <td @click="deleteItem(item)" class="std_link">Удалить</td>
+
       </tr>
       </tbody>
     </table>
@@ -48,10 +61,10 @@
 
       </div>
 
-      <button class="btn-std" @click="save">Сохранить</button>
+      <button class="btn-std" @click="save" v-if="soglashenie!= ''">Сохранить</button>
 
     </div>
-    
+
   </section>
 </template>
 
@@ -79,20 +92,47 @@ export default {
 
   },
   methods: {
+    async deleteItem(item)
+    {
+      let params ={
+        endpoint:'lk/manager/clients/userinfo/' + item.user + '/' + item.price_type,
 
+      }
+
+      console.log(item)
+      const result = await this.$store.dispatch('api/delete', params)
+      console.log(result)
+      if(result.error == false)
+        this.getUser()
+
+
+    },
+    getInt(value){
+     console.log(value)
+
+
+    },
     async saveStatus(item)
     {
+
+    console.log(item)
       let params = {
         endpoint:'lk/manager/clients/userinfo/'+this.user,
         params:{
           price_type:item.price_type,
-          status: item.active
+          active:item.active,
+          price:item.price,
+          images:item.images,
+          user:item.user,
+          manager:item.manager
+
+
         }
       }
 
       const result = await this.$store.dispatch('api/post', params);
 
-
+    console.log(result)
 
     },
 
@@ -117,8 +157,11 @@ export default {
 
 
       const result = await this.$store.dispatch('api/post', params);
-
-
+      console.log(result)
+      if(result.error == false)
+        this.getUser()
+      else
+        this.getUser()
 
     },
 

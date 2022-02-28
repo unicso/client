@@ -1,7 +1,9 @@
 import Vue from 'vue'
 
 Vue.filter('price', (value) => {
-    const date = new Date(value)
+
+    if(value=='0.00')
+        return '';
 
     var price       = Number.prototype.toFixed.call(parseFloat(value) || 0, 2),
         price_sep   = price.replace(/(\D)/g, ","),
