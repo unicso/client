@@ -6,6 +6,10 @@
   <product-report  v-if="$route.params.sa_components == 'product_report'"/>
   <sa-chat  v-if="$route.params.sa_components == 'sachat'"/>
   <sa-config   v-if="$route.params.sa_components == 'config'"/>
+
+  <config-base-params v-if="$route.params.sa_components=='general'"/>
+  <config-permissions v-if="$route.params.sa_components=='permissions'"/>
+
 </section>
 <access-denied-please-login v-else/>
 </template>
@@ -18,9 +22,14 @@ import SaChat from "../../../../components/lk/sa/SaChat";
 import AccessDeniedPleaseLogin from "../../../../components/user/AccessDeniedPleaseLogin";
 import SaConfig from "../../../../components/lk/sa/SaConfig";
 import OnlineHelperChatAdmin from "../../../../components/lk/sa/OnlineHelperChatAdmin";
+import ConfigBaseParams from "../../../../components/config/ConfigBaseParams";
+import ConfigPermissions from "../../../../components/config/ConfigPermissions";
 export default {
   name: "sa_components",
-  components: {OnlineHelperChatAdmin, SaConfig, AccessDeniedPleaseLogin, SaChat, ProductReport, SaUsers, SaMenu},
+  components: {
+    ConfigPermissions,
+    ConfigBaseParams,
+    OnlineHelperChatAdmin, SaConfig, AccessDeniedPleaseLogin, SaChat, ProductReport, SaUsers, SaMenu},
   data(){
     return{
       show_component:false

@@ -18,6 +18,7 @@
       <th>Рабочее</th>
       <th>Сокр. наименование</th>
       <th>ИНН</th>
+      <th>Пользователи</th>
 
     </tr>
 
@@ -35,6 +36,7 @@
       <td>{{contragent.name}}</td>
       <td>{{contragent.official_name}}</td>
       <td>{{contragent.inn}}</td>
+      <td :class="[contragent.users>0?'users_plus':'']">{{contragent.users}}</td>
 
 
     </tr>
@@ -276,4 +278,8 @@ details, summary{
   color: red;
   font-size: 1.2rem;
 }
+.users_plus{
+  background-color: #dafca3;
+}
+
 </style>

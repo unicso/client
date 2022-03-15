@@ -17,6 +17,14 @@
     <li>
       <nuxt-link to="/user/lk/sa/config">Конфигуратор</nuxt-link>
     </li>
+    <li>
+      <nuxt-link to="/user/lk/sa/general">Основные параметры</nuxt-link>
+    </li>
+    <li>
+      <nuxt-link to="/user/lk/sa/permissions">Роли</nuxt-link>
+    </li>
+
+
 
   </ul>
 
@@ -26,7 +34,9 @@
 
 <script>
 export default {
-  name: "SaMenu"
+  name: "SaMenu",
+
+
 }
 </script>
 

@@ -45,6 +45,9 @@
             <i v-else>Сохранить изменения</i>
 
           </button>
+          &nbsp;&nbsp;
+          <a href="/v1/basket/xls" download class="default__link">Скачать в XLS</a>
+
         </div>
 
       </div>

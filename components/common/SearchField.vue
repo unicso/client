@@ -1,5 +1,6 @@
 <template>
 <section class="search">
+
  <div class="search_field">
    <label v-html="$store.state.icons.search" class="search_loop"></label>
    <input type="text" class="search_string" v-model="search" @keyup.enter="$router.push('/catalog/search?search='+search)" placeholder="Введите название или код товара">
@@ -52,7 +53,8 @@ export default {
       search:'',
       result:false,
       error:false,
-      search_width_category:''
+      search_width_category:'',
+      load:false
     }
   },
 
@@ -67,7 +69,7 @@ export default {
       }
     },
    '$route.fullPath'(){
-
+     this.load = false
      this.result = false
 
    }
@@ -80,11 +82,14 @@ export default {
       let params = {
         endpoint: 'shop/search?search=' + this.search + '&short=true'
       }
+
+      this.load = true;
+
       const result = await this.$store.dispatch('api/get', params)
       if(result.error == false)
       {
-
-        this.result = result.body
+        if(this.load)
+          this.result = result.body
 
         this.error = false;
       }
