@@ -51,12 +51,7 @@ import SelectPriceType from "../components/lk/client/SelectPriceType";
 
 export default {
   name: "default.vue",
-  head:{
-    title:'Юниксо - надежный помощник Вашего бизнеса',
-    meta:[
 
-    ]
-  },
   components:{
     SelectPriceType,
     OnlineHelper,

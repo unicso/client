@@ -16,6 +16,10 @@ import SmartRequest from "../../components/smart/SmartRequest";
 export default {
   name: "smart",
   components: {SmartRequest, SmartSkud, SmartOhrana, CartridgeSelection},
+
+  mounted() {
+    this.$store.state.helper.smart_request.subject = this.$route.query.name
+  }
 }
 </script>
 

@@ -25,9 +25,12 @@ name: "BreadcrumbComponent",
 
   data(){
   return{
-    breadcrumbs:false
+    breadcrumbs:false,
+
   }
   },
+
+
   watch:{
     cef_name(newVal, oldVal)
     {
@@ -45,6 +48,11 @@ name: "BreadcrumbComponent",
           {endpoint:'shop/breadcrumbs/'+this.cef_name}
       )
       this.breadcrumbs = result.body
+
+      if(result.error==false)
+      {
+        let b = result.body
+      }
 
   }
 

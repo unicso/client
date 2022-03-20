@@ -1,3 +1,16 @@
+export const strict = false
+export const state = () =>({
+
+    smart_request:{
+    services:[], name:'', phone:'', email:'', position:'', object:'',
+    location:'', area:'', comment:'', budget:'', staff:'', subject:'SMART сервисы'
+}
+
+
+})
+
+
+
 
 export const actions = {
     priceSet({context}, data){

@@ -1,18 +1,7 @@
 <template>
   <section>
-    <h1>Установка СКУД</h1>
-
-    <div class="selection_block" v-if="2==3">
-      <h1>Вариант 1</h1>
-      <div class="input__field" v-for="(items, name) in FETCH_DATA_ITEMS()">
-        <label>{{name}}</label>
-        <select>
-          <option v-for="item in items">{{item}}</option>
-        </select>
-      </div>
-
-    </div>
-
+    <h1>{{$store.state.helper.smart_request.subject}}</h1>
+    
     <h3>Выберите услуги:</h3>
     <div class="input__field">
 
@@ -22,7 +11,7 @@
           <label><b>{{name}}</b></label>
           <ul>
             <li v-for="item in items">
-              <label ><input type="checkbox" :value="item" v-model="request.services">{{item}}</label>
+              <label ><input type="checkbox" :value="item" v-model="$store.state.helper.smart_request.services">{{item}}</label>
             </li>
           </ul>
 
@@ -38,66 +27,67 @@
 
         <div class="field__block">
           <label>Ваши ФИО</label>
-          <input type="text">
+          <input type="text" v-model="$store.state.helper.smart_request.name">
         </div>
         <div class="field__block">
           <label>Ваш номер телефона</label>
-          <input type="text"  >
+          <input type="text"  v-model="$store.state.helper.smart_request.phone" >
         </div>
         <div class="field__block">
           <label>Email</label>
-          <input type="text" >
+          <input type="text"  v-model="$store.state.helper.smart_request.email">
         </div>
         <div class="field__block">
           <label>Должность</label>
-          <input type="text">
+          <input type="text"  v-model="$store.state.helper.smart_request.name">
         </div>
         <div class="field__block">
           <label>Назначение объекта (склад, банк, ТЦ, БЦ и т.д.)</label>
-          <input type="text">
+          <input type="text" v-model="$store.state.helper.smart_request.object">
         </div>
         <div class="field__block">
           <label>Место расположения объекта</label>
-          <input type="text">
+          <input type="text" v-model="$store.state.helper.smart_request.position">
         </div>
         <div class="field__block">
           <label>Примерная площадь</label>
-          <input type="text">
+          <input type="text"  v-model="$store.state.helper.smart_request.area">
         </div>
         <div class="field__block">
           <label>Примерный бюджет</label>
-          <input type="text">
+          <input type="text" v-model="$store.state.helper.smart_request.budget">
         </div>
         <div class="field__block">
           <label>Количество сотрудников</label>
-          <input type="text">
+          <input type="text"  v-model="$store.state.helper.smart_request.staff">
         </div>
         <div class="field__block">
           <label>Выбранные услуги</label>
           <div class="selected_services">
-            {{(request.services).join()}}
+            {{($store.state.helper.smart_request.services).join()}}
           </div>
         </div>
 
         <div class="field__block">
-          <label>Комментарий:<br>
+          <label>
             Уважаемый клиент! Если Вы не нашли в списке нужных услуг, то что искали, напишите нам. Мы обязательно подберем для Вас лучшее предложение
           </label>
-          <textarea rows="9" >
+          <textarea rows="9"  v-model="$store.state.helper.smart_request.comment">
       </textarea>
         </div>
-        <div class="field__block">
+        <div class="field__block" v-if="2==3">
           <label>Добавить вложение</label>
           <input type="file" id="files" ref="files" multiple  class="btn-std"/>
 
         </div>
         <div class="field__block">
           <label></label>
-          <input type="button" value="Отправить" class="btn-std base_shadow_hover" >
+          <input type="button" value="Отправить" class="btn-std base_shadow_hover" @click="send">
         </div>
 
       </main>
 
+      <div class="result" :class="[error?'error':'success']">{{result}}</div>
 
     </div>
 
@@ -108,19 +98,43 @@
 <script>
 export default {
   name: "SmartSkud",
+  props:['subject'],
   data() {
     return {
-      fetched:{},
-      request:{
-        services:[]
 
-      }
+      fetched:{},
+      result:'',
+      error:false
     }
   },
   mounted() {
+    this.$store.state.helper.smart_request.services = []
+
   },
   methods: {
+    async send(){
+      let params = {
+        endpoint:'shop/promotions/smart-request',
+        params:this.$store.state.helper.smart_request
 
+
+      }
+      const result = await this.$store.dispatch('api/post', params)
+
+
+      if(result.error == true)
+      {
+        this.error = true
+        this.result = result.body
+      }
+      else
+      {
+        this.error = false
+        this.result = result.body
+      }
+
+
+    },
     FETCH_DATA_ITEMS()
     {
       var data = {
@@ -252,5 +266,9 @@ input[type=button]{
 .error{
   color: red;
   font-size: 1.2rem;
+}
+.result{
+  text-align: center;
+  padding-bottom: 20px;
 }
 </style>

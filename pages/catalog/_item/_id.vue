@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="name">
   <product-category  v-if="2==3"/>
 
   <div class="catalog_item" v-if="show!=4">
@@ -123,8 +123,21 @@ export default {
 
       showImageImg:false,
       showDescription:true,
-      show_price:false
+      show_price:false,
+      load:false
     }
+  },
+
+  async fetch()
+  {
+    this.load = await this.getItem()
+
+  },
+
+
+  fetchOnServer: false,
+  head(){
+    return this.$store.state.config.head
   },
   created() {
 
@@ -133,11 +146,12 @@ export default {
   mounted() {
 
 
-      this.getItem();
+    //  this.getItem();
 
 
 
   },
+
   methods:{
     priceSet(data){
 
@@ -198,8 +212,16 @@ export default {
       else
       {
         this.images = false
+
       }
+
+        return true
       }
+      else
+      {
+        return false
+      }
+
     },
 
     changeImage(image)

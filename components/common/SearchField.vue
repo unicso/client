@@ -54,19 +54,37 @@ export default {
       result:false,
       error:false,
       search_width_category:'',
-      load:false
+      load:false,
+      count:0,
+      timer:''
     }
   },
 
   watch:{
     search(newVal){
-      if(newVal.length>2)
+
+
+      if(newVal.length>3)
       {
-        this.searchItems()
+
+        let a = ++this.count
+            this.timer = setTimeout(() => {
+              if (a == this.count) {
+                this.searchItems()
+              } else {
+                clearTimeout(this.time);
+              }
+            }, 1000);
+
+
+
       }
       else{
         this.result = false
       }
+
+
+
     },
    '$route.fullPath'(){
      this.load = false

@@ -174,9 +174,13 @@ export default {
       page:'',
       view_method:'list',
       show_orderby:false,
-      subcategory:false
+      subcategory:false,
+
+    //  meta:this.$store.state.config.head
+
     }
   },
+
 
   beforeRouteLeave(to, from, next){
     this.$store.state.shop.show_filters = false
@@ -277,6 +281,8 @@ export default {
     itemSumm(count, price){return count*price},
     async load_catalog(){
 
+
+
       if(this.$route.params.catalog =='search') {
         /** ЕСЛИ ПОИСК **/
         var result = await this.$store.dispatch('api/get', {endpoint: 'shop/search', params: this.$route.query})
@@ -309,13 +315,15 @@ export default {
         if(result.body.products == false) {
           this.subcategory = result.body
           this.$store.state.shop.show_filters = false
+
+
         }
         else {
           this.subcategory = false
           this.$store.state.shop.show_filters = true
         }
 
-
+        console.log(this.subcategory);
         this.$store.state.shop.current_category = this.page
 
       }

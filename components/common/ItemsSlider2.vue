@@ -11,7 +11,7 @@
      <div class="products_block ">
        <div class="products_line" :style="items_margin+ '; width: '+line_width + 'px;'+ 'transition-delay:'+ delay + 's'">
          <div v-if="item_rows==2" class="product_item" v-for="item in items" :style="'width: '+ item_width + 'px;' + item_height">
-           <nuxt-link :to="item.link" class="std_link" :style="itemImage(item.image) + with_border">
+           <nuxt-link :to="item.link + '?name=' + item.name" class="std_link" :style="itemImage(item.image) + with_border">
              <div class="products_name">
                {{item.name}}
              </div>
@@ -19,7 +19,7 @@
          </div>
 
          <div v-if="item_rows==1"  class="product_item one_line" v-for="item in items" :style="'width: '+ item_width + 'px;' + item_height">
-           <nuxt-link :to="item.link" class="std_link" :style="itemImage(item.image) + with_border">
+           <nuxt-link :to="item.link + '?name=' + item.name" class="std_link" :style="itemImage(item.image) + with_border">
 
              <div class="products_name"   v-if="names==true">
                {{item.name}}
