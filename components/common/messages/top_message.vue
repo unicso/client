@@ -1,8 +1,7 @@
 <template>
-  <section v-if="type!=false" ref="section" :style="height" :class="[hide?'hide_message':'show_message']">
-    <div  :class="'type_'+type">{{message}}</div>
+  <section v-if="type!=false" ref="section"  :class="[hide?'hide_message':'show_message']">
+    <div  :class="'type_'+type" v-html="message"></div>
     <div class="close_message"  @click="hideM">Скрыть сообщение</div>
-
   </section>
 </template>
 
@@ -64,9 +63,9 @@ export default {
     async getMessage()
     {
 
-      this.message = 'В связи со сложившейся экономической ситуацией, нарушением логистических цепочек поставок, производители и поставщики продукции вынуждены пересматривать стоимость отгружаемых товаров.\n' +
-          'Учитывая эти факты, некоторые цены на нашем  сайте в ЛК покупателей могут быть неактуальны. Для уточнения цен необходимо оформить заказ, после чего Вы получите счет с актуальными ценами и сроком их действия (срок оплаты счета). Также действующие цены  можете получить у Вашего персонального менеджера.\n' +
-          'По мере стабилизации ситуации на рынке, мы актуализируем информацию по стоимости и ассортименту товаров на нашем сайте.\n' +
+      this.message = 'В связи со сложившейся экономической ситуацией, нарушением логистических цепочек поставок, производители и поставщики продукции вынуждены пересматривать стоимость отгружаемых товаров.<br>' +
+          'Учитывая эти факты, некоторые цены на нашем  сайте в ЛК покупателей могут быть неактуальны. Для уточнения цен необходимо оформить заказ, после чего Вы получите счет с актуальными ценами и сроком их действия (срок оплаты счета). Также действующие цены  можете получить у Вашего персонального менеджера.<br>' +
+          'По мере стабилизации ситуации на рынке, мы актуализируем информацию по стоимости и ассортименту товаров на нашем сайте.<br>' +
           'Приносим свои извинения за доставленные неудобства и благодарим Вас за сотрудничество!';
       this.type = 'error';
 
@@ -89,7 +88,7 @@ section{
 
 }
 section > div{
-  white-space: pre-wrap;
+/*  white-space: pre-wrap;*/
 
 }
 .type_error{
@@ -109,11 +108,42 @@ pre{
 }
 .hide_message{
 
-
+ /* height: 0;
 
   transition:  0.5s ease-in-out;
+*/
 
 }
+.hide_message{
+  animation: 0.5s hide_message forwards;
+
+}
+.hide_message > div{
+  animation: 0.5s hide_message forwards;
+  margin-bottom: 20px;
+
+}
+.show_message .close_message{
+  margin-bottom: 20px;
+}
+@keyframes hide_message {
+  0%{
+    height: auto;
+    max-height: 100%;
+
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.5;
+  }
+  100%{
+
+    padding: 0;
+    height: 0;
+  }
+
+}
+
 .hide_message_button{
   background-color: white;
 }
