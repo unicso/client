@@ -1,11 +1,13 @@
 @media screen and (min-width: 720px) {
     html, body, .wrapper {
-        max-width: 1200px;
+       /* max-width: 1200px;*/
         margin-left: auto;
         margin-right: auto;
 
     }
-
+    .wrapper{
+        max-width: 1200px;
+    }
     .main_page_content_res {
         grid-template-columns: minmax(300px, 1fr) minmax(500px, 4fr);
     }

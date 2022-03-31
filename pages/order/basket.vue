@@ -2,7 +2,7 @@
 <div>
 
 <div class="main_page_content" v-if="basket_summ>0">
-
+  <top_message/>
   <div class="orders_basket ">
     <h1>Оформление заказа</h1>
     <div v-if="2==3">
@@ -51,6 +51,8 @@
         </div>
 
       </div>
+
+
       <form class="order_client content_block " :class="[error?'error':'']">
         <h1>Информация о Вас</h1>
         <div class="customer_info">
@@ -116,9 +118,10 @@
 
 <script>
 import ProductCategory from "../../components/main/ProductCategory";
+import Top_message from "../../components/common/messages/top_message";
 export default {
 name: "basket",
-  components: {ProductCategory},
+  components: {Top_message, ProductCategory},
   data(){
   return{
     //3232005484

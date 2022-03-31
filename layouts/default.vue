@@ -1,5 +1,13 @@
 <template>
+
+  <div>
+    <top_message/>
+
+
+
   <div class="wrapper">
+
+
     <div class="warning"></div>
     <div class="show__alert">
       Ваш браузер устарел и не соответствует требованиям безопасности, а так же не позволяет полноценно использовать сайт.
@@ -37,6 +45,8 @@
 
     <select-price-type :show="false"/>
   </div>
+
+  </div>
 </template>
 <script>
 import MainMenuDesktop from "../components/main/MainMenuDesktop";
@@ -47,12 +57,14 @@ import LeftBanners from "../components/main/LeftBanners";
 import SocketChat from "../components/common/chat/SocketChat";
 import OnlineHelper from "../components/common/chat/OnlineHelper";
 import SelectPriceType from "../components/lk/client/SelectPriceType";
+import Top_message from "../components/common/messages/top_message";
 
 
 export default {
   name: "default.vue",
 
   components:{
+    Top_message,
     SelectPriceType,
     OnlineHelper,
     SocketChat,
