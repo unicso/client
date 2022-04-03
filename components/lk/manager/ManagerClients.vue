@@ -12,6 +12,8 @@
   </details>
   <br>
   <input type="text" v-model="filter" placeholder="Поиск"/>
+
+
   <table class="table">
     <thead>
     <tr>
@@ -61,7 +63,12 @@
 
       </p>
     </details><br>
+  <div class="btn-std cancel__registration" @click="registration_user=false; show_user=false; ">К списку клиентов</div>
 
+  <pre>
+    Контрагент: {{registration_user}}
+
+  </pre>
     <table class="table">
       <thead>
       <tr>
@@ -83,8 +90,7 @@
       </tr>
       </tbody>
     </table>
-
-<div class="btn-std cancel__registration" @click="registration_user=false; show_user=false; ">Отмена</div>
+  <email-notification :contragent="registration_user"/>
 
   <div v-if="registration_user!=false && show_user==false">
 
@@ -131,9 +137,10 @@
 
 <script>
 import ClientInfo from "./ClientInfo";
+import EmailNotification from "./EmailNotification";
 export default {
   name: "ManagerClients",
-  components: {ClientInfo},
+  components: {EmailNotification, ClientInfo},
   data(){
     return{
       contragents:{},

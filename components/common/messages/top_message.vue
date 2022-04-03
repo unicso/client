@@ -1,7 +1,9 @@
 <template>
   <section v-if="type!=false" ref="section"  :class="[hide?'hide_message':'show_message']">
-    <div  :class="'type_'+type" v-html="message"></div>
-    <div class="close_message"  @click="hideM">Скрыть сообщение</div>
+    <noindex>
+      <div  :class="'type_'+type" v-html="message"></div>
+      <div class="close_message"  @click="hideM">Скрыть сообщение</div>
+    </noindex>
   </section>
 </template>
 
