@@ -81,7 +81,17 @@ export default {
     ['@nuxtjs/device'],
    // ['nuxt-session', { alias: 'nsession' }],
     ['cookie-universal-nuxt', { alias: 'cookies' }],
-
+    [
+      '@nuxtjs/yandex-metrika',
+      {
+        id: '87774900',
+        webvisor: true,
+        // clickmap: true,
+        // useCDN: false,
+        // trackLinks: true,
+        // accurateTrackBounce: true,
+      }
+    ]
 
   ],
 
