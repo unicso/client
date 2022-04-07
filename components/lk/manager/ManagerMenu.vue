@@ -4,6 +4,9 @@
     <li>
       <nuxt-link to="/user/lk/manager/documents">Документы</nuxt-link>
     </li>
+    <li>
+      <nuxt-link to="/user/lk/manager/orders">Заказы</nuxt-link>
+    </li>
 
     <li>
       <nuxt-link to="/user/lk/manager/clients">Клиенты</nuxt-link>

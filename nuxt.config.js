@@ -21,12 +21,13 @@ export default {
 
       { property:"og:url", content:"https://market.unicso.ru"},
       { property:"og:type", content:"website"},
-      { property:"og:title", content:"Сайт компании Юниксо"},
+      { property:"og:title", content:"Компания Юниксо"},
       { property:"og:description", content:"Юниксо - надежный помощник Вашего бизнеса"},
       { property:"og:image", content:"https://market.unicso.ru"}
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/files/client/images/favicon.ico' }
+     // { rel: 'icon', type: 'image/x-icon', href: '/files/client/images/favicon.ico' }
+      { rel: 'icon', type: 'image/svg+xml', href: '/top.svg' }
 
     ],
 
@@ -56,7 +57,8 @@ export default {
     baseURL: '/v1/',
     proxyHeaders: false,
     credentials: true,
-    debug:false,
+    debug:isDev,
+
     cookieEnabled:true,
     retry: { retries: 3 }
 
@@ -86,13 +88,13 @@ export default {
       {
         id: '87774900',
         webvisor: true,
+        defer:true,
         // clickmap: true,
         // useCDN: false,
-        // trackLinks: true,
-        // accurateTrackBounce: true,
+         trackLinks: true,
+         accurateTrackBounce: true,
       }
     ]
-
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

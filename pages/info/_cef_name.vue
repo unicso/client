@@ -25,7 +25,53 @@ export default {
 
 
 name: "cef_name",
-  components: {ClientSupport, PaymentPage, DeliveryPage, AboutUs, Contacts, PolitikaKonfidentsialnosti}
+  components: {ClientSupport, PaymentPage, DeliveryPage, AboutUs, Contacts, PolitikaKonfidentsialnosti},
+
+  head() {
+    return {
+      title: this.fetchedData.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.fetchedData.description
+        },
+        { property:"og:title", content:this.fetchedData.title},
+        { property:"og:description", content:this.fetchedData.description},
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: this.fetchedData.keywords
+        },
+
+      ]
+    }
+  },
+
+  asyncData(context) {
+    let endpoint
+    if(process.env.API_SERVER!=undefined)
+       endpoint = process.env.API_SERVER + '/v1/config/seo?page=' + context.route.fullPath;
+    else
+       endpoint = '/config/seo?page=' + context.route.fullPath;
+
+
+    return context.$axios
+        .get(endpoint)
+        .then((res) => {
+          if(res.data.error==false)
+            return { fetchedData: res.data.body }
+          else
+            return {fetchedData: {title:'Юниксо - надежный помощник Вашего бизнеса', description:'Компания ООО «Юниксо» осуществляет коммерческую деятельность, ориентированную на предоставление заказчикам комплексных решений по планированию, разработке, обеспечению и управлению процессами закупочной деятельности организаций'}}
+        })
+        .catch((err)=>{
+          return {fetchedData: {title:'Юниксо - надежный помощник Вашего бизнеса', description:'Компания ООО «Юниксо» осуществляет коммерческую деятельность, ориентированную на предоставление заказчикам комплексных решений по планированию, разработке, обеспечению и управлению процессами закупочной деятельности организаций'}}
+        })
+  },
+
+
+
+
 }
 </script>
 

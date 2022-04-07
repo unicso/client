@@ -141,7 +141,7 @@ export default {
         this.error = result.body
 
       }
-      console.log(result)
+
 
 
     }

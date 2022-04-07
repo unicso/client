@@ -39,7 +39,7 @@
         </div>
         <div class="field__block">
           <label>Должность</label>
-          <input type="text"  v-model="$store.state.helper.smart_request.name">
+          <input type="text"  v-model="$store.state.helper.smart_request.position">
         </div>
         <div class="field__block">
           <label>Назначение объекта (склад, банк, ТЦ, БЦ и т.д.)</label>

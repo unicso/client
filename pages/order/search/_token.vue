@@ -43,11 +43,19 @@
           </tbody>
 
           </table>
-        <div class="btn-std delete_order" @click="deleteOrder" v-if="order.status !='Отменен' && confirm==false">Отменить заказ</div>
-        <div class="confirm_delete" v-if="confirm">
-          <h3>Подтверждаете отмену заказа?</h3>
-          <button class="btn-std" @click="deleteOrderConfirm">Подтверждаю</button>
-          <button class="btn-std" @click="confirm=false">Нет</button>
+        <div class="cancel" v-if="$store.state.user.type<50 && order.status!='Выполнен'">
+          <div class="btn-std delete_order" @click="deleteOrder" v-if="order.status !='Отменен' && confirm==false">Отменить заказ</div>
+          <div class="confirm_delete" v-if="confirm">
+            <h3>Подтверждаете отмену заказа?</h3>
+            <button class="btn-std" @click="deleteOrderConfirm">Подтверждаю</button>
+            <button class="btn-std" @click="confirm=false">Нет</button>
+
+          </div>
+
+        </div>
+        <div class="accept" v-if="$store.state.user.type>=50">
+          <div class="btn-std delete_order" @click="accepted">Выполнен</div>
+
 
         </div>
 
@@ -92,6 +100,16 @@ name: "token",
   },
 
   methods:{
+    async accepted()
+    {
+
+
+      const result = await this.$store.dispatch('api/get', {endpoint:'lk/manager/clients/allorders?order_status_accepted='+this.token});
+
+      if(result.error == false)
+        this.getOrder()
+    },
+
     priceSet(data){
       var price       = Number.prototype.toFixed.call(parseFloat(data) || 0, 2),
           price_sep   = price.replace(/(\D)/g, ","),

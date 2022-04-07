@@ -4,6 +4,7 @@
       <div  :class="'type_'+type" v-html="message"></div>
       <div class="close_message"  @click="hideM">Скрыть сообщение</div>
     <!--/noindex-->
+
   </section>
 </template>
 
@@ -37,7 +38,7 @@ export default {
   },
   watch:{
     '$refs.section.offsetHeight'(newVal){
-      console.log(newVal)
+
    //   this.height = 'height:' + this.$refs.section.offsetHeight + 'px'
       }
 
@@ -64,12 +65,16 @@ export default {
     },
     async getMessage()
     {
+      const result = await this.$store.dispatch('api/get', {endpoint:'config/message'})
 
-      this.message = 'В связи со сложившейся экономической ситуацией, нарушением логистических цепочек поставок, производители и поставщики продукции вынуждены пересматривать стоимость отгружаемых товаров.<br>' +
-          'Учитывая эти факты, некоторые цены на нашем  сайте в ЛК покупателей могут быть неактуальны. Для уточнения цен необходимо оформить заказ, после чего Вы получите счет с актуальными ценами и сроком их действия (срок оплаты счета). Также действующие цены  можете получить у Вашего персонального менеджера.<br>' +
-          'По мере стабилизации ситуации на рынке, мы актуализируем информацию по стоимости и ассортименту товаров на нашем сайте.<br>' +
-          'Приносим свои извинения за доставленные неудобства и благодарим Вас за сотрудничество!';
-      this.type = 'error';
+
+      if(result.error ==false)
+      {
+        this.message = result.body.top
+
+
+        this.type = 'error';
+      }
 
 
 

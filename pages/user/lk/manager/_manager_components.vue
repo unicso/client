@@ -4,6 +4,7 @@
 
   <manager-clients v-if="$route.params.manager_components == 'clients'"/>
   <manager-reconcilement v-if="$route.params.manager_components == 'reconcilement'"/>
+  <manager-orders  v-if="$route.params.manager_components == 'orders'"/>
 
   <client-info v-if="$route.params.manager_components == 'client_edit'" :user="$route.query.user"/>
   <edit-price-type  v-if="$route.params.manager_components == 'edit_price_type'" :user="$route.query.type"/>
@@ -19,9 +20,12 @@ import ManagerReconcilement from "../../../../components/lk/manager/ManagerRecon
 import AccessDeniedPleaseLogin from "../../../../components/user/AccessDeniedPleaseLogin";
 import ClientInfo from "../../../../components/lk/manager/ClientInfo";
 import EditPriceType from "../../../../components/lk/manager/EditPriceType";
+import ManagerOrders from "../../../../components/lk/manager/ManagerOrders";
 export default {
   name: "manager_components",
-  components: {EditPriceType, ClientInfo, AccessDeniedPleaseLogin, ManagerReconcilement, ManagerClients, ManagerMenu},
+  components: {
+    ManagerOrders,
+    EditPriceType, ClientInfo, AccessDeniedPleaseLogin, ManagerReconcilement, ManagerClients, ManagerMenu},
   data(){
     return{
       show_component:false

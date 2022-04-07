@@ -99,23 +99,23 @@ export default {
 
       }
 
-      console.log(item)
+
       const result = await this.$store.dispatch('api/delete', params)
-      console.log(result)
+
       if(result.error == false)
         this.getUser()
 
 
     },
     getInt(value){
-     console.log(value)
+
 
 
     },
     async saveStatus(item)
     {
 
-    console.log(item)
+
       let params = {
         endpoint:'lk/manager/clients/userinfo/'+this.user,
         params:{
@@ -132,7 +132,7 @@ export default {
 
       const result = await this.$store.dispatch('api/post', params);
 
-    console.log(result)
+
 
     },
 
@@ -157,7 +157,7 @@ export default {
 
 
       const result = await this.$store.dispatch('api/post', params);
-      console.log(result)
+
       if(result.error == false)
         this.getUser()
       else

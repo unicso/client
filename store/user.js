@@ -33,6 +33,11 @@ export const mutations = {
         state.lk_link = data.lk_link
         state.type = data.type
         state.name = data.name.split(' ')[0]
+        let dop = ''
+        if(data.name.length > 20)
+            dop = '...'
+        state.name = data.name.slice(0,20) + dop
+
         state.current_price_type = data.price_type
     },
     logout(state){

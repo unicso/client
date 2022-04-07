@@ -121,6 +121,10 @@ export default {
 
     this.showTwoColumns();
 
+
+
+
+
  //   window.addEventListener('scroll', this.scroll);
   },
 
@@ -131,8 +135,6 @@ export default {
         this.two_columns = true;
       else
         this.two_columns = false;
-
-      console.log(this.$route.name)
     },
 
     scrollToTop() {
