@@ -12,7 +12,9 @@
           <th>Вирт. скидка (%)</th>
           <th>Активно</th>
           <th>Отображать цены</th>
+          <th>Отображать скидку</th>
           <th>Отображать фото</th>
+          <th>Каталог списком</th>
 
           <th>Удаление</th>
         </tr>
@@ -25,7 +27,10 @@
         <td>{{item.discount}}</td>
         <td><input type="checkbox" v-model="info.current[index].active" @change="saveStatus(item)"></td>
         <td><input type="checkbox" v-model="info.current[index].price" @change="saveStatus(item)"></td>
+        <td><input type="checkbox" v-model="info.current[index].show_discount" @change="saveStatus(item)"></td>
+
         <td><input type="checkbox" v-model="info.current[index].images" @change="saveStatus(item)"></td>
+        <td><input type="checkbox" v-model="info.current[index].show_only_products" @change="saveStatus(item)"></td>
 
         <td @click="deleteItem(item)" class="std_link">Удалить</td>
 
@@ -124,7 +129,9 @@ export default {
           price:item.price,
           images:item.images,
           user:item.user,
-          manager:item.manager
+          manager:item.manager,
+          show_only_products:item.show_only_products,
+          show_discount:item.show_discount
 
 
         }

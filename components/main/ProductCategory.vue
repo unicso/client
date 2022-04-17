@@ -24,7 +24,9 @@
         <div class="icons icons16 custom_icon" :class="main.cef_name" v-if="main.icon!='false' && main.icon!=''" :style="'background-image: url('+main.icon+ '); background-size: contain;'"></div>
         <div class="icons icons16" :class="main.cef_name" v-else></div>
 
-        <div>{{main.name}}</div>
+        <nuxt-link class="std_link" :to="'/catalog/'+main.cef_name" @click="show_catalog = false">
+          <div>{{main.name}}</div>
+        </nuxt-link>
       </div>
     </li>
   </ul>
